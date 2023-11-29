@@ -21,15 +21,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"2010727302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="概率条件期望与全期望公式 - 知乎 (zhihu.com)有错的 01 条件期望与条件方差 - 简书 (jianshu.com) A Survey on Causal Inference因果推断综述解析|A Survey on Causal Inference(6) - 知乎 (zhihu.com) 基于潜在结果框架的因果推断入门 - 知乎 (zhihu.com) 原理阿里文娱 智能营销增益模型（">
+    <meta name="description" content="概率条件期望与全期望公式 - 知乎 (zhihu.com)有错的 01 条件期望与条件方差 - 简书 (jianshu.com) A Survey on Causal Inference因果推断综述解析|A Survey on Causal Inference(6) - 知乎 (zhihu.com) 基于潜在结果框架的因果推断入门 - 知乎 (zhihu.com) 原理阿里文娱 因果推断学习笔记二">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Uplift Summary">
 <meta property="og:url" content="https://2010727302.github.io/2023/10/26/Uplift-Summary/index.html">
 <meta property="og:site_name" content="一个田螺突然就">
-<meta property="og:description" content="概率条件期望与全期望公式 - 知乎 (zhihu.com)有错的 01 条件期望与条件方差 - 简书 (jianshu.com) A Survey on Causal Inference因果推断综述解析|A Survey on Causal Inference(6) - 知乎 (zhihu.com) 基于潜在结果框架的因果推断入门 - 知乎 (zhihu.com) 原理阿里文娱 智能营销增益模型（">
+<meta property="og:description" content="概率条件期望与全期望公式 - 知乎 (zhihu.com)有错的 01 条件期望与条件方差 - 简书 (jianshu.com) A Survey on Causal Inference因果推断综述解析|A Survey on Causal Inference(6) - 知乎 (zhihu.com) 基于潜在结果框架的因果推断入门 - 知乎 (zhihu.com) 原理阿里文娱 因果推断学习笔记二">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-26T14:09:39.000Z">
-<meta property="article:modified_time" content="2023-10-26T14:10:48.374Z">
+<meta property="article:modified_time" content="2023-11-29T11:55:54.343Z">
 <meta property="article:author" content="Yuhan Wang">
 <meta property="article:tag" content="C++,算法">
 <meta name="twitter:card" content="&lt;twitter:card&gt;">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87"><span class="nav-number">1.</span> <span class="nav-text">概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Survey-on-Causal-Inference"><span class="nav-number">2.</span> <span class="nav-text">A Survey on Causal Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uplift%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">4.</span> <span class="nav-text">uplift模型评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Uplift%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="nav-number">5.</span> <span class="nav-text">Uplift特征选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E5%BC%80%E6%BA%90%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">因果推断常用开源库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Uplift%E5%AE%9E%E6%88%98"><span class="nav-number">7.</span> <span class="nav-text">Uplift实战</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87"><span class="nav-number">1.</span> <span class="nav-text">概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Survey-on-Causal-Inference"><span class="nav-number">2.</span> <span class="nav-text">A Survey on Causal Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uplift%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">4.</span> <span class="nav-text">uplift模型评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Uplift%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="nav-number">5.</span> <span class="nav-text">Uplift特征选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E5%BC%80%E6%BA%90%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">因果推断常用开源库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Uplift%E5%AE%9E%E6%88%98"><span class="nav-number">7.</span> <span class="nav-text">Uplift实战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0"><span class="nav-number">8.</span> <span class="nav-text">论文笔记</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -231,9 +231,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-10-26 22:09:39 / 修改时间：22:10:48" itemprop="dateCreated datePublished" datetime="2023-10-26T22:09:39+08:00">2023-10-26</time>
+      <time title="创建时间：2023-10-26 22:09:39" itemprop="dateCreated datePublished" datetime="2023-10-26T22:09:39+08:00">2023-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-29 19:55:54" itemprop="dateModified" datetime="2023-11-29T19:55:54+08:00">2023-11-29</time>
     </span>
 
   
@@ -250,6 +256,7 @@
 <h2 id="A-Survey-on-Causal-Inference"><a href="#A-Survey-on-Causal-Inference" class="headerlink" title="A Survey on Causal Inference"></a>A Survey on Causal Inference</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366740766">因果推断综述解析|A Survey on Causal Inference(6) - 知乎 (zhihu.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/372399985">基于潜在结果框架的因果推断入门 - 知乎 (zhihu.com)</a></p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247498630&idx=1&sn=b36515e54c2dbc20186942102497c390&chksm=fbd749eacca0c0fc9e285ffc7d06e336115f387394362a4707c71377f02832f8c42bcc71cc7a&mpshare=1&scene=24&srcid=&sharer_sharetime=1585109170232&sharer_shareid=255a68ecb152bdfa3b164d51ce560a8d&poc_token=HLRiK2WjKpUaQQw3Imx3TuOo3a4sQ025dN4gYppc">阿里文娱</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/TSzero/article/details/118410142"><em>因果推断学习笔记二</em></a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jinping_shi/article/details/105583375">智能营销增益模型（Uplift Modeling）的原理与实践</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/442881104">整理</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/349733349">模型和Package</a></p>
@@ -257,6 +264,7 @@
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/442882553">pylift实例</a></p>
 <p><a target="_blank" rel="noopener" href="https://dango.rocks/blog/2018/11/04/Causality0-Collection-of-Study-Materials/">资料收集</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/410055461?utm_id=0">因果推断案例集锦</a></p>
+<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1753445414392961455">概述</a></p>
 <h2 id="uplift模型评估"><a href="#uplift模型评估" class="headerlink" title="uplift模型评估"></a>uplift模型评估</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/343747851">Anticoder：因果推断–uplift model 评估</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/493811028">uplift模型评估指标及分析</a></p>
 <h2 id="Uplift特征选择"><a href="#Uplift特征选择" class="headerlink" title="Uplift特征选择"></a><strong>Uplift特征选择</strong></h2><ul>
@@ -268,6 +276,7 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/uber/causalml">CausalML</a><ul>
 <li><a target="_blank" rel="noopener" href="https://medium.com/grabngoinfo/s-learner-uplift-model-for-individual-treatment-effect-and-customer-segmentation-in-python-9d410746e122">video+introduction</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.modb.pro/db/601027">解释</a></li>
+<li><a target="_blank" rel="noopener" href="https://causal-machine-learning.github.io/kdd2021-tutorial/">tutorial</a></li>
 </ul>
 </li>
 <li><a target="_blank" rel="noopener" href="https://github.com/microsoft/dowhy">Dowhy</a></li>
@@ -281,6 +290,7 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/PGuti/Uplift.git">两个模型做差分模型、一个模型的标签转化模型</a></p>
 <p><a target="_blank" rel="noopener" href="https://nbviewer.jupyter.org/github/maks-sh/scikit-uplift/blob/master/notebooks/RetailHero_EN.ipynb#1.1-Single-model-with-treatment-as-feature">两个模型做差分模型、一个模型(加入干预类特征)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.dango.rocks/blog/2018/11/15/Causality1-Playaround-with-the-Lalonde-Dataset/">Propensity Score Matching (Lalonde’s Dataset)</a></p>
+<h2 id="论文笔记"><a href="#论文笔记" class="headerlink" title="论文笔记"></a>论文笔记</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zyl_wjl_1413/article/details/125407379">LBCF: A Large-Scale Budget-Constrained Causal Forest Algorithm</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VHKSiQO1u_nJbSDo49jiVg">LBCF: A Large-Scale Budget-Constrained Causal Forest Algorithm概述</a></p>
 
     </div>
 
