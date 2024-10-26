@@ -583,9 +583,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-07-26 17:51:04 / 修改时间：21:59:05" itemprop="dateCreated datePublished" datetime="2024-07-26T17:51:04+08:00">2024-07-26</time>
+      <time title="创建时间：2024-07-26 17:51:04" itemprop="dateCreated datePublished" datetime="2024-07-26T17:51:04+08:00">2024-07-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-26 18:58:00" itemprop="dateModified" datetime="2024-10-26T18:58:00+08:00">2024-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
     </span>
 
   
@@ -626,6 +641,43 @@
 <h2 id="KDD2021-USCB-展示广告约束出价问题的通用解决方案-qq-com"><a href="#KDD2021-USCB-展示广告约束出价问题的通用解决方案-qq-com" class="headerlink" title="KDD2021 | USCB:展示广告约束出价问题的通用解决方案 (qq.com)"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/OCInQGXKeYXOsThlSOAZ_g">KDD2021 | USCB:展示广告约束出价问题的通用解决方案 (qq.com)</a></h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/XxYJYZ4VR5bQBYtJEtpQsw">https://mp.weixin.qq.com/s/XxYJYZ4VR5bQBYtJEtpQsw</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/p4LdXKM3KCIU5cMg77olxg">https://mp.weixin.qq.com/s/p4LdXKM3KCIU5cMg77olxg</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/c3OU5Mdb6-YIk0MOmRsG4w">证明过程（对偶）</a></p>
+<h2 id="Incentive-Compatibility-in-the-Auto-bidding-World"><a href="#Incentive-Compatibility-in-the-Auto-bidding-World" class="headerlink" title="Incentive Compatibility in the Auto-bidding World"></a>Incentive Compatibility in the Auto-bidding World</h2><p><strong>声明 5.4</strong>：在连续查询模型中，如果每次查询的拍卖是真实的，那么统一出价策略是每个自动出价代理的最优策略。</p>
+<p>这些声明是论文中理论分析的重要组成部分，它们为证明主要定理提供了基础。</p>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p><strong>定理 2.1</strong>：对于预算设置（当所有广告商都受预算限制）和tCPA设置（当所有广告商都受tCPA限制），我们有SPA不是AIC的。也就是说，有一些情况下，广告商通过误报其约束可以获得好处。</p>
+<p><strong>Theorem 2.1.</strong> For the budget setting (when all advertisers are budgeted-constrained) and for the tCPA-setting (when all advertisers are tCPA-constrained), we have that SPA is not AIC. That is, there are some instances where an advertiser benefits by misreporting its constraint.<br>$$<br>\text{Remark 3.1 (Uniform Bidding). If the per-query action is truthful, then uniform bidding is the}\\textit{optimal policy for the autobidder. Thus, b}_a(q)&#x3D;\mu+v_a(q)\text{ for some }\mu&gt;0.\textit{ We formally prove this in Claim 5.4}<br>$$</p>
+<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p><strong>备注 3.1</strong>（统一投标）。如果每个查询拍卖是真实的，那么统一竞价是自动投标者的最优策略。因此，对于某个μ &gt; 0，ba(q) &#x3D; μ·va(q)。我们在权利要求5.4中正式证明了这一点。</p>
+<p><strong>备注 3.2</strong>（价值函数信息）因此，我们的模型通过实验捕获了自动投标者在他们对市场有足够的了解后的行为。Therefore, our model captures how auto-bidders behave once they have learned enough about the market through experimentation.</p>
+<p><strong>定义 3.3（自动出价激励兼容性，AIC）</strong>：如果对于每一个子博弈完美均衡（SPE），我们有 Va(Ba; Ba) ≥ Va(B′ a; Ba) 和 Va(Ta; Ta) ≥ Va(T′ a; Ta) 对于每一个 Ba, B′ a, Ta, T′ a，那么拍卖规则被称为自动出价激励兼容（AIC）。</p>
+<p>声明 3.1（统一出价）**：如果每次查询的拍卖是真实的（如SPA），那么统一出价是自动出价代理的最优策略。因此，ba(q) &#x3D; µ · va(q) 对于某个 µ &gt; 0。我们在声明 5.4 中正式证明了这一点。</p>
+<p><strong>声明 3.2（价值函数信息）</strong>：在我们的模型中，自动出价者拥有对其代理的查询价值函数的了解，这意味着每个自动出价者对他们面临的出价格局有很好的了解。在实践中，自动出价者已经在多轮拍卖中进行了互动，在那里他们进行实验和学习。因此，经过足够多轮的实验后，每个自动出价者对他们的出价格局有了很好的了解。因此，我们的模型捕捉了自动出价者在通过实验了解了市场后的行为。这个假设在自动出价文献中相当标准（参见例如，Aggarwal 等人（2019年）；Feng 等人（2023年））。</p>
+<h3 id="4"><a href="#4" class="headerlink" title="4"></a>4</h3><p><strong>定理 4.1</strong>：假设至少有两个受预算限制的广告商或两个受tCPA限制的广告商；那么FPA不是AIC的。</p>
+<p>Theorem 4.1. Suppose there are at least two budget-advertisers or two tCPA-advertisers; then FPA is not AIC.</p>
+<p><strong>定理 4.2</strong>：当FPA被限制只能使用统一出价策略时，FPA是AIC的。</p>
+<p>Theorem 4.2. FPA restricted to uniform bidding is AIC.</p>
+<p><strong>引理4.4：</strong><br><img src="/2024/07/26/Autobidding/le4.4(1).png"><br><img src="/2024/07/26/Autobidding/le4.4(2).png"></p>
+<p><strong>声明 4.3</strong>：在其他自动出价者固定的情况下，存在一个乘数 µa ≥ 0，使得以下出价策略是最优的：</p>
+<p>ba(q) &#x3D;[\begin{cases} \mu_a v_a(q) &amp; \text{if } \mu_a v_a(q) \geq \max_{a’ \neq a} b_{a’}(q) \ 0 &amp; \text{otherwise} \end{cases} ] </p>
+<p>这个结果无论广告商是受预算限制还是受tCPA限制都成立。</p>
+<p><strong>推论4.6：</strong>如果FPA和两个预算广告的自动嵌入不是AIC，那么使用相同的查询集和两个tcpa -广告器进行自动嵌入也不是AIC。</p>
+<p>只要解 r 相对于预算和目标的比率是单调的，那么拍卖对于给定估值是 AIC。</p>
+<p><strong>定义 4.12（统一出价均衡）</strong>：自动出价代理子博弈的统一出价均衡对应于出价乘数 µ1, …, µN，使得每个自动出价代理 a 选择的统一出价策略 µa 在所有可行的统一出价策略中最大化问题（12），并且如果广告商 a 的约束不是紧的，则 µa 获得其最大可能值。</p>
+<p><strong>引理 4.13</strong>（Conitzer 等人（2022a）中定理 1 的内涵）。给定一个具有一般约束的Autobiding实例，如(13)所示，存在唯一的统一竞价均衡，所有广告商的竞价乘数在所有可行的统一竞价配置文件中都是最大的。</p>
+<p><strong>备注 4.14</strong>：康茨等人。(2022a) 显示了 FPA 中预算的单调性属性，收入和福利的投标均衡均匀。相反，在我们的工作中，我们专注于每个广告商的单调性。</p>
+<p><strong>定理 5.5</strong>（拍卖等价结果）：假设自动出价代理在SPA中使用统一出价策略，并且类似地，在FPA中使用如声明4.3中定义的简单出价策略。那么，在任何子博弈均衡中，SPA的拍卖结果（分配和定价）与FPA相同。</p>
+<p><strong>定理 5.6</strong>：假设至少有两个受预算限制的广告商或两个受tCPA限制的广告商；那么，即使在连续查询模型中，SPA也不是AIC的。</p>
+<p><strong>定理 5.7</strong>：给定两个广告商，让µ1和µ2是自动出价代理子博弈中的均衡出价乘数。还假设h(q) &#x3D; v1(q) &#x2F; v2(q)是递增的。那么：</p>
+<p>1. </p>
+<p>   如果广告商受预算B1和B2的限制，那么µ1 &#x3D; B2 * E[z1(z≥r)] &#x2F; E[z1(z ≤ r)]，并且µ2 &#x3D; µ1 * r，其中r是以下隐式函数的解： r * E[1[z ≥ r)] &#x2F; E[z1(z ≤ r)] &#x3D; B1 &#x2F; B2。</p>
+<p>2. </p>
+<p>   如果广告商受目标T1和T2的tCPA限制，我们有µ1 &#x3D; T1 * E[1(z≤r)] &#x2F; E[1(z≥r)]，并且µ2 &#x3D; µ1 * r，其中r是以下隐式函数的解： r * E[1(z ≥ r)] &#x2F; E[z1(z ≥ r)] * E[1(z ≤ r)] &#x2F; E[z1(z ≤ r)] &#x3D; T1 &#x2F; T2。</p>
+<p>3. </p>
+<p>   如果进一步，v2在q上是非递减的，并且h是凹函数，并且广告商要么都是受预算限制，要么受tCPA限制，那么SPA是AIC的。</p>
+<p><strong>定理 5.8</strong>：考虑一个满足假设5.1的诚实拍卖（x, p）。如果有至少两个受预算限制的广告商或两个受tCPA限制的广告商，那么这个诚实拍卖不是AIC的。</p>
+<p><strong>定理 5.9</strong>：考虑一个满足假设5.1的诚实拍卖（x, p），并假设有要么两个受预算限制的广告商，要么两个受tCPA限制的广告商。让µ1和µ2是自动出价代理在子博弈均衡中使用的出价乘数。进一步假设h(q) &#x3D; v1(q) &#x2F; v2(q)是递增的。那么：</p>
+<p>1. </p>
+<p>   如果广告商受预算B1和B2的限制，那么µ1 &#x3D; B1 * E[p1(rz,1)]，并且µ2 &#x3D; r * µ1，其中r是以下隐式函数的解： E[rp1(z &#x2F; r, 1)] &#x2F; E[zp1(r &#x2F; z, 1)] &#x3D; B1 &#x2F; B2。</p>
+<p>2. </p>
+<p>   如果广告商受目标T1和T2的tCPA限制，我们有µ1 &#x3D; T1 * E[zg(z &#x2F; r)] &#x2F; E[rp1(z &#x2F; r)]，并且µ2 &#x3D; µ1 * r，其中r是以下隐式函数的解： E[x1( r &#x2F; z, 1)] &#x2F; E[zx1(z &#x2F; r, 1)] * E[rp1(z &#x2F; r, 1)] &#x2F; E[zp1( r &#x2F; z, 1)] &#x3D; T1 &#x2F; T2。</p>
 
       
     </div>
