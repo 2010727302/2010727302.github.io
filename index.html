@@ -217,7 +217,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-12-24 16:15:06 / 修改时间：17:34:04" itemprop="dateCreated datePublished" datetime="2024-12-24T16:15:06+08:00">2024-12-24</time>
+      <time title="创建时间：2024-12-24 16:15:06 / 修改时间：20:16:30" itemprop="dateCreated datePublished" datetime="2024-12-24T16:15:06+08:00">2024-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,6 +265,43 @@
 <li><strong>环境构建与交互</strong>：将广告机会按时间划分决策步骤，代理依次出价，环境提供最终性能，通过多个模块交互实现真实拍卖模拟。</li>
 <li><strong>数据集生成与分析</strong>：使用深度生成模型生成数据，通过PCA可视化、分析价值分布和字段连接等方式验证生成数据与真实数据的相似性，生成的数据集用于分析不同类别印象值变化及关系。</li>
 <li><strong>算法评估</strong>：在基本任务和目标CPA任务中评估基线算法，比较不同算法性能，未对方法针对自动出价任务进行特殊优化。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Reinforcement-Mechanism-Design-With-Applications-to-Dynamic-Pricing-in-Sponsored-Search-Auctions"><a href="#Reinforcement-Mechanism-Design-With-Applications-to-Dynamic-Pricing-in-Sponsored-Search-Auctions" class="headerlink" title="Reinforcement Mechanism Design: With Applications to Dynamic Pricing in Sponsored Search Auctions"></a>Reinforcement Mechanism Design: With Applications to Dynamic Pricing in Sponsored Search Auctions</h2><h3 id="摘要-1"><a href="#摘要-1" class="headerlink" title="摘要"></a>摘要</h3><p>在赞助搜索中，标准机制是广义第二价格（GSP）拍卖，但存在非收入最优问题。本文研究个体和组织互动的社会系统，以赞助搜索拍卖为背景，结合机制设计和人工智能工具解决搜索引擎动态定价问题。通过训练买家行为模型，将动态定价问题建模为马尔可夫决策过程（MDP），应用强化学习算法优化储备价格，实验表明该模型优于多种静态和动态优化策略。</p>
+<ol>
+<li><strong>研究背景</strong><ul>
+<li><strong>赞助搜索拍卖现状</strong>：在线销售广告是搜索引擎公司的盈利模式，如谷歌和百度。用户搜索时，搜索引擎展示广告，广告商竞价竞争位置，按点击付费。常见的广义第二价格（GSP）拍卖机制存在收入非最优问题，且多数收入优化理论基于竞标者理性行为假设，但实际中该假设常不成立。</li>
+<li><strong>相关研究不足</strong>：新兴研究关注竞标者使用学习算法的情况，但多数模型未详细描述竞标者实际行为，难以捕捉异质竞标者群体的不同理性水平。</li>
+</ul>
+</li>
+<li><strong>研究方法</strong><ul>
+<li><strong>强化机制设计</strong>：提出混合方法，结合机制设计理论和机器学习技术。先依据机制设计理论用参数描述机制，再用优化算法寻找最优参数；同时用机器学习算法构建精确的竞标者行为模型，将机制参数作为输入，考虑机器学习和战略竞标者行为。</li>
+<li><strong>构建竞标者行为模型</strong><ul>
+<li><strong>RNN模型</strong>：基于循环神经网络（RNN）构建，输入包括连续m天的关键绩效指标（KPI）、竞标者的出价分布及日期相关特征。RNN输出经全连接层和softmax激活函数转换为有效概率分布。为简化出价分布表示，将其离散为100维向量。KPI统计数据取对数并用tile - coding编码，以捕捉竞标者对相对变化的关注。同时包含公共特征集，如日期相关特征，因多数广告商有季节性广告活动。</li>
+<li><strong>数学表述为马尔可夫模型</strong>：采用时间齐次马尔可夫模型解释RNN - 基于竞标者行为模型，即竞标者下一时间步的出价分布是前m个时间步出价分布和KPI的函数，该模型符合文献及百度实际观察。</li>
+</ul>
+</li>
+<li><strong>强化机制设计框架</strong><ul>
+<li><strong>问题表述为MDP</strong>：将动态机制设计问题表述为马尔可夫决策过程（MDP），其中竞标者出价分布为状态，储备价格为行动。目标是选择一系列储备价格配置文件以最大化贴现收入总和。</li>
+<li><strong>优化算法</strong>：虽存在最优储备定价方案，但精确计算成本高。通过限制关注少数主要竞标者的关键词及仅探索当前储备价格小邻域内的行动来降低计算复杂度，并采用蒙特卡洛树搜索（MCTS）算法，通过限制搜索深度和搜索轨迹数量有效控制计算复杂性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>实验设计与结果</strong><ul>
+<li><strong>实验设置</strong>：选择400个具有特定属性（日查询量大且稳定、大部分收入由最多3个竞标者贡献）的关键词，提取8个月的竞价数据（超70TB）。对每个关键词关注3个主要竞标者，为其构建LSTM网络，设置时间步为1天，用90%数据训练，10%测试，以平均交叉熵为性能指标，用ADAM优化器优化。MCTS算法中探索储备价格为当前储备价格的0.95、1.0和1.05倍，设置相关参数如λ &#x3D; 0.8、搜索深度为5等。</li>
+<li><strong>结果分析</strong><ul>
+<li><strong>策略比较</strong>：动态策略（MCTS）优于所有静态策略（如STATIC OPT、BAIDU、STATIC 50）及动态策略（GREEDY和POLICY GRAD）。BAIDU曲线快速收敛；STATIC OPT曲线先升后降；之前百度在线实验表明STATIC OPT短期内收入高但长期下降，与模拟结果相符，证明竞标者行为模型准确性。激进定价方案短期内收入高但长期下降，因竞标者对储备价格变化作出反应。GREEDY和POLICY GRAD算法表现良好，虽稍逊于MCTS但更简单、计算成本低，表明竞标者可能不太具战略性。</li>
+<li><strong>储备价格更新频率影响</strong>：MCTS算法中，更新储备价格频率越低（Δt越大），收入越高且收敛越快。GREEDY算法性能与Δt &#x3D; 3时的MCTS算法几乎相同。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>研究结论</strong><ul>
+<li>提出结合机制设计和人工智能技术的动态定价框架，不依赖多数理论分析中的不现实假设，采用数据驱动方法解决理论市场设计问题。</li>
+<li>框架包含竞标者行为模型（RNN）和优化算法（MCTS），迭代寻找最优机制参数，通过模拟拍卖估计未来目标。</li>
+<li>在中国主要搜索引擎百度的真实竞价数据实验中，该框架显著提高收入，已被百度采用并证明能增加收入。</li>
 </ul>
 </li>
 </ol>
