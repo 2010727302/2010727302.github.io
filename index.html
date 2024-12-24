@@ -187,6 +187,113 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/12/24/Budget-Dynamic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/12/24/Budget-Dynamic/" class="post-title-link" itemprop="url">Budget&Dynamic</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-12-24 16:15:06 / 修改时间：17:34:04" itemprop="dateCreated datePublished" datetime="2024-12-24T16:15:06+08:00">2024-12-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="An-efficient-multi-item-dynamic-auction-with-budget-constrained-bidders"><a href="#An-efficient-multi-item-dynamic-auction-with-budget-constrained-bidders" class="headerlink" title="An efficient multi-item dynamic auction with budget constrained bidders"></a>An efficient multi-item dynamic auction with budget constrained bidders</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>拍卖人出售多个不可分割物品给潜在投标人，投标人有估值但可能受预算约束，瓦尔拉斯均衡可能不存在。本文提出新颖动态拍卖，能找到核心分配，其包含物品分配与支持价格向量，可实现帕累托效率且对联盟偏离威胁有鲁棒性，拍卖中价格过高时可降低。</p>
+<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><ol>
+<li><strong>模型构建</strong><ul>
+<li>包含卖家和多个潜在投标人，卖家有不可分割物品，投标人对物品有估值和预算，且预算为私有信息，定义了相关概念如价格向量、分配、瓦尔拉斯均衡等，还阐述了核心和严格核心概念及性质。</li>
+</ul>
+</li>
+<li><strong>动态拍卖机制</strong><ul>
+<li>投标人提交出价，拍卖人据出价选分配和价格，投标人再更新出价，重复至无人更新。该拍卖与其他拍卖相比有独特之处，如价格调整灵活、允许降出价等。</li>
+<li>证明了拍卖在有限轮终止，且终止时结果为核心分配，在无预算约束时为严格核心分配且分配完全有效。</li>
+</ul>
+</li>
+</ol>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>通过理论分析和举例说明的方式，如在阐述模型时举了多个例子说明不同情况下的市场均衡和核心分配情况，在证明拍卖相关性质时运用了数学推导和逻辑推理。</p>
+<h2 id="AuctionNet-A-Novel-Benchmark-for-Decision-Making-in-Large-Scale-Games"><a href="#AuctionNet-A-Novel-Benchmark-for-Decision-Making-in-Large-Scale-Games" class="headerlink" title="AuctionNet: A Novel Benchmark for Decision-Making in Large-Scale Games"></a>AuctionNet: A Novel Benchmark for Decision-Making in Large-Scale Games</h2><ol>
+<li><strong>摘要</strong>：决策制定在大规模游戏中是人工智能的重要研究领域，本文提出AuctionNet基准，用于大规模广告拍卖中的出价决策。它由广告拍卖环境、预生成数据集和基线出价决策算法性能评估三部分组成。环境通过多个模块交互复制真实拍卖的完整性和复杂性，数据集包含众多代理竞争轨迹，还评估了多种基线算法性能，该基准已应用于NeurIPS 2024竞赛。</li>
+<li><strong>要点</strong><ul>
+<li><strong>决策问题</strong>：关注广告拍卖中的自动出价问题，用部分可观测随机博弈（POSG）公式化问题，优化目标是在预算约束下最大化价值。</li>
+<li><strong>广告拍卖环境</strong>：包含广告机会生成、出价和拍卖等模块。广告机会生成模块用深度生成模型生成数据，降低与现实差距并避免敏感数据暴露；出价模块模拟广告主竞争，实现多种算法；拍卖模块基于经典GSP拍卖，支持多种规则和多广告位特性。</li>
+<li><strong>预生成数据集</strong>：基于环境生成，包含大量广告剧集、机会和记录，可用于深入了解拍卖生态，分析印象值随时间变化及不同类别关系。</li>
+<li><strong>基线算法评估</strong>：评估了线性规划、强化学习和生成模型等基线算法性能，如Online LP表现较好，IQL和BC等有优化潜力。</li>
+</ul>
+</li>
+<li><strong>实验方法</strong><ul>
+<li><strong>环境构建与交互</strong>：将广告机会按时间划分决策步骤，代理依次出价，环境提供最终性能，通过多个模块交互实现真实拍卖模拟。</li>
+<li><strong>数据集生成与分析</strong>：使用深度生成模型生成数据，通过PCA可视化、分析价值分布和字段连接等方式验证生成数据与真实数据的相似性，生成的数据集用于分析不同类别印象值变化及关系。</li>
+<li><strong>算法评估</strong>：在基本任务和目标CPA任务中评估基线算法，比较不同算法性能，未对方法针对自动出价任务进行特殊优化。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/10/24/sync/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -773,7 +880,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-05 17:45:08" itemprop="dateModified" datetime="2024-10-05T17:45:08+08:00">2024-10-05</time>
+      <time title="修改时间：2024-12-24 20:05:32" itemprop="dateModified" datetime="2024-12-24T20:05:32+08:00">2024-12-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -983,98 +1090,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/09/19/template2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/09/19/greedy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar4.jpg">
-      <meta itemprop="name" content="Yuhan Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一个田螺突然就">
-      <meta itemprop="description" content="Yuhan Wang's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一个田螺突然就">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/19/greedy/" class="post-title-link" itemprop="url">greedy</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-19 13:06:07" itemprop="dateCreated datePublished" datetime="2024-09-19T13:06:07+08:00">2024-09-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-05 18:10:11" itemprop="dateModified" datetime="2024-10-05T18:10:11+08:00">2024-10-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          这里有东西被加密了，需要输入密码查看哦。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/19/greedy/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
