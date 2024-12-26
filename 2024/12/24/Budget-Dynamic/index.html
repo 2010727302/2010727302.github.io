@@ -29,7 +29,7 @@
 <meta property="og:description" content="An efficient multi-item dynamic auction with budget constrained bidders摘要拍卖人出售多个不可分割物品给潜在投标人，投标人有估值但可能受预算约束，瓦尔拉斯均衡可能不存在。本文提出新颖动态拍卖，能找到核心分配，其包含物品分配与支持价格向量，可实现帕累托效率且对联盟偏离威胁有鲁棒性，拍卖中价格过高时可降低。 要点 模型构建 包含卖家">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-24T08:15:06.000Z">
-<meta property="article:modified_time" content="2024-12-24T12:16:30.556Z">
+<meta property="article:modified_time" content="2024-12-26T07:07:28.539Z">
 <meta property="article:author" content="Yuhan Wang">
 <meta property="article:tag" content="paper">
 <meta property="article:tag" content="Budget">
@@ -168,7 +168,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
           <div id="toc-div">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#An-efficient-multi-item-dynamic-auction-with-budget-constrained-bidders"><span class="nav-number">1.</span> <span class="nav-text">An efficient multi-item dynamic auction with budget constrained bidders</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%81%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">实验方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AuctionNet-A-Novel-Benchmark-for-Decision-Making-in-Large-Scale-Games"><span class="nav-number">2.</span> <span class="nav-text">AuctionNet: A Novel Benchmark for Decision-Making in Large-Scale Games</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reinforcement-Mechanism-Design-With-Applications-to-Dynamic-Pricing-in-Sponsored-Search-Auctions"><span class="nav-number">3.</span> <span class="nav-text">Reinforcement Mechanism Design: With Applications to Dynamic Pricing in Sponsored Search Auctions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81-1"><span class="nav-number">3.1.</span> <span class="nav-text">摘要</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#An-efficient-multi-item-dynamic-auction-with-budget-constrained-bidders"><span class="nav-number">1.</span> <span class="nav-text">An efficient multi-item dynamic auction with budget constrained bidders</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%81%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">实验方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AuctionNet-A-Novel-Benchmark-for-Decision-Making-in-Large-Scale-Games"><span class="nav-number">2.</span> <span class="nav-text">AuctionNet: A Novel Benchmark for Decision-Making in Large-Scale Games</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reinforcement-Mechanism-Design-With-Applications-to-Dynamic-Pricing-in-Sponsored-Search-Auctions"><span class="nav-number">3.</span> <span class="nav-text">Reinforcement Mechanism Design: With Applications to Dynamic Pricing in Sponsored Search Auctions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81-1"><span class="nav-number">3.1.</span> <span class="nav-text">摘要</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-dynamic-auction-for-multi-object-procurement-under-a-hard-budget-constraint"><span class="nav-number">4.</span> <span class="nav-text">A dynamic auction for multi-object procurement under a hard budget constraint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81-2"><span class="nav-number">4.1.</span> <span class="nav-text">摘要</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -221,9 +221,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-12-24 16:15:06 / 修改时间：20:16:30" itemprop="dateCreated datePublished" datetime="2024-12-24T16:15:06+08:00">2024-12-24</time>
+      <time title="创建时间：2024-12-24 16:15:06" itemprop="dateCreated datePublished" datetime="2024-12-24T16:15:06+08:00">2024-12-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-26 15:07:28" itemprop="dateModified" datetime="2024-12-26T15:07:28+08:00">2024-12-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -307,6 +313,42 @@
 <li>提出结合机制设计和人工智能技术的动态定价框架，不依赖多数理论分析中的不现实假设，采用数据驱动方法解决理论市场设计问题。</li>
 <li>框架包含竞标者行为模型（RNN）和优化算法（MCTS），迭代寻找最优机制参数，通过模拟拍卖估计未来目标。</li>
 <li>在中国主要搜索引擎百度的真实竞价数据实验中，该框架显著提高收入，已被百度采用并证明能增加收入。</li>
+</ul>
+</li>
+</ol>
+<h2 id="A-dynamic-auction-for-multi-object-procurement-under-a-hard-budget-constraint"><a href="#A-dynamic-auction-for-multi-object-procurement-under-a-hard-budget-constraint" class="headerlink" title="A dynamic auction for multi-object procurement under a hard budget constraint"></a>A dynamic auction for multi-object procurement under a hard budget constraint</h2><h3 id="摘要-2"><a href="#摘要-2" class="headerlink" title="摘要"></a>摘要</h3><p>本论文重新审视了政府机构分配研发补贴的问题。通常，申请人的财务约束属于私人信息。已有文献建议采用拍卖方式，以减少信息租金，从而提高稀缺公共资金的分配效率。针对这一采购问题，我们提出了一种新的开放式时钟拍卖。这种拍卖在战略上较为简单，因为它在占优策略中体现了说实话的特性，并且在遵守预算约束的同时满足事后理性。我们通过蒙特卡洛模拟对该拍卖进行了测试，并讨论了其适用性和局限性。此外，我们还强调了与计算机科学最新进展的联系。</p>
+<ol>
+<li><strong>研究背景</strong><ul>
+<li><strong>创新与市场失灵</strong>：创新存在市场失灵特性，如不可分割性、不可占有性和不确定性，私人企业研发投资常非社会最优，政府采用多种政策工具干预，其中直接补贴私人研发尤为重要，如美国小企业创新研究计划（SBIR）。</li>
+<li><strong>补贴效果与问题</strong>：公共研发资金对社会有益，有直接资助和“光晕”或信号效应等好处，但现有补贴分配实践存在问题，如未充分考虑项目性价比，可能导致资金浪费，同时政府政策可能受游说或政治压力扭曲。</li>
+</ul>
+</li>
+<li><strong>模型构建</strong><ul>
+<li><strong>参与者与物品</strong>：政府机构为“买家”，申请人为“卖家”，卖家有不可分割物品（研究提案），有私知保留价格(\theta_{i})，提交财务出价(b_{i})，买家有固定预算(B)。</li>
+<li><strong>质量等级与权重</strong>：为评估买家效用，给每个申请人项目设定质量等级及相对权重（如A项目权重1，B项目0.7等），资金决策基于这些等级，实际质量在决策时不确定。</li>
+<li><strong>买家效用与目标</strong>：买家目标是在预算约束下最大化采购物品总质量，效用函数为(u_{buyer}(\mathcal{A})&#x3D;\sum_{j \in \mathcal{A}} w_{j}&#x3D;\sum_{i \in \mathcal{I}} q_{i} w_{i}, q_{i} \in{0,1})，完全信息下的最优分配是解决相关二进制背包问题。</li>
+</ul>
+</li>
+<li><strong>拍卖机制</strong><ul>
+<li><strong>初始设置</strong>：申请人给定财务起始出价(\bar{b}<em>{i})（如当前补贴或匹配赠款），起始出价除以质量得到初始价格质量比(\bar{r}</em>{i})。</li>
+<li><strong>拍卖过程</strong>：采用开放递减时钟拍卖，时钟从最高初始价格质量比开始倒计时，投标人可随时退出且不能再进入。只要活跃投标人财务出价总和超预算，倒计时继续，直到预算能容纳剩余活跃出价或正好耗尽预算时拍卖结束。</li>
+<li><strong>支付与结果</strong>：输家保留物品无支付，赢家根据拍卖结束方式获得支付（若因退出结束，支付由退出者最终价格质量比决定；若因耗尽预算结束，支付用完预算）。该机制中，说实话是占优策略，满足预算约束且事后个体理性。</li>
+</ul>
+</li>
+<li><strong>模拟分析</strong><ul>
+<li><strong>模拟设置</strong>：通过蒙特卡洛模拟，假设卖家采用占优策略均衡，对模型参数做多种假设，随机抽取储备价格和信息租金，比较动态拍卖（DA）与最优分配（FB）和现状分配（SQ）。</li>
+<li><strong>模拟结果</strong><ul>
+<li><strong>信息租金影响</strong>：DA旨在减少信息租金，在无信息租金时，DA近似FB且优于SQ；信息租金越大，DA相对SQ优势越明显。</li>
+<li><strong>福利权重影响</strong>：B和C项目福利权重越高，SQ分配误差越大，因SQ过于重视A项目，而DA分配规则能适应福利权重变化。</li>
+<li><strong>预算规模影响</strong>：预算增加时，SQ和DA性能都提升，但SQ对预算变化更敏感。</li>
+<li><strong>储备价格分布影响</strong>：多数情况下，储备价格分布假设对SQ和DA相对性能影响不大，DA性能相对稳定，集中在FB的70 - 75%，而SQ在某些情况下性能较差。总体而言，DA对参数变化不太敏感，跟踪误差主要源于信息租金，SQ则因基本分配误差对假设变化敏感。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>讨论与结论</strong><ul>
+<li><strong>适用性与局限性</strong>：论文基于前人对研发补贴分配的研究，改进拍卖设计简化战略问题，提供稳健预测。假设虽合理但现实中可能被违反，如引入拍卖可能改变申请人行为，导致项目性质、成本超支和作弊风险变化；模型假设项目为完美替代品可能扭曲分配，但偏离该假设会使评估和拍卖难以实施；改变补贴分配方式可能影响高质量申请人数量，但平均质量下降可能仍意味着福利改进；理论上更多参与者应改善拍卖分配，但实践中需平衡项目数量与政策目标及项目启动延迟问题；光环或认证效应使拍卖更理想，但可能降低补贴项目平均质量。</li>
+<li><strong>实施与建议</strong>：实施拍卖需程序管理选择质量等级和福利权重，申请人准备提案并确定储备价格，拍卖实施相对简单且能增加资金决策透明度。使用拍卖的利弊因具体情况而异，需在现实中测试并评估效果，机制适用性取决于创新类型、目标群体和政策目标等因素，理论结果也可能适用于研发资金以外场景。</li>
 </ul>
 </li>
 </ol>
