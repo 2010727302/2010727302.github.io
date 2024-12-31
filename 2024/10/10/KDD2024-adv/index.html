@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"2010727302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="KDD 2024 工业界搜广推（广告）工作整理参考 Alibaba生成式出价 | Generative Auto-bidding via Conditional Diffusion Modeling 利用条件扩散模型进行自动出价，提高在线广告的效率。 Jiayan Guo (Peking University, Alibaba Group); Yusen Huo (Alibaba Group);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KDD2024 adv">
+<meta property="og:url" content="https://2010727302.github.io/2024/10/10/KDD2024-adv/index.html">
+<meta property="og:site_name" content="一个田螺突然就">
+<meta property="og:description" content="KDD 2024 工业界搜广推（广告）工作整理参考 Alibaba生成式出价 | Generative Auto-bidding via Conditional Diffusion Modeling 利用条件扩散模型进行自动出价，提高在线广告的效率。 Jiayan Guo (Peking University, Alibaba Group); Yusen Huo (Alibaba Group);">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-10T12:06:19.000Z">
+<meta property="article:modified_time" content="2024-10-10T12:06:56.092Z">
+<meta property="article:author" content="Yuhan Wang">
+<meta property="article:tag" content="paper">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="https://2010727302.github.io/2024/10/10/KDD2024-adv/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<link rel="publisher" href="%3Cg+:profile_link%3E">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="https://2010727302.github.io/2024/10/10/KDD2024-adv/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://2010727302.github.io/2024/10/10/KDD2024-adv/","path":"2024/10/10/KDD2024-adv/","title":"KDD2024 adv"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>KDD2024 adv | 一个田螺突然就</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一个田螺突然就</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如清风徜徉</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+    
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuhan Wang"
+      src="/images/avatar4.jpg">
+  <p class="site-author-name" itemprop="name">Yuhan Wang</p>
+  <div class="site-description" itemprop="description">Yuhan Wang's Blog</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/2010727302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;2010727302" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yigetianluoturanjiu@gmail.com" title="E-Mail → mailto:yigetianluoturanjiu@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+      </div>
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+          <div id="toc-div">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KDD-2024-%E5%B7%A5%E4%B8%9A%E7%95%8C%E6%90%9C%E5%B9%BF%E6%8E%A8%EF%BC%88%E5%B9%BF%E5%91%8A%EF%BC%89%E5%B7%A5%E4%BD%9C%E6%95%B4%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">KDD 2024 工业界搜广推（广告）工作整理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alibaba"><span class="nav-number">2.</span> <span class="nav-text">Alibaba</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bytedance"><span class="nav-number">3.</span> <span class="nav-text">Bytedance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tencent"><span class="nav-number">4.</span> <span class="nav-text">Tencent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Meituan"><span class="nav-number">5.</span> <span class="nav-text">Meituan</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google"><span class="nav-number">6.</span> <span class="nav-text">Google</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shopee"><span class="nav-number">7.</span> <span class="nav-text">Shopee</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Meta"><span class="nav-number">8.</span> <span class="nav-text">Meta</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        
+      </div>
+    </div>
+    
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/10/10/KDD2024-adv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="KDD2024 adv | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          KDD2024 adv
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-10-10 20:06:19 / 修改时间：20:06:56" itemprop="dateCreated datePublished" datetime="2024-10-10T20:06:19+08:00">2024-10-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="KDD-2024-工业界搜广推（广告）工作整理"><a href="#KDD-2024-工业界搜广推（广告）工作整理" class="headerlink" title="KDD 2024 工业界搜广推（广告）工作整理"></a>KDD 2024 工业界搜广推（广告）工作整理</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jSRiHyg0yRGaRzFDpIl81Q">参考</a></p>
+<h1 id="Alibaba"><a href="#Alibaba" class="headerlink" title="Alibaba"></a><strong>Alibaba</strong></h1><p><strong>生成式出价 |</strong> <strong>Generative Auto-bidding via Conditional Diffusion Modeling</strong></p>
+<p>利用条件扩散模型进行自动出价，提高在线广告的效率。</p>
+<p>Jiayan Guo (Peking University, Alibaba Group); Yusen Huo (Alibaba Group); Zhilin Zhang (Alibaba Group); Tianyu Wang (Alibaba Group); Chuan Yu (Alibaba Group); Jian Xu (Alibaba Group); Bo Zheng (Alibaba Group); Yan Zhang (Peking University)</p>
+<p><strong>因果推断 | CURLS: Causal Rule Learning for Subgroups with Significant Treatment Effect</strong></p>
+<p>针对具有显著处理效应的子群体的因果规则学习。</p>
+<p>Jiehui Zhou (State Key Lab of CAD&amp;CG, Zhejiang University, DAMO Academy, Alibaba Group); Linxiao Yang (DAMO Academy, Alibaba Group); Xingyu Liu (State Key Lab of CAD&amp;CG, Zhejiang University); Xinyue Gu (DAMO Academy, Alibaba Group); Liang Sun (DAMO Academy, Alibaba Group); Wei Chen (State Key Lab of CAD&amp;CG, Zhejiang University)</p>
+<p><strong>合约广告 | Bi-Objective Contract Allocation for Guaranteed Delivery Advertising</strong></p>
+<p>合约广告的双目标合同分配问题。</p>
+<p>an Li (Key Laboratory of System Software (Chinese Academy of Sciences) and State Key Laboratory of Computer Science, Institute of Software, Chinese Academy of Sciences, School of Computer Science and Technology, University of Chinese Academy of Sciences); Yundu Huang (Alibaba Group); Wuyang Mao (Alibaba Group); Furong Ye (Key Laboratory of System Software (Chinese Academy of Sciences) and State Key Laboratory of Computer Science, Institute of Software, Chinese Academy of Sciences); Xiang He (Key Laboratory of System Software (Chinese Academy of Sciences) and State Key Laboratory of Computer Science, Institute of Software, Chinese Academy of Sciences, School of Computer Science and Technology, University of Chinese Academy of Sciences); Zhonglin Zu (Alibaba Group); Shaowei Cai (Key Laboratory of System Software (Chinese Academy of Sciences) and State Key Laboratory of Computer Science, Institute of Software, Chinese Academy of Sciences, School of Computer Science and Technology, University of Chinese Academy of Sciences)</p>
+<p><strong>拍卖广告 | Truthful Bandit Mechanisms for Repeated Two-stage Ad Auctions</strong></p>
+<p>为重复两阶段广告拍卖设计真实性多臂老虎机机制。</p>
+<p>Haoming Li (Shanghai Jiaotong University); Yumou Liu (The Chinese University of Hong Kong, Shenzhen); Zhenzhe Zheng (Shanghai Jiao Tong University); Zhilin Zhang (Alibaba Group); Jian Xu (Alibaba Group); Fan Wu (Shanghai Jiao Tong University)</p>
+<h1 id="Bytedance"><a href="#Bytedance" class="headerlink" title="Bytedance"></a><strong>Bytedance</strong></h1><p><strong>出价 | Spending Programmed Bidding: Privacy-friendly Bid Optimization with ROI Constraint in Online Advertising</strong></p>
+<p>Yumin Su (ByteDance Inc.); Min Xiang (ByteDance Inc.); Yifei Chen (ByteDance Inc.); Yanbiao Li (ByteDance Inc.); Tian Qin (ByteDance Inc.); Hongyi Zhang (ByteDance Inc.); Yasong Li (ByteDance Inc.); Xiaobing Liu (ByteDance Inc.)</p>
+<h1 id="Tencent"><a href="#Tencent" class="headerlink" title="Tencent"></a><strong>Tencent</strong></h1><p><strong>排序增强的uplift | Rankability-enhanced Revenue Uplift Modeling Framework for Online Marketing</strong></p>
+<p>Bowei He (City University of Hong Kong); Yunpeng Weng (FiT, Tencent); Xing Tang (FiT, Tencent); Ziqiang Cui (City University of Hong Kong); Zexu Sun (Renmin University of China); Liang Chen (FiT, Tencent); Xiuqiang He (FiT, Tencent); Chen Ma (City University of Hong Kong)</p>
+<h1 id="Meituan"><a href="#Meituan" class="headerlink" title="Meituan"></a><strong>Meituan</strong></h1><p><strong>拍卖 | Joint Auction in the Online Advertising Market</strong></p>
+<p>Zhen Zhang (Gaoling School of Artificial Intelligence, Renmin University of China); Weian Li (School of Software, Shandong University); Yahui Lei (Meituan Inc.); Bingzhe Wang (Gaoling School of Artificial Intelligence, Renmin University of China); Zhicheng Zhang (Gaoling School of Artificial Intelligence, Renmin University of China); Qi Qi (Gaoling School of Artificial Intelligence, Renmin University of China); Qiang Liu (Meituan Inc.); Xingxing Wang (Meituan Inc.)</p>
+<p><strong>因果推断 | Decision Focused Causal Learning for Direct Counterfactual Marketing Optimization</strong></p>
+<p>Hao Zhou (State Key Laboratory for Novel Software Technology, Nanjing University, Meituan); Rongxiao Huang (State Key Laboratory for Novel Software Technology, Nanjing University); Shaoming Li (Meituan); Guibin Jiang (Meituan); Jiaqi Zheng (State Key Laboratory for Novel Software Technology, Nanjing University); Bing Cheng (Meituan); Wei Lin (Meituan)</p>
+<h1 id="Google"><a href="#Google" class="headerlink" title="Google"></a><strong>Google</strong></h1><p><strong>LLM用于拍卖 | Auctions with LLM Summaries</strong></p>
+<p>Avinava Dubey (Google Research); Zhe Feng (Google Research); Rahul Kidambi (Google Research); Aranyak Mehta (Google Research); Di Wang (Google Research)</p>
+<h1 id="Shopee"><a href="#Shopee" class="headerlink" title="Shopee"></a><strong>Shopee</strong></h1><p><strong>广告校准 | Deep Ensemble Shape Calibration: Multi-Field Post-hoc Calibration in Online Advertising</strong></p>
+<p>Shuai Yang (Shopee Discovery Ads); Hao Yang (Shopee Discovery Ads); Zhuang Zou (Shopee Discovery Ads); Linhe Xu (Shopee Discovery Ads); Shuo Yuan (Shopee Discovery Ads); Yifan Zeng (Shopee Discovery Ads)</p>
+<h1 id="Meta"><a href="#Meta" class="headerlink" title="Meta"></a><strong>Meta</strong></h1><p><strong>离线强化学习出价 | Offline Reinforcement Learning for Optimizing Production Bidding Policies</strong></p>
+<p>Dmytro Korenkevych (AI at Meta); Frank Cheng (AI at Meta); Artsiom Balakir (AI at Meta); Alex Nikulkov (AI at Meta); Lingnan Gao (Meta Platform Inc.); Zhihao Cen (AI at Meta); Zuobing Xu (Meta Platform Inc.); Zheqing Zhu (AI at Meta)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/29/Deep-learning-for-revenue-optimal-auctions-with-budgets/" rel="prev" title="Deep learning for revenue-optimal auctions with budgets">
+                  <i class="fa fa-angle-left"></i> Deep learning for revenue-optimal auctions with budgets
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/10/24/sync/" rel="next" title="多进程">
+                  多进程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yuhan Wang</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

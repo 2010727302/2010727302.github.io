@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"2010727302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="问题背景促销在电子商务平台的营销工作中起着关键作用。他们通过为客户提供更多的价值，从而显著提升了销售额。向客户提供优惠(如图1所示)会产生完成预订的动机，并推动业务增长。在增加购买可能性的同时，如果促销活动时的销售净收入小于不提供促销活动时的净收入，促销活动也可能招致增量货币损失。通常，会制定专门的预算来弥补这一增加的净收入损失，以确保可持续的竞选活动。 预算约束营销最近越来越受欢迎，尤其是在促销">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E-Commerce Promotions Personalization via Online Multiple-Choice Knapsack with Uplift Modeling">
+<meta property="og:url" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/index.html">
+<meta property="og:site_name" content="一个田螺突然就">
+<meta property="og:description" content="问题背景促销在电子商务平台的营销工作中起着关键作用。他们通过为客户提供更多的价值，从而显著提升了销售额。向客户提供优惠(如图1所示)会产生完成预订的动机，并推动业务增长。在增加购买可能性的同时，如果促销活动时的销售净收入小于不提供促销活动时的净收入，促销活动也可能招致增量货币损失。通常，会制定专门的预算来弥补这一增加的净收入损失，以确保可持续的竞选活动。 预算约束营销最近越来越受欢迎，尤其是在促销">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029223156512.png">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029224008191.png">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/CATE.png">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/solution.png">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029230943979.png">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029231056168.png">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029231331394.png">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029231722341.png">
+<meta property="og:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/822e2156683c75b826d7c3ffb9807f32_6_Figure_6_433477608.png">
+<meta property="article:published_time" content="2023-10-29T04:33:47.000Z">
+<meta property="article:modified_time" content="2024-10-05T09:46:52.927Z">
+<meta property="article:author" content="Yuhan Wang">
+<meta property="article:tag" content="paper">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<link rel="publisher" href="%3Cg+:profile_link%3E">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/","path":"2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/","title":"E-Commerce Promotions Personalization via Online Multiple-Choice Knapsack with Uplift Modeling"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>E-Commerce Promotions Personalization via Online Multiple-Choice Knapsack with Uplift Modeling | 一个田螺突然就</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一个田螺突然就</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如清风徜徉</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+    
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuhan Wang"
+      src="/images/avatar4.jpg">
+  <p class="site-author-name" itemprop="name">Yuhan Wang</p>
+  <div class="site-description" itemprop="description">Yuhan Wang's Blog</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/2010727302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;2010727302" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yigetianluoturanjiu@gmail.com" title="E-Mail → mailto:yigetianluoturanjiu@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+      </div>
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+          <div id="toc-div">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">符号定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%A1%86%E6%9E%B6"><span class="nav-number">2.2.</span> <span class="nav-text">解决方案框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dominant-items"><span class="nav-number">2.2.1.</span> <span class="nav-text">Dominant items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Incremental-value-and-weight"><span class="nav-number">2.2.2.</span> <span class="nav-text">Incremental value and weight</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Efficiency-angle"><span class="nav-number">2.2.3.</span> <span class="nav-text">Efficiency angle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Efficiency-angle-threshold"><span class="nav-number">2.2.4.</span> <span class="nav-text">Efficiency angle threshold</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="nav-number">2.3.</span> <span class="nav-text">系统架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        
+      </div>
+    </div>
+    
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="E-Commerce Promotions Personalization via Online Multiple-Choice Knapsack with Uplift Modeling | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          E-Commerce Promotions Personalization via Online Multiple-Choice Knapsack with Uplift Modeling
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-29 12:33:47" itemprop="dateCreated datePublished" datetime="2023-10-29T12:33:47+08:00">2023-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-05 17:46:52" itemprop="dateModified" datetime="2024-10-05T17:46:52+08:00">2024-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h1><p>促销在电子商务平台的营销工作中起着关键作用。他们通过为客户提供更多的价值，从而显著提升了销售额。向客户提供优惠(如图1所示)会产生完成预订的动机，并推动业务增长。在增加购买可能性的同时，如果促销活动时的销售净收入小于不提供促销活动时的净收入，促销活动也可能招致增量货币损失。通常，会制定专门的预算来弥补这一增加的净收入损失，以确保可持续的竞选活动。</p>
+<p>预算约束营销最近越来越受欢迎，尤其是在促销分配方面。许多解决方案考虑一个恒定的成本因素[18]。然而，在存在因果增量估计的情况下，晋升的货币影响可能导致不同的、积极的或消极的结果。现有的解决方案主要依赖于基于意图的模型，不能适应因果模型的负值，因此不适用于此类问题。</p>
+<p>本文利用提升模型(uplift modeling)的因果估计，形式化了预算约束下的多选择晋升分配问题。我们提出了一种新的在线选择背包设置中负值和权重的解决方案。我们在最大的在线旅游平台之一Booking.com上展示了该方法的部署，并在现实生活的实验研究中对其进行了各种基准测试。</p>
+<p>我们的主要贡献有:</p>
+<ol>
+<li>将预算约束下的促销个性化问题表述为具有因果估计的在线mckp。</li>
+<li>基于因果隆起模型估计和多项选择背包优化的两步求解方法。</li>
+<li>Online-MCKP解的新颖扩展，以适应负值和权值。</li>
+<li>在Booking.com平台进行大规模的真实促销活动实验研究。</li>
+</ol>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><h2 id="符号定义"><a href="#符号定义" class="headerlink" title="符号定义"></a>符号定义</h2><p>𝑌𝑖 - a binary random variable representing a completion of a purchase </p>
+<p>​		 一个二进制随机变量，表示购买完成</p>
+<p>𝑅𝑖 - a continuous random variable representing the net monetary revenue associated with the purchase (sum of all revenues minus all promotional costs)</p>
+<p>​	 表示与购买相关的净货币收入的连续随机变量（所有收入的总和减去所有促销成本）</p>
+<p>𝑌𝑖 (𝑘): potential purchase 对于客户𝑖 和促销𝑘如果客户𝑖 获得促销𝑘</p>
+<p>𝑅𝑖 (𝑘): potential net revenue表示如果客户𝑖 获得促销𝑘.</p>
+<p>k&#x3D;0, no promotion<br>$$<br>CATE_{𝑌} (𝑖, 𝑘) &#x3D; E(𝑌_{𝑖} (𝑘) − 𝑌_{𝑖} (0) | 𝑋 &#x3D; 𝑥𝑖 )<br>$$</p>
+<p>表示如果促销k，则对客户i的预期购买概率的增量影响</p>
+<p>$$<br>CATE_{𝑅} (𝑖, 𝑘) &#x3D; E(𝑅_{𝑖}(𝑘) − 𝑅_{𝑖}(0) | 𝑋 &#x3D; 𝑥𝑖 )<br>$$</p>
+<p><em><strong>ppt66-68</strong></em></p>
+<p><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029223156512.png"></p>
+<p>CATEL (𝑖, 𝑘) &#x3D; −CATE𝑅 (𝑖, 𝑘)</p>
+<p>𝑣𝑖𝑘 is CATE𝑌 (𝑖, 𝑘)and 𝑤𝑖𝑘 is CATEL (𝑖, 𝑘)</p>
+<p><em>MCKP：给你N组物品，然后每一组你至多选择一个物品,每个物品都有自己的体积和价值，现在给你一个容里为M的背包，让你用这个背包装物品，使得物品价值总和最大</em></p>
+<p><em>这里一个人是一组，K1,K2….</em></p>
+<p><em>每个人可能收到的优惠券k∈Ki,k&#x3D;0表示这个用户没有优惠</em></p>
+<p><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029224008191.png" alt="image-20231029224008191"></p>
+<p><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/CATE.png" alt="屏幕截图 2023-10-29 224151"></p>
+<h2 id="解决方案框架"><a href="#解决方案框架" class="headerlink" title="解决方案框架"></a>解决方案框架</h2><p><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/solution.png" alt="zaiwen.top2023_10_29 23_01_58"></p>
+<p>先调了公共的UpliftML package，Optimization部分</p>
+<h3 id="Dominant-items"><a href="#Dominant-items" class="headerlink" title="Dominant items"></a>Dominant items</h3><p>删除Dominant和 LP-Dominant，和The Multiple-Choice Knapsack Problem这篇一样</p>
+<p><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029230943979.png" alt="image-20231029230943979"></p>
+<h3 id="Incremental-value-and-weight"><a href="#Incremental-value-and-weight" class="headerlink" title="Incremental value and weight"></a>Incremental value and weight</h3><p><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029231056168.png" alt="image-20231029231056168.png"></p>
+<p>感觉和mckp那篇也差不多</p>
+<p>此外，the incremental efficiency 𝑣𝑖𝑑&#x2F;𝑤𝑖𝑑 is monotonically decreasing with 𝑑，除了d&#x3D;0到d&#x3D;1，可能w和v是负的，看图3。</p>
+<h3 id="Efficiency-angle"><a href="#Efficiency-angle" class="headerlink" title="Efficiency angle"></a>Efficiency angle</h3><p><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029231331394.png" alt="image-20231029231331394.png"></p>
+<h3 id="Efficiency-angle-threshold"><a href="#Efficiency-angle-threshold" class="headerlink" title="Efficiency angle threshold"></a>Efficiency angle threshold</h3><p>1: Input:</p>
+<p>• Set of past dominant items 𝑃</p>
+<p>• Knapsack capacity 𝐶</p>
+<p>• Current customer index 𝑖</p>
+<p>• Expected number of customers |𝑈 |</p>
+<p>2: Sort 𝑃 by decreasing angle 𝜃𝑝</p>
+<p>3: for 𝑝 ∈ 𝑃 do:</p>
+<p>4:	 if p&#x3D;0:<br>$$<br>𝑓 ((𝜃_{0})  ) &#x3D; w_{0}&#x2F;|𝑃 |<br>$$</p>
+<p>5: 	else:<br>$$<br>𝑓 ((𝜃_{p})  ) &#x3D; 𝑓 (𝜃_{p} −1 ) + 𝑤_{p} &#x2F;|𝑃 |<br>$$</p>
+<p>6: end for</p>
+<p>7: 	Return efficiency threshold 𝜃^{*}:<br>$$<br>𝜃^{ * } ← 𝑚𝑖𝑛_{𝑝∈𝑃} ({ 𝜃_{p} | 𝑓 (𝜃_{p} ) ≤ 𝐶&#x2F;(|𝑃 |&#x2F;𝑖 · (|𝑈 |−𝑖+1) )})<br>$$<br>&#x2F;&#x2F; <em>TODO：这个就不知道咋想出来的，问问去</em></p>
+<p>总的：O (|𝐾𝑖 | · 𝑙𝑜𝑔|𝐾𝑖 |)，𝜃更新具有O(|𝑈 |) 复杂性<br><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/image-20231029231722341.png"></p>
+<h2 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h2><p>比较了好几种optimization，global，local， Greedy，下面几个</p>
+<ol>
+<li><strong>Online MCKP (On-MCKP)</strong>:<ul>
+<li><strong>情境描述</strong>：该方法对应于真实世界中的情景，其中顾客逐一到达，每次决策都必须在特定时间步骤中做出，即每到一个新顾客就需要做出促销活动的决策。</li>
+<li><strong>信息限制</strong>：在开始时，没有有关一般权重和价值分布的信息。</li>
+<li><strong>决策过程</strong>：方法会根据剩余预算和更新的效率角度函数（Algorithm 2描述）来调整促销活动的分配决策。</li>
+</ul>
+</li>
+<li><strong>Offline MCKP (Off-MCKP)</strong>:<ul>
+<li><strong>情境描述</strong>：与Online MCKP相比，这种方法不同的是提前知道所有物品，即所有的顾客和可能的促销活动。</li>
+<li><strong>信息利用</strong>：因为提前知道所有物品，可以在分配决策之前仅适应一次效率角度函数（Algorithm 1描述）。</li>
+<li><strong>决策过程</strong>：在知道所有顾客和促销活动之后，算法会决定为每个顾客提供哪种促销活动，而不需要更新效率角度函数。</li>
+</ul>
+</li>
+</ol>
+<p>在这两种方法中，主要的区别在于信息利用和决策时机。Online MCKP需要在每个时间步骤中动态地做出决策，而Offline MCKP可以提前知道所有信息，然后在不需要动态更新的情况下做出决策。</p>
+<ol>
+<li>Integer Linear Programming (ILP)<ul>
+<li><strong>解决方法</strong>：ILP求解器用于在离线设置中寻找最优的上界解决方案。</li>
+<li><strong>线性规划</strong>：MCKP问题可以被表示为一个线性规划，并且采用了论文中所描述的线性方程（Equation 1）来解决。</li>
+<li><strong>预算常数</strong>：预算常数 C被设置为零（C&#x3D;0）。</li>
+<li><strong>工具和求解器</strong>：研究使用了 Python PuLP 软件包和 CBC（Coinor branch and cut）求解器。整体求解器运行时间被限制在3小时内。</li>
+<li><strong>性能说明</strong>：尽管对于背包问题有更合适的求解器，研究中仅遇到了一个实例，即在有限的运行时间内无法达到最优解。不过，它达到了一个可行解，且具有微小的最优性差距。</li>
+</ul>
+</li>
+</ol>
+<p>ILP方法利用了数学规划中的整数线性规划来解决MCKP问题。在离线设置下，ILP被用来找到一个最优的上界解决方案，其依赖于线性规划的建模，并使用了特定的求解器和工具来解决问题。</p>
+<p><img src="/2023/10/29/E-Commerce-Promotions-Personalization-via-Online-Multiple-Choice-Knapsack-with-Uplift-Modeling/822e2156683c75b826d7c3ffb9807f32_6_Figure_6_433477608.png"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>这部分感觉看原文，比较了这几个方法比ILP垃圾多少（不是），然后是看online-mckp自己的一个性质：bound，然后three flat-discount levels 看ROI，最后是一个净利润和阈值的浮动（？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/26/Uplift-Summary/" rel="prev" title="Uplift Summary">
+                  <i class="fa fa-angle-left"></i> Uplift Summary
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/03/13/dp/" rel="next" title="dp">
+                  dp <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yuhan Wang</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

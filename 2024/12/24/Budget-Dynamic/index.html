@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"2010727302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="An efficient multi-item dynamic auction with budget constrained bidders摘要拍卖人出售多个不可分割物品给潜在投标人，投标人有估值但可能受预算约束，瓦尔拉斯均衡可能不存在。本文提出新颖动态拍卖，能找到核心分配，其包含物品分配与支持价格向量，可实现帕累托效率且对联盟偏离威胁有鲁棒性，拍卖中价格过高时可降低。 要点 模型构建 包含卖家">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Budget&amp;Dynamic">
+<meta property="og:url" content="https://2010727302.github.io/2024/12/24/Budget-Dynamic/index.html">
+<meta property="og:site_name" content="一个田螺突然就">
+<meta property="og:description" content="An efficient multi-item dynamic auction with budget constrained bidders摘要拍卖人出售多个不可分割物品给潜在投标人，投标人有估值但可能受预算约束，瓦尔拉斯均衡可能不存在。本文提出新颖动态拍卖，能找到核心分配，其包含物品分配与支持价格向量，可实现帕累托效率且对联盟偏离威胁有鲁棒性，拍卖中价格过高时可降低。 要点 模型构建 包含卖家">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-24T08:15:06.000Z">
+<meta property="article:modified_time" content="2024-12-31T10:49:33.768Z">
+<meta property="article:author" content="Yuhan Wang">
+<meta property="article:tag" content="paper">
+<meta property="article:tag" content="Budget">
+<meta property="article:tag" content="Dynamic">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="https://2010727302.github.io/2024/12/24/Budget-Dynamic/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<link rel="publisher" href="%3Cg+:profile_link%3E">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="https://2010727302.github.io/2024/12/24/Budget-Dynamic/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://2010727302.github.io/2024/12/24/Budget-Dynamic/","path":"2024/12/24/Budget-Dynamic/","title":"Budget&Dynamic"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Budget&Dynamic | 一个田螺突然就</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一个田螺突然就</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如清风徜徉</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+    
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuhan Wang"
+      src="/images/avatar4.jpg">
+  <p class="site-author-name" itemprop="name">Yuhan Wang</p>
+  <div class="site-description" itemprop="description">Yuhan Wang's Blog</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/2010727302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;2010727302" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yigetianluoturanjiu@gmail.com" title="E-Mail → mailto:yigetianluoturanjiu@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+      </div>
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+          <div id="toc-div">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#An-efficient-multi-item-dynamic-auction-with-budget-constrained-bidders"><span class="nav-number">1.</span> <span class="nav-text">An efficient multi-item dynamic auction with budget constrained bidders</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%81%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">实验方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AuctionNet-A-Novel-Benchmark-for-Decision-Making-in-Large-Scale-Games"><span class="nav-number">2.</span> <span class="nav-text">AuctionNet: A Novel Benchmark for Decision-Making in Large-Scale Games</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reinforcement-Mechanism-Design-With-Applications-to-Dynamic-Pricing-in-Sponsored-Search-Auctions"><span class="nav-number">3.</span> <span class="nav-text">Reinforcement Mechanism Design: With Applications to Dynamic Pricing in Sponsored Search Auctions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81-1"><span class="nav-number">3.1.</span> <span class="nav-text">摘要</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-dynamic-auction-for-multi-object-procurement-under-a-hard-budget-constraint"><span class="nav-number">4.</span> <span class="nav-text">A dynamic auction for multi-object procurement under a hard budget constraint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81-2"><span class="nav-number">4.1.</span> <span class="nav-text">摘要</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spending-Programmed-Bidding-Privacy-friendly-Bid-Optimization-with-ROI-Constraint-in-Online-Advertising"><span class="nav-number">5.</span> <span class="nav-text">Spending Programmed Bidding: Privacy-friendly Bid Optimization with ROI Constraint in Online Advertising</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81-3"><span class="nav-number">5.1.</span> <span class="nav-text">摘要</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        
+      </div>
+    </div>
+    
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/12/24/Budget-Dynamic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Budget&Dynamic | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Budget&Dynamic
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-24 16:15:06" itemprop="dateCreated datePublished" datetime="2024-12-24T16:15:06+08:00">2024-12-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-31 18:49:33" itemprop="dateModified" datetime="2024-12-31T18:49:33+08:00">2024-12-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="An-efficient-multi-item-dynamic-auction-with-budget-constrained-bidders"><a href="#An-efficient-multi-item-dynamic-auction-with-budget-constrained-bidders" class="headerlink" title="An efficient multi-item dynamic auction with budget constrained bidders"></a>An efficient multi-item dynamic auction with budget constrained bidders</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>拍卖人出售多个不可分割物品给潜在投标人，投标人有估值但可能受预算约束，瓦尔拉斯均衡可能不存在。本文提出新颖动态拍卖，能找到核心分配，其包含物品分配与支持价格向量，可实现帕累托效率且对联盟偏离威胁有鲁棒性，拍卖中价格过高时可降低。</p>
+<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><ol>
+<li><strong>模型构建</strong><ul>
+<li>包含卖家和多个潜在投标人，卖家有不可分割物品，投标人对物品有估值和预算，且预算为私有信息，定义了相关概念如价格向量、分配、瓦尔拉斯均衡等，还阐述了核心和严格核心概念及性质。</li>
+</ul>
+</li>
+<li><strong>动态拍卖机制</strong><ul>
+<li>投标人提交出价，拍卖人据出价选分配和价格，投标人再更新出价，重复至无人更新。该拍卖与其他拍卖相比有独特之处，如价格调整灵活、允许降出价等。</li>
+<li>证明了拍卖在有限轮终止，且终止时结果为核心分配，在无预算约束时为严格核心分配且分配完全有效。</li>
+</ul>
+</li>
+</ol>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>通过理论分析和举例说明的方式，如在阐述模型时举了多个例子说明不同情况下的市场均衡和核心分配情况，在证明拍卖相关性质时运用了数学推导和逻辑推理。</p>
+<h2 id="AuctionNet-A-Novel-Benchmark-for-Decision-Making-in-Large-Scale-Games"><a href="#AuctionNet-A-Novel-Benchmark-for-Decision-Making-in-Large-Scale-Games" class="headerlink" title="AuctionNet: A Novel Benchmark for Decision-Making in Large-Scale Games"></a>AuctionNet: A Novel Benchmark for Decision-Making in Large-Scale Games</h2><ol>
+<li><strong>摘要</strong>：决策制定在大规模游戏中是人工智能的重要研究领域，本文提出AuctionNet基准，用于大规模广告拍卖中的出价决策。它由广告拍卖环境、预生成数据集和基线出价决策算法性能评估三部分组成。环境通过多个模块交互复制真实拍卖的完整性和复杂性，数据集包含众多代理竞争轨迹，还评估了多种基线算法性能，该基准已应用于NeurIPS 2024竞赛。</li>
+<li><strong>要点</strong><ul>
+<li><strong>决策问题</strong>：关注广告拍卖中的自动出价问题，用部分可观测随机博弈（POSG）公式化问题，优化目标是在预算约束下最大化价值。</li>
+<li><strong>广告拍卖环境</strong>：包含广告机会生成、出价和拍卖等模块。广告机会生成模块用深度生成模型生成数据，降低与现实差距并避免敏感数据暴露；出价模块模拟广告主竞争，实现多种算法；拍卖模块基于经典GSP拍卖，支持多种规则和多广告位特性。</li>
+<li><strong>预生成数据集</strong>：基于环境生成，包含大量广告剧集、机会和记录，可用于深入了解拍卖生态，分析印象值随时间变化及不同类别关系。</li>
+<li><strong>基线算法评估</strong>：评估了线性规划、强化学习和生成模型等基线算法性能，如Online LP表现较好，IQL和BC等有优化潜力。</li>
+</ul>
+</li>
+<li><strong>实验方法</strong><ul>
+<li><strong>环境构建与交互</strong>：将广告机会按时间划分决策步骤，代理依次出价，环境提供最终性能，通过多个模块交互实现真实拍卖模拟。</li>
+<li><strong>数据集生成与分析</strong>：使用深度生成模型生成数据，通过PCA可视化、分析价值分布和字段连接等方式验证生成数据与真实数据的相似性，生成的数据集用于分析不同类别印象值变化及关系。</li>
+<li><strong>算法评估</strong>：在基本任务和目标CPA任务中评估基线算法，比较不同算法性能，未对方法针对自动出价任务进行特殊优化。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Reinforcement-Mechanism-Design-With-Applications-to-Dynamic-Pricing-in-Sponsored-Search-Auctions"><a href="#Reinforcement-Mechanism-Design-With-Applications-to-Dynamic-Pricing-in-Sponsored-Search-Auctions" class="headerlink" title="Reinforcement Mechanism Design: With Applications to Dynamic Pricing in Sponsored Search Auctions"></a>Reinforcement Mechanism Design: With Applications to Dynamic Pricing in Sponsored Search Auctions</h2><h3 id="摘要-1"><a href="#摘要-1" class="headerlink" title="摘要"></a>摘要</h3><p>在赞助搜索中，标准机制是广义第二价格（GSP）拍卖，但存在非收入最优问题。本文研究个体和组织互动的社会系统，以赞助搜索拍卖为背景，结合机制设计和人工智能工具解决搜索引擎动态定价问题。通过训练买家行为模型，将动态定价问题建模为马尔可夫决策过程（MDP），应用强化学习算法优化储备价格，实验表明该模型优于多种静态和动态优化策略。</p>
+<ol>
+<li><strong>研究背景</strong><ul>
+<li><strong>赞助搜索拍卖现状</strong>：在线销售广告是搜索引擎公司的盈利模式，如谷歌和百度。用户搜索时，搜索引擎展示广告，广告商竞价竞争位置，按点击付费。常见的广义第二价格（GSP）拍卖机制存在收入非最优问题，且多数收入优化理论基于竞标者理性行为假设，但实际中该假设常不成立。</li>
+<li><strong>相关研究不足</strong>：新兴研究关注竞标者使用学习算法的情况，但多数模型未详细描述竞标者实际行为，难以捕捉异质竞标者群体的不同理性水平。</li>
+</ul>
+</li>
+<li><strong>研究方法</strong><ul>
+<li><strong>强化机制设计</strong>：提出混合方法，结合机制设计理论和机器学习技术。先依据机制设计理论用参数描述机制，再用优化算法寻找最优参数；同时用机器学习算法构建精确的竞标者行为模型，将机制参数作为输入，考虑机器学习和战略竞标者行为。</li>
+<li><strong>构建竞标者行为模型</strong><ul>
+<li><strong>RNN模型</strong>：基于循环神经网络（RNN）构建，输入包括连续m天的关键绩效指标（KPI）、竞标者的出价分布及日期相关特征。RNN输出经全连接层和softmax激活函数转换为有效概率分布。为简化出价分布表示，将其离散为100维向量。KPI统计数据取对数并用tile - coding编码，以捕捉竞标者对相对变化的关注。同时包含公共特征集，如日期相关特征，因多数广告商有季节性广告活动。</li>
+<li><strong>数学表述为马尔可夫模型</strong>：采用时间齐次马尔可夫模型解释RNN - 基于竞标者行为模型，即竞标者下一时间步的出价分布是前m个时间步出价分布和KPI的函数，该模型符合文献及百度实际观察。</li>
+</ul>
+</li>
+<li><strong>强化机制设计框架</strong><ul>
+<li><strong>问题表述为MDP</strong>：将动态机制设计问题表述为马尔可夫决策过程（MDP），其中竞标者出价分布为状态，储备价格为行动。目标是选择一系列储备价格配置文件以最大化贴现收入总和。</li>
+<li><strong>优化算法</strong>：虽存在最优储备定价方案，但精确计算成本高。通过限制关注少数主要竞标者的关键词及仅探索当前储备价格小邻域内的行动来降低计算复杂度，并采用蒙特卡洛树搜索（MCTS）算法，通过限制搜索深度和搜索轨迹数量有效控制计算复杂性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>实验设计与结果</strong><ul>
+<li><strong>实验设置</strong>：选择400个具有特定属性（日查询量大且稳定、大部分收入由最多3个竞标者贡献）的关键词，提取8个月的竞价数据（超70TB）。对每个关键词关注3个主要竞标者，为其构建LSTM网络，设置时间步为1天，用90%数据训练，10%测试，以平均交叉熵为性能指标，用ADAM优化器优化。MCTS算法中探索储备价格为当前储备价格的0.95、1.0和1.05倍，设置相关参数如λ &#x3D; 0.8、搜索深度为5等。</li>
+<li><strong>结果分析</strong><ul>
+<li><strong>策略比较</strong>：动态策略（MCTS）优于所有静态策略（如STATIC OPT、BAIDU、STATIC 50）及动态策略（GREEDY和POLICY GRAD）。BAIDU曲线快速收敛；STATIC OPT曲线先升后降；之前百度在线实验表明STATIC OPT短期内收入高但长期下降，与模拟结果相符，证明竞标者行为模型准确性。激进定价方案短期内收入高但长期下降，因竞标者对储备价格变化作出反应。GREEDY和POLICY GRAD算法表现良好，虽稍逊于MCTS但更简单、计算成本低，表明竞标者可能不太具战略性。</li>
+<li><strong>储备价格更新频率影响</strong>：MCTS算法中，更新储备价格频率越低（Δt越大），收入越高且收敛越快。GREEDY算法性能与Δt &#x3D; 3时的MCTS算法几乎相同。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>研究结论</strong><ul>
+<li>提出结合机制设计和人工智能技术的动态定价框架，不依赖多数理论分析中的不现实假设，采用数据驱动方法解决理论市场设计问题。</li>
+<li>框架包含竞标者行为模型（RNN）和优化算法（MCTS），迭代寻找最优机制参数，通过模拟拍卖估计未来目标。</li>
+<li>在中国主要搜索引擎百度的真实竞价数据实验中，该框架显著提高收入，已被百度采用并证明能增加收入。</li>
+</ul>
+</li>
+</ol>
+<h2 id="A-dynamic-auction-for-multi-object-procurement-under-a-hard-budget-constraint"><a href="#A-dynamic-auction-for-multi-object-procurement-under-a-hard-budget-constraint" class="headerlink" title="A dynamic auction for multi-object procurement under a hard budget constraint"></a>A dynamic auction for multi-object procurement under a hard budget constraint</h2><h3 id="摘要-2"><a href="#摘要-2" class="headerlink" title="摘要"></a>摘要</h3><p>本论文重新审视了政府机构分配研发补贴的问题。通常，申请人的财务约束属于私人信息。已有文献建议采用拍卖方式，以减少信息租金，从而提高稀缺公共资金的分配效率。针对这一采购问题，我们提出了一种新的开放式时钟拍卖。这种拍卖在战略上较为简单，因为它在占优策略中体现了说实话的特性，并且在遵守预算约束的同时满足事后理性。我们通过蒙特卡洛模拟对该拍卖进行了测试，并讨论了其适用性和局限性。此外，我们还强调了与计算机科学最新进展的联系。</p>
+<ol>
+<li><strong>研究背景</strong><ul>
+<li><strong>创新与市场失灵</strong>：创新存在市场失灵特性，如不可分割性、不可占有性和不确定性，私人企业研发投资常非社会最优，政府采用多种政策工具干预，其中直接补贴私人研发尤为重要，如美国小企业创新研究计划（SBIR）。</li>
+<li><strong>补贴效果与问题</strong>：公共研发资金对社会有益，有直接资助和“光晕”或信号效应等好处，但现有补贴分配实践存在问题，如未充分考虑项目性价比，可能导致资金浪费，同时政府政策可能受游说或政治压力扭曲。</li>
+</ul>
+</li>
+<li><strong>模型构建</strong><ul>
+<li><strong>参与者与物品</strong>：政府机构为“买家”，申请人为“卖家”，卖家有不可分割物品（研究提案），有私知保留价格(\theta_{i})，提交财务出价(b_{i})，买家有固定预算(B)。</li>
+<li><strong>质量等级与权重</strong>：为评估买家效用，给每个申请人项目设定质量等级及相对权重（如A项目权重1，B项目0.7等），资金决策基于这些等级，实际质量在决策时不确定。</li>
+<li><strong>买家效用与目标</strong>：买家目标是在预算约束下最大化采购物品总质量，效用函数为(u_{buyer}(\mathcal{A})&#x3D;\sum_{j \in \mathcal{A}} w_{j}&#x3D;\sum_{i \in \mathcal{I}} q_{i} w_{i}, q_{i} \in{0,1})，完全信息下的最优分配是解决相关二进制背包问题。</li>
+</ul>
+</li>
+<li><strong>拍卖机制</strong><ul>
+<li><strong>初始设置</strong>：申请人给定财务起始出价(\bar{b}<em>{i})（如当前补贴或匹配赠款），起始出价除以质量得到初始价格质量比(\bar{r}</em>{i})。</li>
+<li><strong>拍卖过程</strong>：采用开放递减时钟拍卖，时钟从最高初始价格质量比开始倒计时，投标人可随时退出且不能再进入。只要活跃投标人财务出价总和超预算，倒计时继续，直到预算能容纳剩余活跃出价或正好耗尽预算时拍卖结束。</li>
+<li><strong>支付与结果</strong>：输家保留物品无支付，赢家根据拍卖结束方式获得支付（若因退出结束，支付由退出者最终价格质量比决定；若因耗尽预算结束，支付用完预算）。该机制中，说实话是占优策略，满足预算约束且事后个体理性。</li>
+</ul>
+</li>
+<li><strong>模拟分析</strong><ul>
+<li><strong>模拟设置</strong>：通过蒙特卡洛模拟，假设卖家采用占优策略均衡，对模型参数做多种假设，随机抽取储备价格和信息租金，比较动态拍卖（DA）与最优分配（FB）和现状分配（SQ）。</li>
+<li><strong>模拟结果</strong><ul>
+<li><strong>信息租金影响</strong>：DA旨在减少信息租金，在无信息租金时，DA近似FB且优于SQ；信息租金越大，DA相对SQ优势越明显。</li>
+<li><strong>福利权重影响</strong>：B和C项目福利权重越高，SQ分配误差越大，因SQ过于重视A项目，而DA分配规则能适应福利权重变化。</li>
+<li><strong>预算规模影响</strong>：预算增加时，SQ和DA性能都提升，但SQ对预算变化更敏感。</li>
+<li><strong>储备价格分布影响</strong>：多数情况下，储备价格分布假设对SQ和DA相对性能影响不大，DA性能相对稳定，集中在FB的70 - 75%，而SQ在某些情况下性能较差。总体而言，DA对参数变化不太敏感，跟踪误差主要源于信息租金，SQ则因基本分配误差对假设变化敏感。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>讨论与结论</strong><ul>
+<li><strong>适用性与局限性</strong>：论文基于前人对研发补贴分配的研究，改进拍卖设计简化战略问题，提供稳健预测。假设虽合理但现实中可能被违反，如引入拍卖可能改变申请人行为，导致项目性质、成本超支和作弊风险变化；模型假设项目为完美替代品可能扭曲分配，但偏离该假设会使评估和拍卖难以实施；改变补贴分配方式可能影响高质量申请人数量，但平均质量下降可能仍意味着福利改进；理论上更多参与者应改善拍卖分配，但实践中需平衡项目数量与政策目标及项目启动延迟问题；光环或认证效应使拍卖更理想，但可能降低补贴项目平均质量。</li>
+<li><strong>实施与建议</strong>：实施拍卖需程序管理选择质量等级和福利权重，申请人准备提案并确定储备价格，拍卖实施相对简单且能增加资金决策透明度。使用拍卖的利弊因具体情况而异，需在现实中测试并评估效果，机制适用性取决于创新类型、目标群体和政策目标等因素，理论结果也可能适用于研发资金以外场景。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Spending-Programmed-Bidding-Privacy-friendly-Bid-Optimization-with-ROI-Constraint-in-Online-Advertising"><a href="#Spending-Programmed-Bidding-Privacy-friendly-Bid-Optimization-with-ROI-Constraint-in-Online-Advertising" class="headerlink" title="Spending Programmed Bidding: Privacy-friendly Bid Optimization with ROI Constraint in Online Advertising"></a>Spending Programmed Bidding: Privacy-friendly Bid Optimization with ROI Constraint in Online Advertising</h2><h3 id="摘要-3"><a href="#摘要-3" class="headerlink" title="摘要"></a>摘要</h3><p>  隐私政策使得实时且精确的用户数据无法追踪，这扰乱了价值数十亿美元的在线广告市场，给在线广告行业中受投资回报率（ROI）约束的产品优化带来了重大挑战。隐私保护策略，包括事件聚合和报告延迟，阻碍了对详细和即时反馈数据的获取，从而使传统的身份揭示归因技术无法发挥作用。在本文中，我们引入了一种新颖的支出程序化出价（SPB）框架来应对这些挑战。SPB是一个两阶段框架，将长期投放支出规划（宏观阶段）和短期出价执行（微观阶段）分开。宏观阶段对目标ROI进行建模以实现最大效用并得出预期支出，而微观阶段则在给定预期支出的情况下优化出价价格。我们进一步将我们的框架扩展到跨渠道场景，在该场景中，代理在受隐私约束和身份揭示归因渠道中进行出价。我们发现，当存在受隐私约束的渠道时，SPB在离线数据集和大型广告平台的在线实验中均优于最先进的出价方法。<br>  “Spending Programmed Bidding: Privacy-friendly Bid Optimization with ROI Constraint in Online Advertising”由Yumin Su、Min Xiang等人撰写，提出了一种创新的在线广告出价框架Spending Programmed Bidding (SPB)，以解决隐私保护下ROI约束的出价优化问题。</p>
+<ol>
+<li><strong>研究背景</strong><ul>
+<li><strong>隐私政策影响广告效果</strong>：隐私政策使实时精准用户数据难以追踪，影响在线广告的ROI优化。如苹果的PCM和SKAN策略虽保护隐私，但存在事件聚合和报告延迟问题，影响广告投放和效果评估。</li>
+<li><strong>现有方法的局限性</strong>：传统身份揭示方法受隐私约束，在解决报告延迟、依赖实时数据等问题上存在局限，如CVR预测模型、PID、MPC和RL等方法在隐私场景中效果不佳。</li>
+</ul>
+</li>
+<li><strong>研究方法</strong><ul>
+<li><strong>问题定义与数学表示</strong>：基于在线随机背包问题定义，目标是在ROI和花费约束下最大化GMV，给出了相关数学公式和符号定义。</li>
+<li><strong>隐私场景挑战</strong>：隐私政策导致拍卖中(c_i)和(wp_i)获取困难，使问题面临粗粒度、滞后性和随机性挑战，影响传统优化方法和实时反馈控制方法的适用性。</li>
+<li><strong>SPB框架</strong><ul>
+<li><strong>两阶段分解</strong>：将在线出价过程分为宏观和微观阶段。宏观阶段根据长期数据规划最优花费(S^{(opt)})，微观阶段基于(S^{(opt)})生成实时出价价格，有效应对隐私场景挑战。</li>
+<li><strong>阈值算法（THRESHOLD）</strong>：一种贪婪算法，在特定条件下可近似解决问题，通过确定阈值(R_{thr})计算最优出价，SPB算法对其改进以适应隐私场景。</li>
+<li><strong>宏观花费规划</strong>：通过探索最优GMV和最优ROI的关系，构建函数关系计算最优花费，利用长期累积数据应对隐私挑战，通过多日数据聚合和拟合确定函数参数。</li>
+<li><strong>微观出价优化</strong>：在宏观确定总体最优花费基础上，通过预算分配获得短期最优花费，利用IMPC方法构建(R_{thr})和花费(P_S)的线性插值模型计算最优出价，具有无累积误差、无需先验函数分布、稳健便携等优点。</li>
+<li><strong>多渠道推广</strong>：将SPB扩展到多渠道场景，宏观部分联合求解各渠道最优花费，微观部分独立应用IMPC算法计算出价，通过定理4确定各渠道(R_{thr})相等时整体(P_G)最大。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>实验验证</strong><ul>
+<li><strong>实验设置</strong>：使用TikTok广告平台工业数据集和模拟隐私数据集，定义预算拆分实验机制，介绍SPB方法设置。</li>
+<li><strong>性能评估指标</strong>：根据ROI和花费利用率将广告活动分组，通过计算GMV和花费评估出价方法性能。</li>
+<li><strong>对比出价方法</strong>：对比BidCap、MPC和SPB三种出价方法。</li>
+<li><strong>实验结果</strong><ul>
+<li><strong>在线实验</strong>：SPB在Accomplish组提高GMV和收入，在Violation组降低GMV和收入；在隐私约束场景表现良好，尤其在SKAN归因活动中；对ROI波动容忍度降低时，Violation组GMV比例增加较小，GMV分布更倾向于(R_{res}&#x2F;R_{target}&gt;1)。</li>
+<li><strong>离线实验</strong>：SPB在Accomplish组增强GMV，在Violation组降低GMV；在不同延迟下，Accomplish组比例高且随延迟增加优势更明显，Violation组GMV比例增加缓慢；在离线环境中，GMV分布更集中于(R_{res}&#x2F;R_{target}&#x3D;1)，能产生更多(R_{res}&#x2F;R_{target}≥1.0)的GMV。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>研究结论</strong><ul>
+<li>提出的SPB框架有效解决隐私保护下ROI约束的出价优化问题，在离线和在线实验中表现优于现有方法。</li>
+<li>未来将探索更隐私敏感的广告市场平衡。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+              <a href="/tags/Budget/" rel="tag"># Budget</a>
+              <a href="/tags/Dynamic/" rel="tag"># Dynamic</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/10/24/sync/" rel="prev" title="多进程">
+                  <i class="fa fa-angle-left"></i> 多进程
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yuhan Wang</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

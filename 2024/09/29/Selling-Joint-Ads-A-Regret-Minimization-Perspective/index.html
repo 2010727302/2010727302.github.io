@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"2010727302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 研究的问题这篇论文探讨的核心问题是设计一种收益最大化的激励相容机制，用于在线零售环境中的联合广告销售。具体来说，就是如何将一个广告位（例如）出售给两个不可排除的买家（例如，一个商家和一个品牌），这两个买家可能共同在拍卖中出价以推广一个产品，并且都从广告的展示中获益。该问题涉及到设计一个机制，该机制从两个买家那里收集出价，并决定是否分配广告位以及两个参与方应支付的金额。这个问题引出了复杂的激励">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Selling Joint Ads: A Regret Minimization Perspective">
+<meta property="og:url" content="https://2010727302.github.io/2024/09/29/Selling-Joint-Ads-A-Regret-Minimization-Perspective/index.html">
+<meta property="og:site_name" content="一个田螺突然就">
+<meta property="og:description" content="1. 研究的问题这篇论文探讨的核心问题是设计一种收益最大化的激励相容机制，用于在线零售环境中的联合广告销售。具体来说，就是如何将一个广告位（例如）出售给两个不可排除的买家（例如，一个商家和一个品牌），这两个买家可能共同在拍卖中出价以推广一个产品，并且都从广告的展示中获益。该问题涉及到设计一个机制，该机制从两个买家那里收集出价，并决定是否分配广告位以及两个参与方应支付的金额。这个问题引出了复杂的激励">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-29T09:50:08.000Z">
+<meta property="article:modified_time" content="2024-10-05T09:46:52.928Z">
+<meta property="article:author" content="Yuhan Wang">
+<meta property="article:tag" content="paper">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="https://2010727302.github.io/2024/09/29/Selling-Joint-Ads-A-Regret-Minimization-Perspective/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<link rel="publisher" href="%3Cg+:profile_link%3E">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="https://2010727302.github.io/2024/09/29/Selling-Joint-Ads-A-Regret-Minimization-Perspective/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://2010727302.github.io/2024/09/29/Selling-Joint-Ads-A-Regret-Minimization-Perspective/","path":"2024/09/29/Selling-Joint-Ads-A-Regret-Minimization-Perspective/","title":"Selling Joint Ads: A Regret Minimization Perspective"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Selling Joint Ads: A Regret Minimization Perspective | 一个田螺突然就</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一个田螺突然就</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如清风徜徉</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+    
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuhan Wang"
+      src="/images/avatar4.jpg">
+  <p class="site-author-name" itemprop="name">Yuhan Wang</p>
+  <div class="site-description" itemprop="description">Yuhan Wang's Blog</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/2010727302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;2010727302" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yigetianluoturanjiu@gmail.com" title="E-Mail → mailto:yigetianluoturanjiu@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+      </div>
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+          <div id="toc-div">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%A0%94%E7%A9%B6%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">1. 研究的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%A0%94%E7%A9%B6%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">2. 研究的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8%E7%9A%84%E6%8A%80%E6%9C%AF"><span class="nav-number">3.</span> <span class="nav-text">3. 使用的技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Research-Problem"><span class="nav-number">4.</span> <span class="nav-text">1. Research Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Research-Object"><span class="nav-number">5.</span> <span class="nav-text">2. Research Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Used-Technology"><span class="nav-number">6.</span> <span class="nav-text">3. Used Technology</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        
+      </div>
+    </div>
+    
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/09/29/Selling-Joint-Ads-A-Regret-Minimization-Perspective/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Selling Joint Ads: A Regret Minimization Perspective | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Selling Joint Ads: A Regret Minimization Perspective
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-29 17:50:08" itemprop="dateCreated datePublished" datetime="2024-09-29T17:50:08+08:00">2024-09-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-05 17:46:52" itemprop="dateModified" datetime="2024-10-05T17:46:52+08:00">2024-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="1-研究的问题"><a href="#1-研究的问题" class="headerlink" title="1. 研究的问题"></a>1. 研究的问题</h3><p>这篇论文探讨的核心问题是设计一种收益最大化的激励相容机制，用于在线零售环境中的联合广告销售。具体来说，就是如何将一个广告位（例如）出售给两个不可排除的买家（例如，一个商家和一个品牌），这两个买家可能共同在拍卖中出价以推广一个产品，并且都从广告的展示中获益。该问题涉及到设计一个机制，该机制从两个买家那里收集出价，并决定是否分配广告位以及两个参与方应支付的金额。这个问题引出了复杂的激励相容性约束，例如，如何在两个参与方之间分配付款。</p>
+<h3 id="2-研究的对象"><a href="#2-研究的对象" class="headerlink" title="2. 研究的对象"></a>2. 研究的对象</h3><p>研究对象是在线零售领域的广告销售机制，尤其是在涉及两个或多个买家共同对一个非排他性商品（如广告位）出价的场景。论文特别关注了那些在拍卖设计中产生的复杂问题，包括如何在不同的买家之间分割付款，以及如何确保拍卖机制既能最大化收益，又能满足激励相容性和个体理性的要求。</p>
+<h3 id="3-使用的技术"><a href="#3-使用的技术" class="headerlink" title="3. 使用的技术"></a>3. 使用的技术</h3><p>论文采用了在线学习视角来解决寻找收益最大化激励相容机制的问题。作者提出了一种高效的学习算法，该算法基于自适应离散化机制空间的方法，因为任何非自适应离散化都无法实现次线性遗憾。在随机设置中（即代理的估值根据某些固定但未知的分布进行抽取），作者设计了一个有效的学习算法，实现了 (\tilde{O}(n^{3&#x2F;4})) 的遗憾界限。而在对抗性设置中（即估值是预先任意生成的），作者利用问题的非Lipschitz性质来证明一个强有力的负面结果，即没有任何学习算法能够实现超过最佳固定机制收益的一半。</p>
+<p>此外，论文还考虑了 (\pi)-平滑对手设置，即估值随机生成自平滑分布，但与随机情况不同，可以以非平稳方式进行。在这个设置中，作者构建了一个有效的学习算法，实现了 (\tilde{O}(n^{2&#x2F;3})) 的遗憾界限，并基于对数数量级的专家进行简洁编码。最后，作者证明了在随机和平滑设置中，没有任何学习算法能够实现小于 (\Omega(\sqrt{n})) 的遗憾，从而缩小了这两种问题中最小最大遗憾率的范围。</p>
+<h3 id="1-Research-Problem"><a href="#1-Research-Problem" class="headerlink" title="1. Research Problem"></a>1. Research Problem</h3><p>The core issue explored in this paper is the design of a revenue-maximizing incentive-compatible mechanism for selling a non-excludable good, such as an advertisement slot, to two cooperative bidders (e.g., a merchant and a brand). This problem captures scenarios where two parties jointly bid in an auction and both benefit from the ad being displayed. The mechanism collects bids from both parties and decides on the allocation and payments. This gives rise to intricate incentive compatibility constraints, such as how to split payments between the two parties. The paper tackles the problem of finding a revenue-maximizing incentive-compatible mechanism from an online learning perspective, which poses significant technical challenges due to the large action space and the highly irregular function mapping mechanisms to revenue.</p>
+<h3 id="2-Research-Object"><a href="#2-Research-Object" class="headerlink" title="2. Research Object"></a>2. Research Object</h3><p>The research object is the mechanism design for selling joint advertisements in the online retail sector, specifically focusing on scenarios where multiple bidders are involved in the bidding process for a single, non-excludable item. The paper is particularly concerned with the complexities that arise in auction design, including how to divide payments among different bidders and ensuring that the auction mechanism maximizes revenue while meeting the criteria for incentive compatibility and individual rationality.</p>
+<h3 id="3-Used-Technology"><a href="#3-Used-Technology" class="headerlink" title="3. Used Technology"></a>3. Used Technology</h3><p>The paper employs an online learning approach to address the challenge of identifying a revenue-maximizing incentive-compatible mechanism. The authors propose an efficient learning algorithm based on an adaptive discretization scheme of the mechanism space, as any non-adaptive discretization fails to achieve sublinear regret. In the stochastic setting, where agents’ valuations are drawn from a fixed but unknown distribution, the algorithm achieves a regret bound of (\tilde{O}(n^{3&#x2F;4})). In the adversarial setting, where valuations are arbitrarily generated upfront, the authors exploit the non-Lipschitzness of the problem to prove a strong negative result, indicating that no learning algorithm can achieve more than half of the revenue of the best fixed mechanism in hindsight. They also consider the (\pi)-smooth adversary setting, where valuations are randomly generated from smooth distributions but can be non-stationary. In this setting, they construct an efficient learning algorithm that achieves a regret bound of (\tilde{O}(n^{2&#x2F;3})) and is based on a succinct encoding of exponentially many experts. Finally, they prove that no learning algorithm can achieve less than (\Omega(\sqrt{n})) regret in both the stochastic and the smooth setting, thus narrowing the range where the minimax regret rates for these two problems lie.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/29/A-Context-Integrated-Transformer-Based-Neural-Network-for-Auction-Design/" rel="prev" title="A Context-Integrated Transformer-Based Neural Network for Auction Design">
+                  <i class="fa fa-angle-left"></i> A Context-Integrated Transformer-Based Neural Network for Auction Design
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/29/Related-Work/" rel="next" title="Related Work">
+                  Related Work <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yuhan Wang</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
