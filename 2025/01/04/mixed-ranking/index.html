@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"2010727302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="NMA: Neural Multi-slot Auctions with Externalities for Online Advertising 研究背景：在线广告是众多互联网平台的主要收入来源，拍卖机制的设计对平台、用户和广告商至关重要。广义第二价格（GSP）拍卖是常见机制，但存在用户点击假设与实际不符等问题。如在美团外卖平台，广告展示受多种因素影响，而GSP未考虑这些外部性。Deep Neu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mixed ranking">
+<meta property="og:url" content="https://2010727302.github.io/2025/01/04/mixed-ranking/index.html">
+<meta property="og:site_name" content="一个田螺突然就">
+<meta property="og:description" content="NMA: Neural Multi-slot Auctions with Externalities for Online Advertising 研究背景：在线广告是众多互联网平台的主要收入来源，拍卖机制的设计对平台、用户和广告商至关重要。广义第二价格（GSP）拍卖是常见机制，但存在用户点击假设与实际不符等问题。如在美团外卖平台，广告展示受多种因素影响，而GSP未考虑这些外部性。Deep Neu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-04T06:11:04.000Z">
+<meta property="article:modified_time" content="2025-01-04T06:14:17.963Z">
+<meta property="article:author" content="Yuhan Wang">
+<meta property="article:tag" content="paper">
+<meta property="article:tag" content="mixed ranking">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="https://2010727302.github.io/2025/01/04/mixed-ranking/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<link rel="publisher" href="%3Cg+:profile_link%3E">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="https://2010727302.github.io/2025/01/04/mixed-ranking/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://2010727302.github.io/2025/01/04/mixed-ranking/","path":"2025/01/04/mixed-ranking/","title":"mixed ranking"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>mixed ranking | 一个田螺突然就</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一个田螺突然就</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如清风徜徉</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+    
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuhan Wang"
+      src="/images/avatar4.jpg">
+  <p class="site-author-name" itemprop="name">Yuhan Wang</p>
+  <div class="site-description" itemprop="description">Yuhan Wang's Blog</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/2010727302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;2010727302" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yigetianluoturanjiu@gmail.com" title="E-Mail → mailto:yigetianluoturanjiu@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+      </div>
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+          <div id="toc-div">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NMA-Neural-Multi-slot-Auctions-with-Externalities-for-Online-Advertising"><span class="nav-number">1.</span> <span class="nav-text">NMA: Neural Multi-slot Auctions with Externalities for Online Advertising</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.0.1.</span> <span class="nav-text">摘要</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Contextual-Generative-Auction-with-Permutation-level-Externalities-for-Online-Advertising"><span class="nav-number">1.1.</span> <span class="nav-text">Contextual Generative Auction with Permutation-level Externalities for Online Advertising</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        
+      </div>
+    </div>
+    
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2025/01/04/mixed-ranking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="mixed ranking | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mixed ranking
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-04 14:11:04 / 修改时间：14:14:17" itemprop="dateCreated datePublished" datetime="2025-01-04T14:11:04+08:00">2025-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="NMA-Neural-Multi-slot-Auctions-with-Externalities-for-Online-Advertising"><a href="#NMA-Neural-Multi-slot-Auctions-with-Externalities-for-Online-Advertising" class="headerlink" title="NMA: Neural Multi-slot Auctions with Externalities for Online Advertising"></a>NMA: Neural Multi-slot Auctions with Externalities for Online Advertising</h1><ul>
+<li><strong>研究背景</strong>：在线广告是众多互联网平台的主要收入来源，拍卖机制的设计对平台、用户和广告商至关重要。广义第二价格（GSP）拍卖是常见机制，但存在用户点击假设与实际不符等问题。如在美团外卖平台，广告展示受多种因素影响，而GSP未考虑这些外部性。Deep Neural Auctions（DNA）虽有改进，但仍有局限，VCG及其变体WVCG在理论上可处理外部性，但在实践中面临收入下降或参数求解复杂等问题。</li>
+<li><strong>研究目的</strong>：提出一种新的神经多槽拍卖机制（NMA），有效建模全局外部性，平衡平台收入和社会福利，同时解决现有机制的问题。</li>
+<li><strong>方法与模型</strong><ul>
+<li><strong>模型结构</strong><ul>
+<li><strong>上下文感知列表式预测模块（CLPM）</strong>：采用参数共享结构，输入广告列表及相关公共信息，通过嵌入层、自注意力单元和目标注意力单元处理，输出列表式pCTR。还提出基于广告真实反馈的辅助损失，使模型能有效建模全局外部性，提高预测准确性。</li>
+<li><strong>列表式深度排名模块（LDRM）</strong>：结合拍卖机制与深度学习，设计μ-Net子网络计算广告列表排名分数，确定支付规则，保证激励兼容性（IC）和个体理性（IR），实现端到端优化，提高排名公式表达能力。</li>
+<li><strong>列表式可微排序模块（LDSM）</strong>：将排序操作从不可微转换为可微，通过定义排序算子和放松argmax操作，输出行随机置换矩阵表示选择概率，使复杂拍卖机制能端到端训练，解决LDRM在分配和支付处理上与深度学习不适应的问题。</li>
+<li><strong>社会福利最大化辅助损失</strong>：基于广告列表社会福利定义，构建辅助损失，加速学习过程，减少社会福利下降，通过调整参数平衡NMA性能，确保满足社会福利约束。</li>
+</ul>
+</li>
+<li><strong>实验设计</strong><ul>
+<li><strong>数据集</strong>：使用公共数据集Avito和工业数据集Meituan进行离线实验，将数据集按时间或比例划分为训练集和测试集。</li>
+<li><strong>评估指标</strong>：包括点击率（CTR）、每千次展示收入（RPM）、每千次展示社会福利（SWPM）和社会福利最大化比率（SWMR），同时评估机制的IC属性。</li>
+<li><strong>对比方法</strong>：与GSP、DNA、VCG和WVCG等代表性拍卖机制对比。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>实验结果</strong><ul>
+<li><strong>离线实验</strong><ul>
+<li><strong>性能比较</strong>：NMA在两个数据集上的RPM、SWPM和CTR指标上优于DNA和GSP，能有效建模全局外部性；与VCG相比，NMA在广告收入和社会福利间平衡更好；在RPM指标上明显优于WVCG，验证了NMA的强大表达和学习能力。NMA的IC-R值与VCG相当且优于GFP，满足IC约束。</li>
+<li><strong>模块消融研究</strong>：去除CLPM、LDRM - LDSM或社会福利最大化辅助损失后的NMA变体性能均下降，证明各模块对NMA性能提升有重要作用，CLPM能有效建模全局外部性，辅助损失有助于平衡广告收入和社会福利。</li>
+<li><strong>超参数分析</strong>：α₁增大时，SWPM增加但RPM下降，α₂在一定范围内增加可提升性能，过大则导致性能下降，说明辅助损失可帮助平衡收入和福利，且CLPM辅助损失权重需合理设置。</li>
+</ul>
+</li>
+<li><strong>在线A&#x2F;B测试</strong>：在美团外卖平台进行为期一个月的在线A&#x2F;B测试，NMA相比GSP在CTR、RPM和SWPM上分别有显著提升，证明NMA在实际应用中可实现更高平台收入和社会福利，尽管在线测试与离线实验结果在绝对值上存在差异，但趋势一致。</li>
+</ul>
+</li>
+<li><strong>研究结论</strong>：NMA有效建模全局外部性，通过设计的模块和辅助损失平衡平台收入和社会福利，在离线和在线实验中表现优异，已部署于美团外卖平台。未来可进一步优化，如采用列表生成模块替代全排列算法，提高工作效率。</li>
+</ul>
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>在线广告拍卖为社交网络服务和电子商务平台带来了数十亿美元的收入。对于广告商来说简单易懂的广义第二价格（GSP）拍卖，几乎已成为行业中广告拍卖机制的基准。然而，大多数基于GSP的行业实践都假定用户点击仅依赖于广告本身，而忽略了外部项目的影响，即外部性。最近，深度神经网络拍卖（DNA）尝试用深度神经网络升级GSP，并在一定程度上对局部外部性进行建模。然而，它仅考虑了拍卖中的集合级上下文，而忽略了广告的顺序和展示位置，这仍然不是最优的。尽管基于维克里 - 克拉克 - 格罗夫斯（VCG）的多槽拍卖（如VCG、加权VCG（WVCG））使得对全局外部性（如广告的顺序和位置等）进行建模在理论上成为可能，但它们缺乏对收入和社会福利的有效平衡。</p>
+<p>在本文中，我们提出了名为神经多槽拍卖（NMA）的新型拍卖机制，以应对上述挑战。具体而言，我们使用上下文感知列表式预测模块对全局外部性进行有效建模，以实现更好的性能。我们设计了一个列表式深度排名模块，以保证端到端学习中的激励兼容性。此外，我们提出了一个社会福利辅助损失，以在最大化收入的同时有效地减少社会福利的下降。在离线大规模数据集和在线A&#x2F;B测试中的实验结果表明，NMA在工业实践中比其他现有拍卖机制（即GSP、DNA、WVCG）获得了更高的收入，同时平衡了社会福利，并且我们已成功将NMA部署在美团外卖平台上。</p>
+<h2 id="Contextual-Generative-Auction-with-Permutation-level-Externalities-for-Online-Advertising"><a href="#Contextual-Generative-Auction-with-Permutation-level-Externalities-for-Online-Advertising" class="headerlink" title="Contextual Generative Auction with Permutation-level Externalities for Online Advertising"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bXtJuava8XhjybrlTHAcCA">Contextual Generative Auction with Permutation-level Externalities for Online Advertising</a></h2><ol>
+<li><strong>研究背景</strong><ul>
+<li><strong>在线广告的重要性与拍卖机制</strong>：在线广告是互联网行业的核心收入来源，广告拍卖在确保平台收入和激励广告商方面起着关键作用。传统拍卖机制如GSP存在局限性，其独立CTR假设忽略了其他展示广告的影响，即外部性。</li>
+<li><strong>学习型拍卖的进展与局限</strong>：学习型拍卖如Deep Neural Auction（DNA）和Score Weighted VCG（SW-VCG）虽能更好地捕捉外部性，但受“分配后预测”设计范式限制，仅考虑候选广告集内的外部性（集合级外部性），未考虑最终分配中影响每个广告CTR的顺序上下文（排列级外部性），导致分配非最优。</li>
+</ul>
+</li>
+<li><strong>方法设计</strong><ul>
+<li><strong>理论基础与问题建模</strong><ul>
+<li>多槽拍卖与排列级外部性：将在线广告拍卖抽象为多槽拍卖问题，考虑广告商出价、广告特征、用户特征等因素，定义分配规则和支付规则。引入排列级外部性，即广告的CTR受其他展示广告影响，且不同排列会导致外部影响的差异。</li>
+<li>最优多槽拍卖：基于Myerson拍卖理论，推导适应排列级外部性的最优拍卖机制，证明在满足一定条件下，该机制能最大化平台预期收入并满足激励兼容性（IC）和个体理性（IR）约束。</li>
+<li>拍卖设计为学习问题：由于直接实现最优分配规则计算复杂，将拍卖机制参数化，通过学习确定参数。引入事后遗憾（ex-post regret）概念，以量化广告商偏离IC条件的程度，将拍卖设计问题转化为最小化预期负收入并满足事后遗憾为零的约束优化问题。</li>
+</ul>
+</li>
+<li><strong>CGA框架设计</strong><ul>
+<li><strong>生成器（Generator）</strong>：采用自回归生成模块，包括排列不变集级编码器和排列等变自回归解码器。编码器通过自注意力层和求和池化增强广告表示，解码器基于上下文嵌入学习条件概率，以生成最大化预期虚拟福利的广告序列。</li>
+<li><strong>评估器（Evaluator）</strong>：预测每个广告的排列感知CTR，通过对广告序列嵌入进行双向LSTM和多头自注意力编码，结合预测阶段的逐点CTR，估计个性化外部性感知校准向量，与逐点CTR元素相乘得到排列感知CTR。</li>
+<li><strong>支付计算（Payment Computation）</strong>：受神经网络在多物品拍卖中有效近似最优机制的启发，引入PaymentNet学习最优支付规则。PaymentNet的输入包括分配嵌入、自排除出价配置文件和预期价值配置文件，通过sigmoidal激活函数计算支付率，以满足IR约束并输出支付。</li>
+</ul>
+</li>
+<li><strong>优化与训练</strong><ul>
+<li>G-E框架优化：先训练Evaluator至收敛，然后冻结其参数，使用Evaluator估计的排列感知奖励通过策略梯度训练Generator，以最大化虚拟福利。</li>
+<li>PaymentNet优化：在Generator和Evaluator收敛后，冻结它们的参数，应用增广拉格朗日方法解决约束优化问题，优化PaymentNet，尽管问题非凸，但实验表明优化后的CGA能接近最优收入且遗憾极小。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>实验验证</strong><ul>
+<li><strong>实验设置</strong><ul>
+<li>数据集：使用来自淘宝的真实日志数据，包括训练集和测试集，每个样本涉及多个广告商竞争广告槽位，实验设置广告槽位数为3。</li>
+<li>基线方法：对比GSP、DNA、SW-VCG、VCG Auction with Permutation-level Externalities（VCG）、EdgeNet和Optimal等方法，根据外部性建模粒度分类。</li>
+<li>性能指标：考虑每千次展示收入（RPM）、点击率（CTR）和IC度量（衡量广告商操纵出价可获得的效用相对增加）。</li>
+<li>实现细节：设置CGA的特征嵌入大小、注意力机制、隐藏层大小等参数，通过Adam优化器训练，学习型基线方法通过网格搜索调优超参数。</li>
+</ul>
+</li>
+<li><strong>离线比较结果</strong><ul>
+<li>CGA在平台收入（RPM）和CTR方面优于现有方法，且事后遗憾较低，表明CGA能有效近似最优拍卖机制。</li>
+<li>随着外部性建模从无到集合级再到排列级的改进，拍卖性能在三个指标上均有提升，突出了精细建模外部性在拍卖设计中的重要性。</li>
+</ul>
+</li>
+<li><strong>消融研究</strong><ul>
+<li>CGA的各设计考虑有效，去除Evaluator或改变训练方式会导致性能下降，证明了G-E框架、外部奖励建模和虚拟价值使用的重要性。</li>
+<li>去除价值分布对CGA性能影响较小，可能是因为CGA对外部性的建模通过捕捉广告间相关性，部分反映了缺失的价值分布信息。</li>
+</ul>
+</li>
+<li><strong>在线A&#x2F;B测试结果</strong><ul>
+<li>CGA在淘宝广告系统的在线A&#x2F;B测试中表现良好，与DNA相比，RPM提升3.2%，平均响应时间仅增加3ms（相对增加1.6%），同时提高了广告商的投资回报率（ROI）、CTR和商品交易总额（GMV），表明CGA能通过生成模型有效探索分配空间，提升平台收入。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>研究结论</strong><ul>
+<li>提出CGA框架，用于在线多槽广告拍卖中考虑排列级外部性，理论上证明了经典Myerson拍卖在适应排列级外部性时的最优性，为CGA框架设计提供依据。</li>
+<li>CGA通过自回归生成模型和G-E学习范式优化分配，通过量化IC约束为预期事后遗憾学习最优支付规则，经离线和在线实验验证有效。</li>
+<li>未来研究将扩展上下文生成机制，以整合来自不同渠道的异构项目。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+              <a href="/tags/mixed-ranking/" rel="tag"># mixed ranking</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/24/Budget-Dynamic/" rel="prev" title="Budget&Dynamic">
+                  <i class="fa fa-angle-left"></i> Budget&Dynamic
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yuhan Wang</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
