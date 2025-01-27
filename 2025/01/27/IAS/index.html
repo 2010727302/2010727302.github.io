@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"2010727302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Optimally Integrating Ad Auction into E-Commerce PlatformsIAS（Integrated Ad System）模型即集成广告系统模型，用于描述电商平台上广告与有机搜索结果混合排列的情况。该模型的目标函数和约束条件设计紧密围绕电商平台关注的核心指标，旨在平衡广告收入与用户体验。  目标函数 收入（Revenue）：$Revenue &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IAS">
+<meta property="og:url" content="https://2010727302.github.io/2025/01/27/IAS/index.html">
+<meta property="og:site_name" content="一个田螺突然就">
+<meta property="og:description" content="Optimally Integrating Ad Auction into E-Commerce PlatformsIAS（Integrated Ad System）模型即集成广告系统模型，用于描述电商平台上广告与有机搜索结果混合排列的情况。该模型的目标函数和约束条件设计紧密围绕电商平台关注的核心指标，旨在平衡广告收入与用户体验。  目标函数 收入（Revenue）：$Revenue &#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2010727302.github.io/images/lambda.png">
+<meta property="article:published_time" content="2025-01-27T09:28:45.000Z">
+<meta property="article:modified_time" content="2025-01-27T09:30:03.000Z">
+<meta property="article:author" content="Yuhan Wang">
+<meta property="article:tag" content="paper">
+<meta property="article:tag" content="混排">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="https://2010727302.github.io/2025/01/27/IAS/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<link rel="publisher" href="%3Cg+:profile_link%3E">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="https://2010727302.github.io/2025/01/27/IAS/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://2010727302.github.io/2025/01/27/IAS/","path":"2025/01/27/IAS/","title":"IAS"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>IAS | 一个田螺突然就</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一个田螺突然就</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如清风徜徉</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+    
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuhan Wang"
+      src="/images/avatar4.jpg">
+  <p class="site-author-name" itemprop="name">Yuhan Wang</p>
+  <div class="site-description" itemprop="description">Yuhan Wang's Blog</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/2010727302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;2010727302" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yigetianluoturanjiu@gmail.com" title="E-Mail → mailto:yigetianluoturanjiu@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+      </div>
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+          <div id="toc-div">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimally-Integrating-Ad-Auction-into-E-Commerce-Platforms"><span class="nav-number">1.</span> <span class="nav-text">Optimally Integrating Ad Auction into E-Commerce Platforms</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98-UCST-alpha"><span class="nav-number">1.1.</span> <span class="nav-text">无约束问题$UCST(\alpha)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98-CST-V-0-%E5%95%86%E4%B8%9A%E5%8C%96%E7%8E%87%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.2.</span> <span class="nav-text">约束问题$CST(V_{0})$ -商业化率约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E5%91%8A%E6%95%B0%E9%87%8F%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.3.</span> <span class="nav-text">广告数量约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E5%91%8A%E9%97%B4%E9%9A%94%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.4.</span> <span class="nav-text">广告间隔约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PC%E7%AB%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">PC端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="nav-number">1.4.2.</span> <span class="nav-text">移动端</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        
+      </div>
+    </div>
+    
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2025/01/27/IAS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="IAS | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IAS
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-27 17:28:45 / 修改时间：17:30:03" itemprop="dateCreated datePublished" datetime="2025-01-27T17:28:45+08:00">2025-01-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Optimally-Integrating-Ad-Auction-into-E-Commerce-Platforms"><a href="#Optimally-Integrating-Ad-Auction-into-E-Commerce-Platforms" class="headerlink" title="Optimally Integrating Ad Auction into E-Commerce Platforms"></a>Optimally Integrating Ad Auction into E-Commerce Platforms</h1><p>IAS（Integrated Ad System）模型即集成广告系统模型，用于描述电商平台上广告与有机搜索结果混合排列的情况。该模型的目标函数和约束条件设计紧密围绕电商平台关注的核心指标，旨在平衡广告收入与用户体验。</p>
+<ol>
+<li><strong>目标函数</strong><ul>
+<li><strong>收入（Revenue）</strong>：$Revenue &#x3D;\int_{V} \sum_{i \in A} p_{i}(v) w_{i} x_{i}(v) f(v) dv$，此公式表示收入是对所有广告商品的支付价格、质量因子、分配情况以及概率分布进行积分求和。其中，$p_{i}(v)$是广告商品$i$的支付价格，$w_{i}$为其质量因子，$x_{i}(v)$代表分配规则，$f(v)$是概率分布函数。通过这一函数计算，反映出平台从广告投放中获取的即时收入 。</li>
+<li><strong>商品交易总量（GMV）</strong>：$GMV&#x3D;\int_{V}\left[\sum_{i \in A} g_{i} w_{i} x_{i}(v)+\sum_{i \in O} g_{i} w_{i} x_{i}(v)\right] f(v) dv$，该公式计算的是平台的商品交易总量，考虑了广告商品和有机商品的预估交易量、质量因子和分配情况。其中，$g_{i}$为商品$i$的预估交易量，对广告商品和有机商品分别求和再积分，体现了平台业务的整体交易规模，是衡量用户体验和平台长期收益的重要指标。</li>
+<li><strong>无约束问题（Unconstrained Problem）</strong>：$UCST (\alpha)$给定加权系数$\alpha \in[0,1]$，通过线性凸组合收入和GMV来构建目标函数，即$max _{x \in \mathcal{X}} \alpha \cdot Revenue +(1-\alpha) \cdot GMV$。该目标函数旨在在不同权重下，同时考虑收入和GMV，寻找能使两者综合效益最大化的机制。例如，当$\alpha$接近1时，更注重收入；当$\alpha$接近0时，则更倾向于GMV。<br> Unconstrained Problem $UCST (\alpha)$ ) Given the weighted coefficient $\alpha \in[0,1]$ ,the unconstrained problem $UCST (\alpha)$ ) can be written as<br> $max _{x \in \mathcal{X}} \alpha \cdot Revenue +(1-\alpha) \cdot Volume. (4)$</li>
+<li><strong>约束问题（Constrained Problem）</strong>：$CST(V_{0})$给定GMV阈值$V_{0}$，以优化收入为目标，即$max Revenue$，同时需满足$GMV \geq V_{0}$和$x \in \mathcal{X}$的约束。此目标函数强调在保证一定GMV水平的前提下，最大化广告收入，体现了平台在平衡用户体验和短期收益时的考量。<br> Constrained Problem $CST(V_{0})$ ) Given a threshold $V_{0}$ , the constrained problem $CST(V_{0})$ ) can be written as<br> $$max Revenue \quad (P1)$$<br> $$s.t. Volume \geq V_{0} \quad(C 1.1)$$<br> $$x \in \mathcal{X} \quad(C 1.2)$$</li>
+</ul>
+</li>
+<li><strong>约束条件</strong><ul>
+<li><strong>分配规则约束</strong>：对于分配规则$x_{ik}(b)$需满足$\sum_{k} x_{ik}(b) \leq 1, \forall i \in A \cup O$，确保每个商品最多被分配到一个展示位；$\sum_{i \in A} x_{ik}(b)+\sum_{i \in O} x_{ik}(b)&#x3D;1, \forall k$，保证每个展示位都有且仅有一个商品；$x_{ik}(b) \in{0,1}, \forall i, k$，表示商品是否被分配到展示位只能是0或1的二元选择。这些约束保证了分配的合理性和唯一性 。</li>
+<li><strong>个体理性（Individual Rationality）</strong>：$U_{i}(x, p, b_{i}) \geq 0, \forall b_{i} \in[0, u_{i}], \forall i \in A$，此约束确保广告商参与拍卖的期望效用非负，即广告商在平台的广告投放行为能获得至少为零的收益，这是吸引广告商参与的基本条件。</li>
+<li><strong>贝叶斯激励兼容（Bayesian Incentive Compatibility）</strong>：$U_{i}(x, p, v_{i}) \geq U_{i}(x, p, b_{i}), \forall b_{i} \in[0, u_{i}], \forall i \in A$，该约束保证广告商如实报告自身价值是最优策略，避免广告商虚假报价，维护拍卖机制的公平性和有效性。</li>
+</ul>
+</li>
+</ol>
+<h2 id="无约束问题-UCST-alpha"><a href="#无约束问题-UCST-alpha" class="headerlink" title="无约束问题$UCST(\alpha)$"></a>无约束问题$UCST(\alpha)$</h2><ul>
+<li><strong>目标函数</strong>：$max <em>{x \in \mathcal{X}} \alpha \cdot Revenue+(1 - \alpha)\cdot GMV(4)$。这里的$\alpha\in[0,1]$是加权系数，用于平衡对收入和GMV的侧重程度。<br>   转化为<strong>引理 2</strong>:要最大化目标函数 （4），机制需要最大化目标<br> $$\int</em>{V} \sum_{i \in I}\left(\alpha \phi_{i}\left(v_{i}\right)+(1-\alpha) g_{i}\right) w_{i} x_{i}(v) f(v) d v-\alpha \sum_{i \in I} U_{i}(x, p, 0) . (5)$$</li>
+<li><strong>修正虚拟价值排序</strong>：机制$M$涉及到定义修正虚拟价值$\psi_{i}(v_{i})&#x3D;(\alpha \phi_{i}(v_{i})+(1 - \alpha)g_{i})w_{i}&#x3D;(1 - \alpha)g_{i}w_{i}$。其中$\phi_{i}(v_{i})$是广告商品$i$的虚拟价值，$g_{i}$是商品$i$的预估交易量，$w_{i}$是商品$i$的质量因子。按照这个修正虚拟价值对所有商品（包括广告商品和有机商品）进行排序。</li>
+<li><strong>定价规则</strong>(迈尔森)：有机商品的支付为0，广告商品的支付价格是根据其在排序中的位置和相关价值计算得出的，以保证个体理性（广告商参与拍卖的期望效用非负）和贝叶斯激励兼容（广告商如实报告自身价值是最优策略）。<br>   给定分配规则和支付规则，广告项目 i 的出价为$b_{i}$时的预期效用可以表示为：$$U_{i}\left(x, p, b_{i}\right)&#x3D;\int_{V_{-i}}\left(v_{i}-p_{i}\left(b_{i}, v_{-i}\right)\right) w_{i} x_{i}\left(b_{i}, v_{-i}\right) f_{-i}\left(v_{-i}\right) d v_{-i}$$<br>   因为$p(b)$只出现在$U_{i}(x,p,0)$中，并且我们需要保证（IR）的性质，根据引理 1，如果我们选择$p_{i}(v)&#x3D;v_{i}-\frac{\int_{0}^{v_{i}} x_{i}(s_{i},v_{-i})ds_{i}}{x_{i}(v)}$作为支付规则，那么$U_{i}(x,p,0)$将为 0，并且我们只需要考虑选择合适的$x(b)$来最大化式（5）的第一部分。</li>
+<li><strong>分配规则</strong>：将广告商品插入有机商品序列进行分配。对于分配规则$x_{ik}(b)$，要满足$\sum_{k}x_{ik}(b)\leq1,\forall i\in A\cup O$（每个商品最多被分配到一个展示位）、$\sum_{i\in A}x_{ik}(b)+\sum_{i\in O}x_{ik}(b) &#x3D; 1,\forall k$（每个展示位都有且仅有一个商品）和$x_{ik}(b)\in{0,1},\forall i,k$（商品是否被分配到展示位是二元选择）等条件。<br>   对于分配规则，我们将 $\psi_{i}(v_{i}) \stackrel{ def }{&#x3D;}(\alpha \phi_{i}(v_{i})+(1-\alpha) g_{i}) w_{i}$ 定义为物品 $i$ 的修正虚拟价值。不难验证，以下分配规则可以最大化公式（5）的第一部分。<br>$x_{i k}(v)&#x3D; \begin{cases}1 &amp; 如果\psi_{i}\left(v_{i}\right)是第 k 高的修正虚拟价值，k\in{1,2,\ldots,K}。\0&amp;否则。\end{cases}$</li>
+</ul>
+<h2 id="约束问题-CST-V-0-商业化率约束"><a href="#约束问题-CST-V-0-商业化率约束" class="headerlink" title="约束问题$CST(V_{0})$ -商业化率约束"></a>约束问题$CST(V_{0})$ -商业化率约束</h2><p>可通过对偶转为无约束问题</p>
+<ul>
+<li><strong>放宽约束条件</strong>：由于可行域是离散的，即$x_{i k}(v)$不是关于出价$v$的连续函数，因此很难直接优化目标。我们首先将约束$x_{i k}(v)∈{0,1}$在（C1.2）中放宽为$x_{i k}(v)∈[0,1]$，并将放宽后的可行域记为$\bar{x}$。放宽后的约束问题为：<br>最大化$$R(x)\stackrel{ def }{&#x3D;}\int_{V}\sum_{i\in I}w_{i}p_{i}(v)x_{i}(v)f(v)dv（P2）$$<br>约束条件为$$V(x)\stackrel{ def }{&#x3D;}\int_{V}\sum_{i\in I}g_{i}w_{i}x_{i}(v)f(v)dv\geq V_{0}（C2.1）$$<br>$$x\in\overline{\mathcal{X}}（C2.2）$$</li>
+<li><strong>对偶问题</strong>：对于可访问的$V_{o}$，强对偶性成立意味着<br>$$\begin{aligned}&amp;\underbrace{\max_{x:x\in\mathcal{X},V(x)\geq V_{0}}R(x)}<em>{\text{原始问题}}&#x3D;\underbrace{\min</em>{\lambda\geq0}\max_{x\in\mathcal{X}}\left(R(x)+\lambda\left(V(x)-V_{0}\right)\right)}<em>{\text{对偶问题}}\&amp;&#x3D;\min</em>{\lambda\geq0}\max_{x\in\mathcal{X}}\left[\int_{V}\sum_{i\in I}\left(p_{i}\left(b_{i}\right)+\lambda g_{i}\right)w_{i}x_{i}(b)f(b)db-\lambda V_{0}\right]。\end{aligned}$$</li>
+<li><strong>分配规则</strong>：当给定一个$\lambda$时，它是一个具有松弛可行域$\bar{x}$的无约束问题。由于$\bar{x}$的系数矩阵是完全单模矩阵([22])，内部问题的最优解是整数形式，即 0-1 形式。因此，内部问题的最优解可以通过机制 M 以$\alpha &#x3D; 1&#x2F;(\lambda + 1)$获得，即<br>$$ x_{i k}^{\lambda}(v)&#x3D;\begin{cases}1&amp;\text{如果}\psi_{i}^{\lambda}\left(v_{i}\right)\text{是第}k\text{高的，}k\in{1,2,\ldots,K},\0&amp;\text{否则，}\end{cases}$$<br>其中$\psi_{i}^{\lambda}(v_{i})\stackrel{def}{&#x3D;}[(\phi_{i}(v_{i})+\lambda g_{i})w_{i}]&#x2F;(\lambda + 1)$。</li>
+<li><strong>定价规则</strong>：$p_{i}^{\lambda}(v)$可以通过在(7)中将$x_{i k}(v)$替换为$x_{i k}^{\lambda}(v)$得到。</li>
+<li><strong>$\lambda$计算</strong>：二分<br><img src="/./images/lambda.png" alt="alt text"></li>
+<li><strong>定理 2</strong>：具有阈值$V_0$的约束问题等价于一个具有系数$\alpha^{<em>}$的无约束问题，其中$\alpha^{</em>}&#x3D;1&#x2F;(\lambda^{<em>}+1)$，并且$\lambda^{</em>}$是约束问题中的最优拉格朗日乘子。</li>
+</ul>
+<h2 id="广告数量约束"><a href="#广告数量约束" class="headerlink" title="广告数量约束"></a>广告数量约束</h2><ol>
+<li><strong>问题设定</strong>：在集成广告系统中引入对广告商品总数的限制，要求广告商品数量不超过 $c$ ，即 $\sum_{i \in A} \sum_{k} x_{ik}(v) \leq c$，将此约束加入原有的约束条件集 $x$ 后得到新的可行域 $x’$。</li>
+<li><strong>无约束问题的最优机制</strong>：基于此前无约束问题的结论，商品按修正虚拟价值 $\psi_{i}(v_{i})$ 排序。在新约束下，为保证广告商品数量符合预算，在排序时仅考虑排名前 $c$ 的广告商品。由此得到扩展机制 $M’(c)$，具体步骤为：<ul>
+<li>将所有广告商品按 $\psi_{i}(v_{i})$ 降序排列，保留前 $c$ 个广告商品，删除其余广告商品；</li>
+<li>针对剩余的广告商品和所有有机商品，运行系数为 $\alpha$ 的原无约束问题机制 $M$。</li>
+<li>由于原机制 $M$ 的最优性以及对广告商品数量的有效控制，$M’(c)$ 是当前设定下无约束问题的最优机制。</li>
+</ul>
+</li>
+<li><strong>约束问题的求解</strong>：对于约束问题，其求解逻辑与前文类似，但由于新可行域 $x’$ 的系数矩阵不再是全幺模矩阵，导致求解难度增加。通过将其转化为最小费用最大流问题（证明见附录 Lemma 6），可证明松弛问题仍具有0 - 1形式的最优解。基于此，约束问题仍能通过选择合适参数转化为无约束问题求解，从而将此前针对无约束和约束问题关系的结论（Theorem 2）扩展到存在广告数量预算约束的场景。</li>
+</ol>
+<h2 id="广告间隔约束"><a href="#广告间隔约束" class="headerlink" title="广告间隔约束"></a>广告间隔约束</h2><p>用广告数量约束的机制，分别运行局部的无约束问题</p>
+<h3 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h3><ul>
+<li><p><strong>页面划分</strong>：当我们在电子商务平台上通过个人电脑搜索产品时，搜索结果通常显示为几行，每行包含几个项目。受这种布局的启发，我们希望限制每行中的广告数量以让用户感到舒适。鉴于此，我们将一个搜索结果页面分成多行，每行包含连续的 l 个槽位。然后，我们要求在这 l 个槽位中显示的广告项目最多为 c 个。我们将这个模型称为稀疏集成广告系统——行（SIASR）。</p>
+</li>
+<li><p><strong>约束条件</strong>：$$\sum_{i \in A} \sum_{k &#x3D; ml + 1}^{(m + 1)l} x_{ik}(v)≤c，m &#x3D; 0,1,\ldots,|K&#x2F;l|$$<br>$$\sum_{i \in A} \sum_{k&#x3D;\lfloor K &#x2F; l] l+1}^{K} x_{i k}(v) ≤c$$。将它们添加到$x$中并表示新的约束条件。</p>
+</li>
+<li><p><strong>无约束问题的最优机制</strong>：基于上述分析，我们可以对每个部分运行机制(M’(c))来为稀疏集成广告系统（SIASR）生成一个可行的广告排列方案。这是因为机制(M’(c))本身具有最优性，所以每个部分都能实现最优的广告商品分配，进而使得整个页面所有展示位都能达到全局最优的分配效果。由此，我们得到了在这种设定下的最优机制，记为(\tilde{M}(c, l))。</p>
+<ul>
+<li><strong>第一步</strong>：运行机制(M’(c))，对所有商品（包括广告商品和自然商品）分配前(l)个展示位。机制(M’(c))会根据商品的相关价值对商品进行排序，并依据广告商品数量预算(c)，从所有商品中选择合适的商品分配到这(l)个展示位上。</li>
+<li><strong>第二步</strong>：运行机制(M’(c))，对剩余的所有商品分配接下来的(l)个展示位。在完成第一步分配后，剩余商品的集合发生了变化，再次运行机制(M’(c))，从这些剩余商品中选择合适的商品填充接下来的(l)个展示位。</li>
+<li><strong>第三步</strong>：重复第二步，直到所有展示位都分配完毕。需要注意的是，在最后一轮分配时，展示位的数量可能会小于(l)。这是因为前面按照每(l)个展示位一轮进行分配，到最后可能会剩下不足(l)个展示位，此时依然按照机制(M’(c))对剩余商品进行分配，以完成整个搜索结果页面的广告与自然商品的分配。</li>
+</ul>
+</li>
+<li><p><strong>约束问题</strong>：我们通过引理 7（在附录中显示）克服了这个问题。到目前为止，我们解决了 SIASR 的受约束问题，并将定理 2 扩展到了这种情况。<br>引理 7.对于 SIASR，约束问题的松弛内问题可以构造为最小费用最大流问题，并且具有 0-1 形式的最优解。</p>
+</li>
+</ul>
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><ul>
+<li><p><strong>页面划分</strong>：一般来说，输入一个关键字后，搜索结果在一列中显示（与个人电脑终端的布局不同）。如果我们仍然想限制广告的稀疏性，我们需要在任何连续的 l 个位置上添加约束，即任何连续的 l 个位置上最多显示 c 个广告项。</p>
+</li>
+<li><p><strong>约束条件</strong>：$\sum_{i∈A}\sum_{k &#x3D; m + 1}^{m + l}x_{ik}(v)\leq c$，$m &#x3D; 0,1,\ldots,K - l$，并将新的可行区域表示为$\hat{x}$。我们将这个模型称为稀疏集成广告系统——列（SIASC）。</p>
+</li>
+<li><p><strong>无约束问题的最优机制</strong>：</p>
+</li>
+</ul>
+<ol>
+<li>运行机制$M’(c)$以在所有物品上分配前$l$个时段。</li>
+<li>运行机制$M’(c - a)$，为所有剩余物品分配下一个时段，其中$a$是最后$l - 1$个时段中的广告物品数量。</li>
+<li>重复步骤 2，直到所有槽位都被分配。</li>
+</ol>
+<ul>
+<li><strong>约束问题</strong>：对于约束问题，我们可以将 SIASR 中使用的方法扩展到这种设置。唯一的区别是，在这种设置下，连续的 l 个槽有更多的约束。然而，最终它并不影响难度。我们只需要稍微修改一下图 6 的结构：添加一定数量的节点$k_{i}$来代表更多的组，并连接弧$s_{j}^{\prime\prime}k_{i}$，其中$j\in{i,i + 1,\cdots,i + l - 1}$，以及弧$k_{i}t$。其他分析是相似的。这样，我们将定理 2 推广到 SIASC 的情况。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+              <a href="/tags/%E6%B7%B7%E6%8E%92/" rel="tag"># 混排</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/04/mixed-ranking/" rel="prev" title="混排">
+                  <i class="fa fa-angle-left"></i> 混排
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yuhan Wang</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

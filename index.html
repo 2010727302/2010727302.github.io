@@ -187,6 +187,157 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2025/01/27/IAS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/01/27/IAS/" class="post-title-link" itemprop="url">IAS</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-27 17:28:45 / 修改时间：17:30:03" itemprop="dateCreated datePublished" datetime="2025-01-27T17:28:45+08:00">2025-01-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Optimally-Integrating-Ad-Auction-into-E-Commerce-Platforms"><a href="#Optimally-Integrating-Ad-Auction-into-E-Commerce-Platforms" class="headerlink" title="Optimally Integrating Ad Auction into E-Commerce Platforms"></a>Optimally Integrating Ad Auction into E-Commerce Platforms</h1><p>IAS（Integrated Ad System）模型即集成广告系统模型，用于描述电商平台上广告与有机搜索结果混合排列的情况。该模型的目标函数和约束条件设计紧密围绕电商平台关注的核心指标，旨在平衡广告收入与用户体验。</p>
+<ol>
+<li><strong>目标函数</strong><ul>
+<li><strong>收入（Revenue）</strong>：$Revenue &#x3D;\int_{V} \sum_{i \in A} p_{i}(v) w_{i} x_{i}(v) f(v) dv$，此公式表示收入是对所有广告商品的支付价格、质量因子、分配情况以及概率分布进行积分求和。其中，$p_{i}(v)$是广告商品$i$的支付价格，$w_{i}$为其质量因子，$x_{i}(v)$代表分配规则，$f(v)$是概率分布函数。通过这一函数计算，反映出平台从广告投放中获取的即时收入 。</li>
+<li><strong>商品交易总量（GMV）</strong>：$GMV&#x3D;\int_{V}\left[\sum_{i \in A} g_{i} w_{i} x_{i}(v)+\sum_{i \in O} g_{i} w_{i} x_{i}(v)\right] f(v) dv$，该公式计算的是平台的商品交易总量，考虑了广告商品和有机商品的预估交易量、质量因子和分配情况。其中，$g_{i}$为商品$i$的预估交易量，对广告商品和有机商品分别求和再积分，体现了平台业务的整体交易规模，是衡量用户体验和平台长期收益的重要指标。</li>
+<li><strong>无约束问题（Unconstrained Problem）</strong>：$UCST (\alpha)$给定加权系数$\alpha \in[0,1]$，通过线性凸组合收入和GMV来构建目标函数，即$max _{x \in \mathcal{X}} \alpha \cdot Revenue +(1-\alpha) \cdot GMV$。该目标函数旨在在不同权重下，同时考虑收入和GMV，寻找能使两者综合效益最大化的机制。例如，当$\alpha$接近1时，更注重收入；当$\alpha$接近0时，则更倾向于GMV。<br> Unconstrained Problem $UCST (\alpha)$ ) Given the weighted coefficient $\alpha \in[0,1]$ ,the unconstrained problem $UCST (\alpha)$ ) can be written as<br> $max _{x \in \mathcal{X}} \alpha \cdot Revenue +(1-\alpha) \cdot Volume. (4)$</li>
+<li><strong>约束问题（Constrained Problem）</strong>：$CST(V_{0})$给定GMV阈值$V_{0}$，以优化收入为目标，即$max Revenue$，同时需满足$GMV \geq V_{0}$和$x \in \mathcal{X}$的约束。此目标函数强调在保证一定GMV水平的前提下，最大化广告收入，体现了平台在平衡用户体验和短期收益时的考量。<br> Constrained Problem $CST(V_{0})$ ) Given a threshold $V_{0}$ , the constrained problem $CST(V_{0})$ ) can be written as<br> $$max Revenue \quad (P1)$$<br> $$s.t. Volume \geq V_{0} \quad(C 1.1)$$<br> $$x \in \mathcal{X} \quad(C 1.2)$$</li>
+</ul>
+</li>
+<li><strong>约束条件</strong><ul>
+<li><strong>分配规则约束</strong>：对于分配规则$x_{ik}(b)$需满足$\sum_{k} x_{ik}(b) \leq 1, \forall i \in A \cup O$，确保每个商品最多被分配到一个展示位；$\sum_{i \in A} x_{ik}(b)+\sum_{i \in O} x_{ik}(b)&#x3D;1, \forall k$，保证每个展示位都有且仅有一个商品；$x_{ik}(b) \in{0,1}, \forall i, k$，表示商品是否被分配到展示位只能是0或1的二元选择。这些约束保证了分配的合理性和唯一性 。</li>
+<li><strong>个体理性（Individual Rationality）</strong>：$U_{i}(x, p, b_{i}) \geq 0, \forall b_{i} \in[0, u_{i}], \forall i \in A$，此约束确保广告商参与拍卖的期望效用非负，即广告商在平台的广告投放行为能获得至少为零的收益，这是吸引广告商参与的基本条件。</li>
+<li><strong>贝叶斯激励兼容（Bayesian Incentive Compatibility）</strong>：$U_{i}(x, p, v_{i}) \geq U_{i}(x, p, b_{i}), \forall b_{i} \in[0, u_{i}], \forall i \in A$，该约束保证广告商如实报告自身价值是最优策略，避免广告商虚假报价，维护拍卖机制的公平性和有效性。</li>
+</ul>
+</li>
+</ol>
+<h2 id="无约束问题-UCST-alpha"><a href="#无约束问题-UCST-alpha" class="headerlink" title="无约束问题$UCST(\alpha)$"></a>无约束问题$UCST(\alpha)$</h2><ul>
+<li><strong>目标函数</strong>：$max <em>{x \in \mathcal{X}} \alpha \cdot Revenue+(1 - \alpha)\cdot GMV(4)$。这里的$\alpha\in[0,1]$是加权系数，用于平衡对收入和GMV的侧重程度。<br>   转化为<strong>引理 2</strong>:要最大化目标函数 （4），机制需要最大化目标<br> $$\int</em>{V} \sum_{i \in I}\left(\alpha \phi_{i}\left(v_{i}\right)+(1-\alpha) g_{i}\right) w_{i} x_{i}(v) f(v) d v-\alpha \sum_{i \in I} U_{i}(x, p, 0) . (5)$$</li>
+<li><strong>修正虚拟价值排序</strong>：机制$M$涉及到定义修正虚拟价值$\psi_{i}(v_{i})&#x3D;(\alpha \phi_{i}(v_{i})+(1 - \alpha)g_{i})w_{i}&#x3D;(1 - \alpha)g_{i}w_{i}$。其中$\phi_{i}(v_{i})$是广告商品$i$的虚拟价值，$g_{i}$是商品$i$的预估交易量，$w_{i}$是商品$i$的质量因子。按照这个修正虚拟价值对所有商品（包括广告商品和有机商品）进行排序。</li>
+<li><strong>定价规则</strong>(迈尔森)：有机商品的支付为0，广告商品的支付价格是根据其在排序中的位置和相关价值计算得出的，以保证个体理性（广告商参与拍卖的期望效用非负）和贝叶斯激励兼容（广告商如实报告自身价值是最优策略）。<br>   给定分配规则和支付规则，广告项目 i 的出价为$b_{i}$时的预期效用可以表示为：$$U_{i}\left(x, p, b_{i}\right)&#x3D;\int_{V_{-i}}\left(v_{i}-p_{i}\left(b_{i}, v_{-i}\right)\right) w_{i} x_{i}\left(b_{i}, v_{-i}\right) f_{-i}\left(v_{-i}\right) d v_{-i}$$<br>   因为$p(b)$只出现在$U_{i}(x,p,0)$中，并且我们需要保证（IR）的性质，根据引理 1，如果我们选择$p_{i}(v)&#x3D;v_{i}-\frac{\int_{0}^{v_{i}} x_{i}(s_{i},v_{-i})ds_{i}}{x_{i}(v)}$作为支付规则，那么$U_{i}(x,p,0)$将为 0，并且我们只需要考虑选择合适的$x(b)$来最大化式（5）的第一部分。</li>
+<li><strong>分配规则</strong>：将广告商品插入有机商品序列进行分配。对于分配规则$x_{ik}(b)$，要满足$\sum_{k}x_{ik}(b)\leq1,\forall i\in A\cup O$（每个商品最多被分配到一个展示位）、$\sum_{i\in A}x_{ik}(b)+\sum_{i\in O}x_{ik}(b) &#x3D; 1,\forall k$（每个展示位都有且仅有一个商品）和$x_{ik}(b)\in{0,1},\forall i,k$（商品是否被分配到展示位是二元选择）等条件。<br>   对于分配规则，我们将 $\psi_{i}(v_{i}) \stackrel{ def }{&#x3D;}(\alpha \phi_{i}(v_{i})+(1-\alpha) g_{i}) w_{i}$ 定义为物品 $i$ 的修正虚拟价值。不难验证，以下分配规则可以最大化公式（5）的第一部分。<br>$x_{i k}(v)&#x3D; \begin{cases}1 &amp; 如果\psi_{i}\left(v_{i}\right)是第 k 高的修正虚拟价值，k\in{1,2,\ldots,K}。\0&amp;否则。\end{cases}$</li>
+</ul>
+<h2 id="约束问题-CST-V-0-商业化率约束"><a href="#约束问题-CST-V-0-商业化率约束" class="headerlink" title="约束问题$CST(V_{0})$ -商业化率约束"></a>约束问题$CST(V_{0})$ -商业化率约束</h2><p>可通过对偶转为无约束问题</p>
+<ul>
+<li><strong>放宽约束条件</strong>：由于可行域是离散的，即$x_{i k}(v)$不是关于出价$v$的连续函数，因此很难直接优化目标。我们首先将约束$x_{i k}(v)∈{0,1}$在（C1.2）中放宽为$x_{i k}(v)∈[0,1]$，并将放宽后的可行域记为$\bar{x}$。放宽后的约束问题为：<br>最大化$$R(x)\stackrel{ def }{&#x3D;}\int_{V}\sum_{i\in I}w_{i}p_{i}(v)x_{i}(v)f(v)dv（P2）$$<br>约束条件为$$V(x)\stackrel{ def }{&#x3D;}\int_{V}\sum_{i\in I}g_{i}w_{i}x_{i}(v)f(v)dv\geq V_{0}（C2.1）$$<br>$$x\in\overline{\mathcal{X}}（C2.2）$$</li>
+<li><strong>对偶问题</strong>：对于可访问的$V_{o}$，强对偶性成立意味着<br>$$\begin{aligned}&amp;\underbrace{\max_{x:x\in\mathcal{X},V(x)\geq V_{0}}R(x)}<em>{\text{原始问题}}&#x3D;\underbrace{\min</em>{\lambda\geq0}\max_{x\in\mathcal{X}}\left(R(x)+\lambda\left(V(x)-V_{0}\right)\right)}<em>{\text{对偶问题}}\&amp;&#x3D;\min</em>{\lambda\geq0}\max_{x\in\mathcal{X}}\left[\int_{V}\sum_{i\in I}\left(p_{i}\left(b_{i}\right)+\lambda g_{i}\right)w_{i}x_{i}(b)f(b)db-\lambda V_{0}\right]。\end{aligned}$$</li>
+<li><strong>分配规则</strong>：当给定一个$\lambda$时，它是一个具有松弛可行域$\bar{x}$的无约束问题。由于$\bar{x}$的系数矩阵是完全单模矩阵([22])，内部问题的最优解是整数形式，即 0-1 形式。因此，内部问题的最优解可以通过机制 M 以$\alpha &#x3D; 1&#x2F;(\lambda + 1)$获得，即<br>$$ x_{i k}^{\lambda}(v)&#x3D;\begin{cases}1&amp;\text{如果}\psi_{i}^{\lambda}\left(v_{i}\right)\text{是第}k\text{高的，}k\in{1,2,\ldots,K},\0&amp;\text{否则，}\end{cases}$$<br>其中$\psi_{i}^{\lambda}(v_{i})\stackrel{def}{&#x3D;}[(\phi_{i}(v_{i})+\lambda g_{i})w_{i}]&#x2F;(\lambda + 1)$。</li>
+<li><strong>定价规则</strong>：$p_{i}^{\lambda}(v)$可以通过在(7)中将$x_{i k}(v)$替换为$x_{i k}^{\lambda}(v)$得到。</li>
+<li><strong>$\lambda$计算</strong>：二分<br><img src="/./images/lambda.png" alt="alt text"></li>
+<li><strong>定理 2</strong>：具有阈值$V_0$的约束问题等价于一个具有系数$\alpha^{<em>}$的无约束问题，其中$\alpha^{</em>}&#x3D;1&#x2F;(\lambda^{<em>}+1)$，并且$\lambda^{</em>}$是约束问题中的最优拉格朗日乘子。</li>
+</ul>
+<h2 id="广告数量约束"><a href="#广告数量约束" class="headerlink" title="广告数量约束"></a>广告数量约束</h2><ol>
+<li><strong>问题设定</strong>：在集成广告系统中引入对广告商品总数的限制，要求广告商品数量不超过 $c$ ，即 $\sum_{i \in A} \sum_{k} x_{ik}(v) \leq c$，将此约束加入原有的约束条件集 $x$ 后得到新的可行域 $x’$。</li>
+<li><strong>无约束问题的最优机制</strong>：基于此前无约束问题的结论，商品按修正虚拟价值 $\psi_{i}(v_{i})$ 排序。在新约束下，为保证广告商品数量符合预算，在排序时仅考虑排名前 $c$ 的广告商品。由此得到扩展机制 $M’(c)$，具体步骤为：<ul>
+<li>将所有广告商品按 $\psi_{i}(v_{i})$ 降序排列，保留前 $c$ 个广告商品，删除其余广告商品；</li>
+<li>针对剩余的广告商品和所有有机商品，运行系数为 $\alpha$ 的原无约束问题机制 $M$。</li>
+<li>由于原机制 $M$ 的最优性以及对广告商品数量的有效控制，$M’(c)$ 是当前设定下无约束问题的最优机制。</li>
+</ul>
+</li>
+<li><strong>约束问题的求解</strong>：对于约束问题，其求解逻辑与前文类似，但由于新可行域 $x’$ 的系数矩阵不再是全幺模矩阵，导致求解难度增加。通过将其转化为最小费用最大流问题（证明见附录 Lemma 6），可证明松弛问题仍具有0 - 1形式的最优解。基于此，约束问题仍能通过选择合适参数转化为无约束问题求解，从而将此前针对无约束和约束问题关系的结论（Theorem 2）扩展到存在广告数量预算约束的场景。</li>
+</ol>
+<h2 id="广告间隔约束"><a href="#广告间隔约束" class="headerlink" title="广告间隔约束"></a>广告间隔约束</h2><p>用广告数量约束的机制，分别运行局部的无约束问题</p>
+<h3 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h3><ul>
+<li><p><strong>页面划分</strong>：当我们在电子商务平台上通过个人电脑搜索产品时，搜索结果通常显示为几行，每行包含几个项目。受这种布局的启发，我们希望限制每行中的广告数量以让用户感到舒适。鉴于此，我们将一个搜索结果页面分成多行，每行包含连续的 l 个槽位。然后，我们要求在这 l 个槽位中显示的广告项目最多为 c 个。我们将这个模型称为稀疏集成广告系统——行（SIASR）。</p>
+</li>
+<li><p><strong>约束条件</strong>：$$\sum_{i \in A} \sum_{k &#x3D; ml + 1}^{(m + 1)l} x_{ik}(v)≤c，m &#x3D; 0,1,\ldots,|K&#x2F;l|$$<br>$$\sum_{i \in A} \sum_{k&#x3D;\lfloor K &#x2F; l] l+1}^{K} x_{i k}(v) ≤c$$。将它们添加到$x$中并表示新的约束条件。</p>
+</li>
+<li><p><strong>无约束问题的最优机制</strong>：基于上述分析，我们可以对每个部分运行机制(M’(c))来为稀疏集成广告系统（SIASR）生成一个可行的广告排列方案。这是因为机制(M’(c))本身具有最优性，所以每个部分都能实现最优的广告商品分配，进而使得整个页面所有展示位都能达到全局最优的分配效果。由此，我们得到了在这种设定下的最优机制，记为(\tilde{M}(c, l))。</p>
+<ul>
+<li><strong>第一步</strong>：运行机制(M’(c))，对所有商品（包括广告商品和自然商品）分配前(l)个展示位。机制(M’(c))会根据商品的相关价值对商品进行排序，并依据广告商品数量预算(c)，从所有商品中选择合适的商品分配到这(l)个展示位上。</li>
+<li><strong>第二步</strong>：运行机制(M’(c))，对剩余的所有商品分配接下来的(l)个展示位。在完成第一步分配后，剩余商品的集合发生了变化，再次运行机制(M’(c))，从这些剩余商品中选择合适的商品填充接下来的(l)个展示位。</li>
+<li><strong>第三步</strong>：重复第二步，直到所有展示位都分配完毕。需要注意的是，在最后一轮分配时，展示位的数量可能会小于(l)。这是因为前面按照每(l)个展示位一轮进行分配，到最后可能会剩下不足(l)个展示位，此时依然按照机制(M’(c))对剩余商品进行分配，以完成整个搜索结果页面的广告与自然商品的分配。</li>
+</ul>
+</li>
+<li><p><strong>约束问题</strong>：我们通过引理 7（在附录中显示）克服了这个问题。到目前为止，我们解决了 SIASR 的受约束问题，并将定理 2 扩展到了这种情况。<br>引理 7.对于 SIASR，约束问题的松弛内问题可以构造为最小费用最大流问题，并且具有 0-1 形式的最优解。</p>
+</li>
+</ul>
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><ul>
+<li><p><strong>页面划分</strong>：一般来说，输入一个关键字后，搜索结果在一列中显示（与个人电脑终端的布局不同）。如果我们仍然想限制广告的稀疏性，我们需要在任何连续的 l 个位置上添加约束，即任何连续的 l 个位置上最多显示 c 个广告项。</p>
+</li>
+<li><p><strong>约束条件</strong>：$\sum_{i∈A}\sum_{k &#x3D; m + 1}^{m + l}x_{ik}(v)\leq c$，$m &#x3D; 0,1,\ldots,K - l$，并将新的可行区域表示为$\hat{x}$。我们将这个模型称为稀疏集成广告系统——列（SIASC）。</p>
+</li>
+<li><p><strong>无约束问题的最优机制</strong>：</p>
+</li>
+</ul>
+<ol>
+<li>运行机制$M’(c)$以在所有物品上分配前$l$个时段。</li>
+<li>运行机制$M’(c - a)$，为所有剩余物品分配下一个时段，其中$a$是最后$l - 1$个时段中的广告物品数量。</li>
+<li>重复步骤 2，直到所有槽位都被分配。</li>
+</ol>
+<ul>
+<li><strong>约束问题</strong>：对于约束问题，我们可以将 SIASR 中使用的方法扩展到这种设置。唯一的区别是，在这种设置下，连续的 l 个槽有更多的约束。然而，最终它并不影响难度。我们只需要稍微修改一下图 6 的结构：添加一定数量的节点$k_{i}$来代表更多的组，并连接弧$s_{j}^{\prime\prime}k_{i}$，其中$j\in{i,i + 1,\cdots,i + l - 1}$，以及弧$k_{i}t$。其他分析是相似的。这样，我们将定理 2 推广到 SIASC 的情况。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2025/01/04/mixed-ranking/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -205,7 +356,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/01/04/mixed-ranking/" class="post-title-link" itemprop="url">mixed ranking</a>
+          <a href="/2025/01/04/mixed-ranking/" class="post-title-link" itemprop="url">混排</a>
         </h2>
 
         <div class="post-meta-container">
@@ -215,9 +366,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-01-04 14:11:04 / 修改时间：14:14:17" itemprop="dateCreated datePublished" datetime="2025-01-04T14:11:04+08:00">2025-01-04</time>
+      <time title="创建时间：2025-01-04 14:11:04" itemprop="dateCreated datePublished" datetime="2025-01-04T14:11:04+08:00">2025-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-01-27 17:26:45" itemprop="dateModified" datetime="2025-01-27T17:26:45+08:00">2025-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -272,7 +429,7 @@
 </ul>
 <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>在线广告拍卖为社交网络服务和电子商务平台带来了数十亿美元的收入。对于广告商来说简单易懂的广义第二价格（GSP）拍卖，几乎已成为行业中广告拍卖机制的基准。然而，大多数基于GSP的行业实践都假定用户点击仅依赖于广告本身，而忽略了外部项目的影响，即外部性。最近，深度神经网络拍卖（DNA）尝试用深度神经网络升级GSP，并在一定程度上对局部外部性进行建模。然而，它仅考虑了拍卖中的集合级上下文，而忽略了广告的顺序和展示位置，这仍然不是最优的。尽管基于维克里 - 克拉克 - 格罗夫斯（VCG）的多槽拍卖（如VCG、加权VCG（WVCG））使得对全局外部性（如广告的顺序和位置等）进行建模在理论上成为可能，但它们缺乏对收入和社会福利的有效平衡。</p>
 <p>在本文中，我们提出了名为神经多槽拍卖（NMA）的新型拍卖机制，以应对上述挑战。具体而言，我们使用上下文感知列表式预测模块对全局外部性进行有效建模，以实现更好的性能。我们设计了一个列表式深度排名模块，以保证端到端学习中的激励兼容性。此外，我们提出了一个社会福利辅助损失，以在最大化收入的同时有效地减少社会福利的下降。在离线大规模数据集和在线A&#x2F;B测试中的实验结果表明，NMA在工业实践中比其他现有拍卖机制（即GSP、DNA、WVCG）获得了更高的收入，同时平衡了社会福利，并且我们已成功将NMA部署在美团外卖平台上。</p>
-<h2 id="Contextual-Generative-Auction-with-Permutation-level-Externalities-for-Online-Advertising"><a href="#Contextual-Generative-Auction-with-Permutation-level-Externalities-for-Online-Advertising" class="headerlink" title="Contextual Generative Auction with Permutation-level Externalities for Online Advertising"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bXtJuava8XhjybrlTHAcCA">Contextual Generative Auction with Permutation-level Externalities for Online Advertising</a></h2><ol>
+<h1 id="Contextual-Generative-Auction-with-Permutation-level-Externalities-for-Online-Advertising"><a href="#Contextual-Generative-Auction-with-Permutation-level-Externalities-for-Online-Advertising" class="headerlink" title="Contextual Generative Auction with Permutation-level Externalities for Online Advertising"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bXtJuava8XhjybrlTHAcCA">Contextual Generative Auction with Permutation-level Externalities for Online Advertising</a></h1><ol>
 <li><strong>研究背景</strong><ul>
 <li><strong>在线广告的重要性与拍卖机制</strong>：在线广告是互联网行业的核心收入来源，广告拍卖在确保平台收入和激励广告商方面起着关键作用。传统拍卖机制如GSP存在局限性，其独立CTR假设忽略了其他展示广告的影响，即外部性。</li>
 <li><strong>学习型拍卖的进展与局限</strong>：学习型拍卖如Deep Neural Auction（DNA）和Score Weighted VCG（SW-VCG）虽能更好地捕捉外部性，但受“分配后预测”设计范式限制，仅考虑候选广告集内的外部性（集合级外部性），未考虑最终分配中影响每个广告CTR的顺序上下文（排列级外部性），导致分配非最优。</li>
@@ -325,10 +482,172 @@
 <li><strong>研究结论</strong><ul>
 <li>提出CGA框架，用于在线多槽广告拍卖中考虑排列级外部性，理论上证明了经典Myerson拍卖在适应排列级外部性时的最优性，为CGA框架设计提供依据。</li>
 <li>CGA通过自回归生成模型和G-E学习范式优化分配，通过量化IC约束为预期事后遗憾学习最优支付规则，经离线和在线实验验证有效。</li>
-<li>未来研究将扩展上下文生成机制，以整合来自不同渠道的异构项目。</li>
+<li>未来研究将扩展上下文生成机制，以整合来自不同渠道的异构项目。<br><img src="/2025/01/04/mixed-ranking/images/1.13_Figure_1.png" alt="alt text"><br><img src="/2025/01/04/mixed-ranking/images/1.13_Figure_2.png" alt="alt text"><br><img src="/2025/01/04/mixed-ranking/images/1.13_Figure_3.png" alt="alt text"><br><img src="/2025/01/04/mixed-ranking/images/1.13_Figure_4.png" alt="alt text"><br><img src="/2025/01/04/mixed-ranking/images/1.13_Figure_5.png" alt="alt text"><br><img src="/2025/01/04/mixed-ranking/images/1.13_Figure_6.png" alt="alt text"><br>使用真实监督信号的方式虽然简单直接，但是此类方法只考虑了初始排序这一种排列方式上的物品间关系和用户反馈。假设有序列中有n个物品，其余n!-1种排列方式都被模型忽略，不利于寻找最优排序。<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/TUpkUi2EpqW0wZ3KxncJYQ">refer</a></li>
 </ul>
 </li>
 </ol>
+<p>基于listwise模型的rerank的实现方法。而在listwise模型中根据做法的不同又可以分为序列生成式、基于序列表征pointwise式、半生成式、两段式和强化学习等几种不同的方案。</p>
+<h1 id="model方法"><a href="#model方法" class="headerlink" title="model方法"></a>model方法</h1><h2 id="基于序列表征，pointwise打分"><a href="#基于序列表征，pointwise打分" class="headerlink" title="基于序列表征，pointwise打分"></a>基于序列表征，pointwise打分</h2><p>这一大类有一个共同的特点，都是以上层精排的输出序列作为输入，在模型结构上借助RNN等序列结构来引入item序列之间的影响。进一步的通过attention的方式来捕捉item之间的相互影响。典型的如DLCM模型。而在阿里的PRM中进一步地将用户的个性化向量通过和item结合的方式引入模型中。这些模型第二个共同特点是最终线上对item的打分还是pointwise的，直接输出序列中每个item的分数，根据分数从高到低排序。</p>
+<h3 id="DLCM"><a href="#DLCM" class="headerlink" title="DLCM"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xumaomao/p/18213440">DLCM</a></h3><p><img src="/2025/01/04/mixed-ranking/images/DLCM.png" alt="alt text"><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/390857478">refer</a><br>DLCM模型主要包含3个步骤：</p>
+<ol>
+<li><p>使用传统的LTR模型检索Top N个doc，具体做法将查询-文档对 $(q,d)$ 转化特征向量 $\mathbf{x}_{(q,d)}$，然后使用全局排序函数 $f$ 计算查询 $q$ 的Top N个doc的列表 $R_q^n$</p>
+</li>
+<li><p>使用GRU对Top N个doc的特征向量 $\mathbf{x}_{(q,d)}$ 进行编码，从低位置到高位置，一步一步地输入进GRU中，最终产生一个隐向量 $s_n$ 和n个隐层输出 $o_i$， $i \in [1,n]$。这个局部模型被称为local context model - $I(R_q,X_q)$，输出被称为local ranking context</p>
+</li>
+<li><p>该步为对Top N个doc进行重排序，使用的是local ranking function (局部排序函数) $\phi$，并且该函数的输入为 $s_n$ 和 $o$</p>
+</li>
+</ol>
+<h3 id="PRM"><a href="#PRM" class="headerlink" title="PRM"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/TUpkUi2EpqW0wZ3KxncJYQ">PRM</a></h3><p><img src="/2025/01/04/mixed-ranking/images/PRM.png" alt="alt text"></p>
+<ul>
+<li>用transformer来克服RNN距离遗忘的问题，从而显式建模item之间的相互影响</li>
+<li>在transformer中加入用户兴趣的建模 (Transformer equipped with personalized embedding)</li>
+<li>其中个性化LTR Loss形式:</li>
+</ul>
+<p>$$\mathcal{L} &#x3D; \sum_{r\in\mathcal{R}} \ell({y_i, P(y_i|X,PV;\hat{\theta})|i\in\mathcal{S}_r})$$</p>
+<p>PV矩阵会和输入模型的初始item特征矩阵拼接，PV矩阵由预训练模型(CTR预估模型)产生</p>
+<ul>
+<li><a href="#PRM%E5%85%B7%E4%BD%93%E6%A8%A1%E5%9E%8B">具体模型</a></li>
+</ul>
+<h4 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h4><ul>
+<li>重排序后的评分困难：无法为每个反事实列表获取反馈</li>
+<li>指数级时间复杂度：组合优化问题，存在n!种可行排列</li>
+</ul>
+<h4 id="评估生成范式"><a href="#评估生成范式" class="headerlink" title="评估生成范式"></a>评估生成范式</h4><ul>
+<li>评估器(Evaluator)：Evaluate listwise utility</li>
+<li>生成器(Generator)：Generate feasible permutations</li>
+</ul>
+<h3 id="SetRank"><a href="#SetRank" class="headerlink" title="SetRank"></a>SetRank</h3><h2 id="序列生成"><a href="#序列生成" class="headerlink" title="序列生成"></a>序列生成</h2><p>上面的那些方法都是基于预估分数重排，而下面的这些方法主要利用 RNN 直接生成重排序。</p>
+<h3 id="seq2slate"><a href="#seq2slate" class="headerlink" title="seq2slate"></a>seq2slate</h3><p>考虑了前序信息，通过 RNN 来提取前序信息，再通过 pointer network 来从输入商品列表中一步步地生成最终推荐列表。训练时采用 REINFORCE 算法去训练，并且用的是监督式的方法去训练。<br>ptrnet：比如求第一个位置，就和encoder部分的都求一遍权重，和第一个关系最大，就输出1，没有词汇表，输出从输入里面选</p>
+<p><img src="/2025/01/04/mixed-ranking/images/seq2slate.png" alt="alt text"></p>
+<h3 id="GRN"><a href="#GRN" class="headerlink" title="GRN"></a><a target="_blank" rel="noopener" href="https://www.notion.so/GRN-17b9114a541680198a4fc3d7b5414f0d">GRN</a></h3><h2 id="Two-Stage"><a href="#Two-Stage" class="headerlink" title="Two-Stage"></a>Two-Stage</h2><h3 id="SetToSeq"><a href="#SetToSeq" class="headerlink" title="SetToSeq"></a>SetToSeq</h3><h3 id="PIER"><a href="#PIER" class="headerlink" title="PIER"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/NUpGoNM1P5Z5JZ0QPj3D5w">PIER</a></h3><p><img src="/2025/01/04/mixed-ranking/images/PIER.png" alt="alt text"></p>
+<h2 id="RL"><a href="#RL" class="headerlink" title="RL"></a>RL</h2><p>从action space的角度出发，基于RL的混排模型可以分为以下两类:</p>
+<h3 id="离散action-space"><a href="#离散action-space" class="headerlink" title="离散action space"></a>离散action space</h3><ul>
+<li>以不同类型结果的mix pattern为action space</li>
+<li>代表工作: <strong>Cross DQN: Cross Deep Q Network for Ads Allocation in Feed</strong></li>
+<li>实现方式:<ul>
+<li>每种内容的结果经过精排后形成内部有序队列，如:<ul>
+<li>A&#x3D;(a1,a2,a3,a4)</li>
+<li>B&#x3D;(b1,b2,b3,b4) </li>
+<li>C&#x3D;(c1,c2,c3,c4)</li>
+</ul>
+</li>
+<li>RL model的action space是不同类型内容的混排pattern</li>
+<li>每种混排结果对应一种结果类型的mix pattern</li>
+<li>示例:mix pattern &#x3D; AABCB，输出mix list&#x3D;a1-a2-b1-c1-b2</li>
+<li>action space size &#x3D; x^N (x为结果类型数,N为混排list长度)</li>
+<li>state包含user side info和当前各队列候选list等context</li>
+<li>特例:某些场景需要决定是否在首位透出广告&#x2F;直播,此时action space简化为透出&#x2F;不透出</li>
+</ul>
+</li>
+</ul>
+<h3 id="连续action-space"><a href="#连续action-space" class="headerlink" title="连续action space"></a>连续action space</h3><ul>
+<li>以多目标融合公式的加权系数作为action space</li>
+<li>代表工作: <strong>Multi-Task Fusion via Reinforcement Learning for Long-Term User Satisfaction in Recommender Systems</strong></li>
+<li>实现方式:<ul>
+<li>精排后每种内容的混排分由统一的多目标融合公式给出</li>
+<li>示例:mix_score &#x3D; w1 * ctr + w2 * wtr + w3 * ltr</li>
+<li>RL学习个性化权重wi</li>
+<li>采用non-Deterministic Policy Gradient时,w由学习的均值mu和方差sigma决定</li>
+<li>state包含user side和context信息</li>
+</ul>
+</li>
+</ul>
+<p>三、方案比较</p>
+<ol>
+<li><p>A方案(离散action space)特点:</p>
+<ul>
+<li>一般采用double-DQN等模型</li>
+<li>action space不宜过大(需要对离散空间取max)</li>
+<li>便于控制不同类型结果比例</li>
+<li>适合流量调控(根据mix pattern修正reward)</li>
+</ul>
+</li>
+<li><p>B方案(连续action space)特点:</p>
+<ul>
+<li>基于多目标融合公式进行混排</li>
+<li>RL用于动态调整系数,实现个性化</li>
+<li>需要处理不同内容pxtr的量纲不一致问题</li>
+<li>non-Deterministic Policy的方差可提供探索能力</li>
+</ul>
+</li>
+</ol>
+<h3 id="京东"><a href="#京东" class="headerlink" title="京东"></a>京东</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/MtIe1fZUdK94buLR5Sm64Q">refer</a><br>基于强化学习的序列优化<br><img src="/2025/01/04/mixed-ranking/images/image-8.png" alt="alt text"></p>
+<p><img src="/2025/01/04/mixed-ranking/images/image-9.png" alt="alt text"><br>序列生成和评估模型结构包含两个主要部分:</p>
+<ol>
+<li>序列评估模型</li>
+</ol>
+<ul>
+<li>底层进行特征抽取,使用Point DNN结构对每个item单独抽取特征</li>
+<li>Point DNN将稀疏的embedding转化为dense feature,得到item的特征向量</li>
+<li>在序列评估模型中,将序列对应的向量抽取组成序列</li>
+<li>对序列进行attention操作,突出最相关的特征</li>
+<li>输出每个item的预估点击率,与出价、多样性等业务指标融合得到最终得分</li>
+</ul>
+<ol start="2">
+<li>序列生成模型</li>
+</ol>
+<ul>
+<li>输入:将整个候选集合作为生成模型的输入</li>
+<li>特征处理:<ul>
+<li>对候选集中所有item特征做max pooling得到候选集合的特征向量</li>
+<li>将集合特征向量与每个item的特征向量拼接得到新特征</li>
+<li>新特征经过多层DNN处理得到概率矩阵</li>
+</ul>
+</li>
+</ul>
+<p>如图举例，假设一共有五个item，序列长度是四。如上图左上的表格，按行来看表示的是每一个item出现在当前这个位置的概率，按列来看表示的是item出现在不同位置的概率。模型训练使用2D softmax的交叉熵loss。如果一个item在候选集里被选中了，并且是出现在第一个位置，它的第一个位置的label就是1。如图，SKU1在第一个位置label是1，SKU2在第三个位置label是1。训练完成的模型在线上预测过程中预测采样频率，用一个受控的temperature参数来控制这个采样频率。按照这个表去生成序列，逐个位置去采样多次生成多个序列。举例来说，生成第一个位置需要的SKU，类似扔一个骰子，如果小于0.9，SKU1被选中，如果是0.9到1，SKU2被选中。第二个位置去除第一个位置已经出现过的SKU，进行重新归一化，再采样一次，这样可以生成多个候选序列。再把这些候选序列与启发式的或者随机生成的序列融合起来，变成一个序列的候选集，统一交给序列的评估模型去评估，选出一个最好的序列。</p>
+<h3 id="美团"><a href="#美团" class="headerlink" title="美团"></a>美团</h3><h4 id="（页面级序列建模）Deep-Page-Level-Interest-Network-in-Reinforcement-Learning-for-Ads-Allocation"><a href="#（页面级序列建模）Deep-Page-Level-Interest-Network-in-Reinforcement-Learning-for-Ads-Allocation" class="headerlink" title="（页面级序列建模）Deep Page-Level Interest Network in Reinforcement Learning for Ads Allocation."></a>（页面级序列建模）Deep Page-Level Interest Network in Reinforcement Learning for Ads Allocation.</h4><p>Accepted by SIGIR2022<br><img src="/2025/01/04/mixed-ranking/images/image-5.png" alt="alt text"></p>
+<h4 id="（多通道建模）Cross-DQN-Cross-Deep-Q-Network-for-Ads-Allocation-in-Feed"><a href="#（多通道建模）Cross-DQN-Cross-Deep-Q-Network-for-Ads-Allocation-in-Feed" class="headerlink" title="（多通道建模）Cross DQN: Cross Deep Q Network for Ads Allocation in Feed"></a>（多通道建模）Cross DQN: Cross Deep Q Network for Ads Allocation in Feed</h4><p><img src="/2025/01/04/mixed-ranking/images/image-6.png" alt="alt text"></p>
+<h3 id="Reinforcement-Learning-to-Rank-with-Pairwise-Policy-Gradient"><a href="#Reinforcement-Learning-to-Rank-with-Pairwise-Policy-Gradient" class="headerlink" title="Reinforcement Learning to Rank with Pairwise Policy Gradient"></a>Reinforcement Learning to Rank with Pairwise Policy Gradient</h3><p>这篇论文关注的是信息检索（IR）中的文档排序模型的强化学习（RL）。其中一个分支的方法是将排序过程形式化为马尔可夫决策过程（MDP），并通过策略梯度来确定模型参数。尽管这些方法已经取得了一些初步的成功，但它们仍未完全实现其潜力。现有的策略梯度方法直接使用采样文档列表的绝对性能分数（回报）在其梯度估计中，这可能导致两个限制：1) 无法反映同一查询内文档之间的相对优劣，而这通常与信息检索排序的本质更接近；2) 产生高方差的梯度估计，导致学习速度慢和排序准确性低。为了解决这些问题，本文提出了一种新的策略梯度算法，即成对策略梯度（Pairwise Policy Gradient, PPG），该算法使用同一查询下采样的两个文档列表进行成对比较来确定梯度。PPG算法重复采样文档列表对，通过成对比较估计梯度，并最终更新模型参数。理论分析表明，PPG能够做出无偏且低方差的梯度估计。实验结果也证明了在搜索结果多样化和文本检索方面，相比现有最先进基线方法，PPG有显著的性能提升。</p>
+<h2 id="个性化"><a href="#个性化" class="headerlink" title="个性化"></a>个性化</h2><h3 id="Multi-Level-Interaction-Reranking-with-User-Behavior-History"><a href="#Multi-Level-Interaction-Reranking-with-User-Behavior-History" class="headerlink" title="Multi-Level Interaction Reranking with User Behavior History"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/F0tl3GNlUeFqZsN5hzp8Lg">Multi-Level Interaction Reranking with User Behavior History</a></h3><p>该研究关注的是多阶段推荐系统（MRS）的最终阶段——重排序（reranking），其直接关系到用户的体验和满意度，在MRS中扮演着关键角色。尽管现有工作已经取得了一定的进步，但仍有三个问题尚未得到解决：</p>
+<ol>
+<li>用户历史行为中的偏好信息未被充分利用：用户的历史行为包含丰富的偏好信息，例如用户的长期和短期兴趣，但在重排序过程中并未被充分挖掘。以往的工作通常将历史记录中的项目视为同等重要，忽略了历史与候选项目之间的动态交互。</li>
+<li>现有的重排序模型主要关注项目级别的交互，而忽略了特征级别的细粒度交互：这导致了对项目之间细微影响的捕捉不足，从而影响了重排序的效果。</li>
+<li>在重排序前对初始有序列表进行评分可能导致过早评分问题：这种做法可能会产生次优的重排序性能，因为评分是在固定顺序下进行的，未能充分考虑到不同排列可能带来的不同效果。</li>
+</ol>
+<p>为了解决上述问题，本文提出了一种名为多层次交互重排序（Multi-level Interaction Reranking, MIR）的框架。MIR结合了低级别的跨项目交互和高级别的集到列表交互，其中将待重排序的候选项目视为一个集合，而将用户按时间顺序的行为历史视为一个列表。我们设计了一个新颖的SLAttention结构来建模集到列表的交互，并融合个性化长短期兴趣。此外，为了捕捉项目之间的细粒度影响，我们还引入了特征级别的交互。MIR的设计确保了输入项目的任何排列不会改变输出排名，这一点我们在理论上也进行了证明。</p>
+<h2 id="具体模型"><a href="#具体模型" class="headerlink" title="具体模型"></a>具体模型</h2><h3 id="PRM具体模型"><a href="#PRM具体模型" class="headerlink" title="PRM具体模型"></a>PRM具体模型</h3><h3 id="4-2-Input-Layer-输入层"><a href="#4-2-Input-Layer-输入层" class="headerlink" title="4.2 Input Layer (输入层)"></a>4.2 Input Layer (输入层)</h3><ul>
+<li><p>**Personalized Vector (PV)**：个性化向量</p>
+<ul>
+<li>尽管精排队列给出的列表已经有部分个性化结果了，但对于整个用户的个性化结果来说，还不够</li>
+<li>本文拼接原始的特征向量X与用户个性化的向量PV(图1b)，从而重排阶段引入用户个性化</li>
+</ul>
+</li>
+<li><p>**Position Embedding (PE)**：位置向量</p>
+<ul>
+<li>为了利用精排队列中的items的序列信息，本文引入位置编码向量PE(可学习)</li>
+<li>使用方式与[X;PV]+PE</li>
+<li>在输入向量之后使用FFN进行编码与维度转换，得到图1b中输入层最后的e</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-Encoding-Layer-编码层"><a href="#4-3-Encoding-Layer-编码层" class="headerlink" title="4.3 Encoding Layer(编码层)"></a>4.3 Encoding Layer(编码层)</h3><ul>
+<li>编码层目的是学习items对与额外信息(用户偏好、items初始列表)之间的交互(图1a)</li>
+<li>本文使用N层Transformer进行编码，主要考虑到了:<ul>
+<li>TRM的并行</li>
+<li>self-attention不会依赖item之间的距离等因素</li>
+</ul>
+</li>
+<li>从图1a可以看出，本文使用的Transformer block与原论文基本一致，也是用到了Multi-head Self-Attention，FFN等结构</li>
+</ul>
+<h3 id="4-4-Output-Layer-输出层"><a href="#4-4-Output-Layer-输出层" class="headerlink" title="4.4 Output Layer(输出层)"></a>4.4 Output Layer(输出层)</h3><ul>
+<li>输出层目标是为每个item打出一个重排得分</li>
+<li>此处最终使用softmax函数进行输出</li>
+<li>输出结果为点击每个item的概率</li>
+<li>训练模型时，本文使用点击相关数据完成训练，最终损失函数为交叉熵<br>$$\mathcal{L} &#x3D; \sum_{r\in\mathcal{R}} \ell({y_i, P(y_i|X,PV;\hat{\theta})|i\in\mathcal{S}_r})$$</li>
+</ul>
+<h3 id="4-5-Personalized-Module-个性化模块"><a href="#4-5-Personalized-Module-个性化模块" class="headerlink" title="4.5 Personalized Module(个性化模块)"></a>4.5 Personalized Module(个性化模块)</h3><ul>
+<li>直观来说，可以直接用PRM来端到端学习用户个性化向量PV</li>
+<li>然而在重排阶段学习PV，缺少了用户的通用偏好信息</li>
+<li>因此本文使用预训练模型生成用户个性化向量(图1c)<ul>
+<li>输入为用户的点击序列items(H)，当前item与用户user的信息(性别、年龄、购买力等)</li>
+<li>训练数据仍然使用点击数据</li>
+<li>损失函数为二分类交叉熵</li>
+<li>最终取sigmoid之前层网络的输出结果作为用户个性化向量PV</li>
+</ul>
+</li>
+<li>由于是CTR任务，作者也建议使用FM、FFM、DeepFM、DCN、FFN、PNN等用来学习PV</li>
+</ul>
 
       
     </div>
@@ -1205,98 +1524,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/09/19/moni/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/09/19/template3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar4.jpg">
-      <meta itemprop="name" content="Yuhan Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一个田螺突然就">
-      <meta itemprop="description" content="Yuhan Wang's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一个田螺突然就">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/19/template3/" class="post-title-link" itemprop="url">template3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-19 13:15:15" itemprop="dateCreated datePublished" datetime="2024-09-19T13:15:15+08:00">2024-09-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-10 20:08:58" itemprop="dateModified" datetime="2024-10-10T20:08:58+08:00">2024-10-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          这里有东西被加密了，需要输入密码查看哦。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/19/template3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
