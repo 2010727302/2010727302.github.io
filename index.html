@@ -187,6 +187,504 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2025/08/11/prediction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/08/11/prediction/" class="post-title-link" itemprop="url">prediction</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-08-11 20:00:51 / 修改时间：20:03:27" itemprop="dateCreated datePublished" datetime="2025-08-11T20:00:51+08:00">2025-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="ctr预估"><a href="#ctr预估" class="headerlink" title="ctr预估"></a>ctr预估</h2><h3 id="顶层范式对比：判别式-vs-生成式"><a href="#顶层范式对比：判别式-vs-生成式" class="headerlink" title="顶层范式对比：判别式 vs. 生成式"></a><strong>顶层范式对比：判别式 vs. 生成式</strong></h3><table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left">传统判别式方法 (Discriminative)</th>
+<th align="left">新兴生成式方法 (Generative)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>核心目标</strong></td>
+<td align="left">学习一个决策边界，直接预测一个标签的条件概率 $P(Y|X)$。<br /><strong>示例</strong>：“给定特征X，用户点击Y的概率是多少？”</td>
+<td align="left">学习数据的联合分布 $P(X, Y)$ 或其生成过程。<br />模型旨在理解数据的底层结构与机制，而不仅仅是对数据点进行区分。</td>
+</tr>
+<tr>
+<td align="left"><strong>解决的问题</strong></td>
+<td align="left"><strong>数值预测与排序</strong>：<br />- 直接对CTR&#x2F;CVR等指标进行精确的数值预测。<br />- 核心优化目标为AUC、Logloss等排序或校准指标。</td>
+<td align="left"><strong>机制理解、序列生成与特征表示</strong>：<br />- 端到端序列推荐，直接生成推荐列表。<br />- 为下游任务生成高阶、具有语义的特征表示。<br />- 通过模拟数据生成过程，进行数据增强或偏差校准。<br />- 对用户行为或市场动态进行仿真与归因分析。</td>
+</tr>
+<tr>
+<td align="left"><strong>代表模型&#x2F;技术</strong></td>
+<td align="left"><strong>特征交互模型</strong>: Wide &amp; Deep, DeepFM, DCN, xDeepFM<br /><strong>用户序列模型</strong>: DIN, DIEN<br /><strong>多任务&#x2F;偏差校正</strong>: ESMM, PLE<br /><strong>集成模型</strong>: XGBoost, LightGBM</td>
+<td align="left"><strong>完全生成式架构</strong>: HSTU, OneRec<br /><strong>混合式&#x2F;特征增强架构</strong>: LUM, HLLM<br /><strong>数据增强&#x2F;分布建模</strong>: VAE, GAN</td>
+</tr>
+<tr>
+<td align="left"><strong>主要优势</strong></td>
+<td align="left"><strong>高效性与精确性</strong>：在特定预测任务上计算效率高，经过长期优化，预测精度有保障。<br /><strong>技术成熟度高</strong>：工业界有大量成熟的应用、优化经验和稳定的部署方案。</td>
+<td align="left"><strong>统一多阶段流程</strong>: 完全生成式架构能替代传统多阶段漏斗，解决目标不一致问题。<br /><strong>语义理解与泛化</strong>: 能基于内容理解进行推荐，有效缓解数据稀疏和冷启动问题。<br /><strong>提供过程可解释性</strong>：通过模拟生成路径，为归因分析和反事实推断提供了可能性。</td>
+</tr>
+<tr>
+<td align="left"><strong>主要挑战</strong></td>
+<td align="left"><strong>模型可解释性差</strong>：通常被视为“黑箱”，难以对单个预测结果进行归因。<br /><strong>强数据依赖性</strong>：在历史交互数据稀疏或缺失的场景下（如冷启动），模型效果会显著下降。<br /><strong>偏差敏感性</strong>：容易学习并放大训练数据中存在的各种偏差（如选择偏差、位置偏差）。</td>
+<td align="left"><strong>计算与工程成本高</strong>：生成式大模型的训练和在线推理成本通常远高于判别式模型，对硬件资源要求高。<br /><strong>建模复杂度高</strong>：需要将业务流程抽象为生成过程，对建模能力要求更高。<br /><strong>技术尚处发展阶段</strong>：大规模、成熟的工业界应用相对较少，许多方案仍在快速迭代和探索中。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="主流判别式CTR-CVR模型详细比较"><a href="#主流判别式CTR-CVR模型详细比较" class="headerlink" title="主流判别式CTR&#x2F;CVR模型详细比较"></a><strong>主流判别式CTR&#x2F;CVR模型详细比较</strong></h3><table>
+<thead>
+<tr>
+<th align="left">模型类别</th>
+<th align="left">代表模型</th>
+<th align="left">核心创新点</th>
+<th align="left">解决的主要问题</th>
+<th align="left">优势</th>
+<th align="left">权衡&#x2F;挑战</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>特征交互模型</strong></td>
+<td align="left"><strong>Wide &amp; Deep, DeepFM</strong></td>
+<td align="left">结合浅层（记忆）和深层（泛化）网络，或将FM与DNN结合。</td>
+<td align="left">平衡模型的记忆能力和泛化能力，自动学习低阶和高阶特征交互 [1]。</td>
+<td align="left">效果稳健，易于实现。</td>
+<td align="left">MLP部分特征交互是隐式的，效率和可解释性一般。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>DCN, xDeepFM</strong></td>
+<td align="left">设计显式的交叉网络（Cross Network）或压缩交互网络（CIN）来建模高阶特征交互。</td>
+<td align="left">更高效、更有针对性地学习高阶特征交互，避免MLP的“暴力”学习。</td>
+<td align="left">参数效率高，能显式控制交互阶数，有一定可解释性。</td>
+<td align="left">交互模式相对固定，可能不如注意力机制灵活。</td>
+</tr>
+<tr>
+<td align="left"><strong>用户序列模型</strong></td>
+<td align="left"><strong>DIN (Deep Interest Network)</strong></td>
+<td align="left">引入注意力机制，根据目标广告动态激活用户历史行为序列中的相关兴趣。</td>
+<td align="left">解决传统池化方法无法捕捉用户兴趣多样性和上下文相关性的问题 [2]。</td>
+<td align="left">显著提升对用户动态兴趣的捕捉能力，模型更具上下文感知能力。</td>
+<td align="left">注意力计算与序列长度成正比，长序列下面临性能瓶颈。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>DIEN (Deep Interest Evolution Network)</strong></td>
+<td align="left">在DIN基础上引入GRU，显式建模用户兴趣的演化过程和时序依赖。</td>
+<td align="left">捕捉用户兴趣的发展趋势，而不仅仅是静态的相关性。</td>
+<td align="left">能更深刻地理解用户兴趣的演化链路，预测更具时效性。</td>
+<td align="left">模型结构更复杂，训练成本更高。</td>
+</tr>
+<tr>
+<td align="left"><strong>多任务学习框架</strong></td>
+<td align="left"><strong>ESMM (Entire Space Multi-task Model)</strong></td>
+<td align="left">在全曝光空间上联合建模pCTR和pCTCVR，间接推导pCVR。</td>
+<td align="left">从根本上解决了CVR预估中的样本选择偏差（SSB）问题 [3]。</td>
+<td align="left">理论优雅，效果显著，已成为CVR预估的工业标准范式。</td>
+<td align="left">依赖于 $pCVR &#x3D; pCTCVR &#x2F; pCTR$ 的假设，任务间信息共享机制简单。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>PLE (Progressive Layered Extraction)</strong></td>
+<td align="left">设计解耦的共享专家和任务独有专家网络，并进行渐进式信息提取。</td>
+<td align="left">解决多任务学习中普遍存在的“跷跷板”现象（负迁移）[4]。</td>
+<td align="left">有效缓解任务间冲突，提升多任务学习的整体性能和稳定性。</td>
+<td align="left">架构设计和调优相对复杂。</td>
+</tr>
+<tr>
+<td align="left"><strong>迁移学习框架</strong></td>
+<td align="left"><strong>Transfer Learning (Fine-tuning)</strong></td>
+<td align="left">利用在数据丰富的源域（如所有广告）上预训练的模型，在数据稀疏的目标域（如特定广告位）上进行微调 [5, 6]。</td>
+<td align="left">解决冷启动和数据稀疏问题，校准由选择偏差导致的有偏预测 [5]。</td>
+<td align="left">有效利用已有知识，提升稀疏场景下的模型性能和泛化能力。</td>
+<td align="left">需要仔细设计迁移策略，防止负迁移；源域和目标域的差异性是关键。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="1-生成式架构-Generative-Architecture"><a href="#1-生成式架构-Generative-Architecture" class="headerlink" title="1. 生成式架构 (Generative Architecture)"></a><strong>1. 生成式架构 (Generative Architecture)</strong></h3><ul>
+<li>LLM4Rec 范式概览<br> <img src="/images/llm4rec.png"><br><em>A Survey on Large Language Models for Recommendation：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2305.19860">https://arxiv.org/pdf/2305.19860</a></em>	<br>如上图，LLM4Rec 概括来说有3种范式：</li>
+</ul>
+<ol>
+<li>   LLM Embedding + RS：利用语言模型作为特征提取器，将 user 和 item 的描述输入给 LLM 然后得到 embedding，然后再将这些 embedding 输入到传统推荐模型使用（小红书 NoteLLM）<br><em>案例：小红书笔记推荐，利用 LLM 产生笔记 embedding 然后做 i2i 召回；</em></li>
+<li>   LLM Tokens + RS：利用语言模型的输出对 RS 进行辅助增强（谷歌 Youtube、华为 KAR）<br><em>案例：谷歌 Youtube 利用 LLM 产生指导兴趣标签，然后从传统推荐模型结果里只筛选出兴趣标签内的；</em></li>
+<li>   LLM As RS：直接将语言模型作为推荐系统，大致分为三类：<br>  a.	将推荐视为文本生成任务，文本结果即推荐结果：P5、VIP5、M6-Rec<br>  b.	基于 LLM 的生成式推荐：Meta GR（2024’02）<br>  c.	改造传统推荐模型并变大，展现 Scaling Law 规律：Meta Wukong（2024’03）<br><em>案例：阿里 M6-Rec 将推荐任务全部转化成文本，用户特征、物料都用文本描述，最后可以直接生成文本进行推荐。</em></li>
+</ol>
+<hr>
+<h3 id="各模型详细解析"><a href="#各模型详细解析" class="headerlink" title="各模型详细解析"></a><strong>各模型详细解析</strong></h3><h4 id="传统判别式推荐模型-DLRM"><a href="#传统判别式推荐模型-DLRM" class="headerlink" title="传统判别式推荐模型 (DLRM)"></a><strong>传统判别式推荐模型 (DLRM)</strong></h4><ul>
+<li><strong>模型概述</strong>：这是工业界最成熟和广泛应用的一类模型，其核心目标是学习一个判别函数 $P(y|x)$，即在给定用户和物品的特征后，预测一个具体的分数，如点击率（CTR）或转化率（CVR）。</li>
+<li><strong>技术架构</strong>：经典架构通常是“输入层 + Embedding层 + 特征交互层 + MLP层”。Embedding层将高维稀疏的ID特征映射为低维稠密向量；特征交互层通过点积、交叉网络（如DCN）或注意力机制（如DIN）来学习特征间的组合关系；MLP层则进行非线性变换并输出最终预测值。</li>
+<li><strong>优势与挑战</strong>：优势在于技术成熟、预测精准、易于部署。挑战在于模型是“黑箱”，难以解释；严重依赖历史数据，泛化和冷启动能力弱；并且多阶段的推荐漏斗存在目标不一致和信息损失问题。</li>
+</ul>
+<h4 id="完全生成式"><a href="#完全生成式" class="headerlink" title="完全生成式"></a><strong>完全生成式</strong></h4><h5 id="1-1-HSTU-Meta"><a href="#1-1-HSTU-Meta" class="headerlink" title="1.1 HSTU (Meta)"></a><strong>1.1 HSTU (Meta)</strong></h5><ul>
+<li><p><strong>模型概述</strong>：HSTU将推荐彻底范式化为一个序列到序列（Seq2Seq）的生成任务。模型根据用户历史直接<strong>生成</strong>未来可能交互的物品ID序列。</p>
+<p>  <img src="/images/hstu.png"></p>
+  <img src="E:\RUCGL\REPO\--\images\hstu2.png" alt="image-20250809191048418" style="zoom:50%;" />
+</li>
+<li><p><strong>具体做法</strong> </p>
+<p>  这篇是 GR 架构的示范，直接把推荐 task 转为序列转导问题，用 HSTU 编码器串起所有交互行为</p>
+<ul>
+<li>将所有用户行为、上下文和物品特征统一编码为事件序列。 </li>
+<li>采用为推荐场景定制的高效Transformer变体<strong>HSTU</strong>架构，自回归地预测下一个事件（物品）。</li>
+<li>将模型参数规模扩展至万亿级别，首次在推荐领域验证了<strong>Scaling Law</strong>的有效性。</li>
+</ul>
+</li>
+<li><p><strong>优势</strong> </p>
+<ul>
+<li>彻底抛弃多阶段pipeline，实现端到端优化，解决目标不一致问题。 </li>
+<li>能够建模更长、更完整的用户行为序列。</li>
+<li>超大规模模型可能涌现出更深层次的用户理解能力。</li>
+</ul>
+</li>
+<li><p><strong>挑战</strong></p>
+<ul>
+<li>算力要求高、在线延迟高、无法利用交叉特征</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-2-OneRec-快手"><a href="#1-2-OneRec-快手" class="headerlink" title="1.2 OneRec (快手)"></a><strong>1.2 OneRec (快手)</strong></h5><ul>
+<li><strong>模型概述</strong>：同样采用端到端生成范式，统一多阶段流程，直接生成推荐的视频ID序列。</li>
+<li><strong>技术架构与实现</strong>：核心技术包括<strong>视频Tokenizer</strong>（将视频压缩为语义ID）和引入**强化学习(RL)**（通过DPO等方法对齐多业务目标）以及采用Encoder-Decoder结构，并引入MoE提升效率。</li>
+<li><strong>优势</strong>：<ol>
+<li>极大地简化了系统架构，显著降低了运营成本。</li>
+<li>通过RL，能更灵活地对齐长期、复杂的业务指标。</li>
+</ol>
+</li>
+<li><strong>挑战</strong>：<ol>
+<li>语义ID的质量直接决定了生成效果，设计和迭代成本高。</li>
+<li>面临生成无效ID或热门ID的问题，强依赖奖励模型进行约束。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h4 id="2-堆叠式架构-Stacked-Architecture"><a href="#2-堆叠式架构-Stacked-Architecture" class="headerlink" title="2. 堆叠式架构 (Stacked Architecture)"></a><strong>2. 堆叠式架构 (Stacked Architecture)</strong></h4><h5 id="2-1-Large-User-Model-LUM-阿里"><a href="#2-1-Large-User-Model-LUM-阿里" class="headerlink" title="2.1 Large User Model - LUM (阿里)"></a><strong>2.1 Large User Model - LUM (阿里)</strong></h5><img src="E:\RUCGL\REPO\--\images\lum1.png" alt="image-20250809190735326" style="zoom:80%;" />
+
+<ul>
+<li><p><strong>模型概述</strong>：LUM代表了一种务实的融合路径，其核心思想是“用生成式模型赋能传统的判别式模型”，而非完全替代。</p>
+</li>
+<li><img src="E:\RUCGL\REPO\--\images\lum2.png" alt="image-20250809190735326" style="zoom:80%;" />
+</li>
+<li><p><strong>技术架构与实现</strong>：</p>
+<ul>
+<li>阶段1:以充足的各式各样的用户行为作为语料，构造通用的LUM，理解搜推广下的语言体系&amp;协同信号。同时承担Scaling Law的能力。注意此时LUM是下游任务无关的。</li>
+<li>阶段2:通过构造不同trigger，来提取与下游强相关的Knowledge。达到生成式-&gt;判别式转换目的，适配下游各种应用</li>
+<li>阶段3:以增量信号的方式引入到各个生产模型中去</li>
+</ul>
+</li>
+<li><p><strong>优势</strong>：</p>
+<ol>
+<li>无需重构现有系统，落地成本低，风险可控。</li>
+<li>利用了生成式模型的泛化能力，同时保留了判别式模型的高效和精准。</li>
+</ol>
+</li>
+<li><p><strong>挑战与权衡</strong>：</p>
+<ol>
+<li>多阶段串行优化（预训练-&gt;查询-&gt;排序），增加了系统链路的复杂性和迭代成本。</li>
+<li>生成式预训练的目标与下游判别式任务的目标可能不完全一致。</li>
+</ol>
+</li>
+</ul>
+<h5 id="2-2-HLLM-字节"><a href="#2-2-HLLM-字节" class="headerlink" title="2.2 HLLM (字节)"></a><strong>2.2 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fVgqAL-pO6Ae5CwcPf34yA">HLLM (字节)</a></strong></h5><ul>
+<li><p><strong>模型概述</strong>：用LLM彻底替代了传统的、无语义的ID Embedding。</p>
+<img src="https://mmbiz.qpic.cn/sz_mmbiz_png/zhVlwj96tThmyibOuG3sCJibfBVz5Apo9t4u2gDRwKhYeafE6xCNym0F0icLRZBqlfOedvgKbEdiankibB9icZ1WSaIw/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片" style="zoom: 60%;" />
+</li>
+<li><p><strong>技术架构与实现</strong>：做了一个双LLM结构：</p>
+<ul>
+<li>Item LLM 用文本描述建模物品（标题、标签等），下游可以直接拿 emb用</li>
+<li>User LLM 则接历史物品 emb序列，学习用户兴趣 ➜ 预测下一个物品<br>两个 LLM 分开训练，既节省 token 长度，又保留了预训练能力。</li>
+</ul>
+</li>
+<li><p><strong>优势与创新点</strong>：</p>
+<ol>
+<li>将推荐从基于ID的“符号匹配”升级为基于内容的“语义理解”。</li>
+<li>解决冷启动：对新物品，只要有文本描述就能立即进行高质量推荐。</li>
+</ol>
+</li>
+<li><p><strong>挑战与权衡</strong>：</p>
+<ol>
+<li>模型效果高度依赖物品是否有高质量、信息丰富的文本描述。</li>
+<li>双LLM架构的训练和推理成本依然很高。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h4 id="3-混合式架构-Hybrid-Architecture"><a href="#3-混合式架构-Hybrid-Architecture" class="headerlink" title="3. 混合式架构 (Hybrid Architecture)"></a><strong>3. 混合式架构 (Hybrid Architecture)</strong></h4><h5 id="3-1-MTGR-美团-MTGR：美团外卖生成式推荐Scaling-Law落地实践"><a href="#3-1-MTGR-美团-MTGR：美团外卖生成式推荐Scaling-Law落地实践" class="headerlink" title="3.1 [MTGR (美团)](MTGR：美团外卖生成式推荐Scaling Law落地实践)"></a><strong>3.1 [MTGR (美团)](<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JiDOqD-ThU0Upp6xnNg3Nw">MTGR：美团外卖生成式推荐Scaling Law落地实践</a>)</strong></h5><p><img src="http://mmecoa.qpic.cn/sz_mmecoa_png/hEx03cFgUsXMsNLia4ic6hfqwSCxWCibscN2UtUxpA7QvCyP4YYIjJcS5rgP0fkkGdnNzbknqFKJFFhmtDeg5cptg/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=10005&wx_lazy=1&retryload=3" alt="图1 外卖推荐DLRM范式下Scaling路径"></p>
+<img src="http://mmecoa.qpic.cn/sz_mmecoa_png/hEx03cFgUsXMsNLia4ic6hfqwSCxWCibscNbAJv949gFXqMQSgDabUI8OJf7yiaIp7ic3PCWKd95WwZbvTMafiaOiasKg/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=10005&wx_lazy=1&retryload=3" alt="图2 MTGR模型架构图" style="zoom:80%;" />
+
+<ul>
+<li><p>在模型方面是微创新，主要创新是在推理阶段，而这也是为了落地而做。推理阶段就是深度使用Nvidia的feature，挖掘和发挥其GPU的推理能力。</p>
+<p>  比HSTU微创新有：</p>
+<p>  （1）保留交叉特征：将用户特征、历史行为序列、实时交互和候选者特征（包括交叉特征）转化为统一令牌序列，交叉特征被整合进候选者令牌中。 </p>
+<p>  （2）组层归一化：按领域分组对不同领域的token进行归一化，确保每个领域内的token分布相似，通常调整为均值0、方差1的分布，从而在自注意力计算前对齐不同领域的语义空间。</p>
+<p>  （3）动态掩码策略：MTGR模型用来处理令牌序列的一种方法，主要目的是避免信息泄露，同时提升模型性能。它的核心思想是根据令牌的类型和时间关系，灵活控制哪些令牌可以“看到”其他令牌的信息。</p>
+<p>  推理阶段的创新有：</p>
+<p>  （1）通过集成Nvidia提供的深度优化的Cutlass-based HSTU kernel，支持变长序列的输入无需padding，</p>
+<p>  大幅提升了Attention的计算效率，单算子性能相较于Triton版本提升2~3倍。</p>
+<p>  （2）引入动态BS，每张卡的BS根据实际数据的序列长度动态调整，保证计算量（total_tokens）基本相同。因为少数用户的序列很长，大部分用户的序列都比较短，每张卡拿到的用户数相同，但由于序列长度不同实际的计算量差别较大。而每个step都要等负载最重的卡计算完，所有卡才能进行梯度同步。</p>
+<p>  （3）选择TensorRT作为模型推理框架：TensorRT是Nvidia推出的推理优化框架，在业界广泛应用，具有较强的算子融合、低精度量化能力。</p>
+<p>  ab效果：</p>
+<p>  转换量提升 1.22%，点击率（CTR）提升 1.31%。同时，训练成本保持不变，推理成本降低 12%。</p>
+</li>
+</ul>
+<hr>
+<h4 id="4-判别式扩展架构-Discriminative-Scaling"><a href="#4-判别式扩展架构-Discriminative-Scaling" class="headerlink" title="4. 判别式扩展架构 (Discriminative Scaling)"></a><strong>4. 判别式扩展架构 (Discriminative Scaling)</strong></h4><h5 id="4-1-RankMixer-抖音"><a href="#4-1-RankMixer-抖音" class="headerlink" title="4.1 RankMixer (抖音)"></a><strong>4.1 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IxyUzNKF9piNvrEOSGgnTg">RankMixer (抖音)</a></strong></h5><ul>
+<li><p>作者认为，深度学习推荐模型（DLRMs）的扩展定律研究必须克服以下问题：</p>
+<ul>
+<li>架构应与硬件对齐，以最大化现代GPU上的MFU和计算吞吐量。</li>
+<li>模型设计必须利用推荐数据的特性，如数百个字段之间的异构特征空间和个性化跨特征交互。</li>
+</ul>
+<p>  这两个问题对应了RankMixer的两大模块：</p>
+<ul>
+<li>对输入特征进行tokenizer，用token操作代替特征交叉；</li>
+<li>用稀疏MoE代替self-attention，扩大参数的同时保证并行度，使得RankMixer在相同的FLOPS下具有更大的模型容量和学习能力。</li>
+</ul>
+  <img src="E:\RUCGL\REPO\--\images\rankmixer.png" alt="image-20250809223504933" style="zoom:67%;" />
+</li>
+<li><p>输入特征被分词为T个语义相关的特征令牌（tokens），通过L层RankMixer块处理。每层包括2部分：</p>
+<ol>
+<li>多头令牌混合（Multi-head Token Mixing）：无参数操作，通过拆分头（heads）并重组令牌，实现跨令牌特征交互。比自注意力更高效，避免了异构特征空间的相似度计算难题。<br>  具体的，用户、item、交叉等特征构建的连续的每个特征field（embedding）是被当作token，那么所有特征field就是一个token序列，也可以看作是一个shape是（T，D）的矩阵。将列分块成（T，H<em>D&#x2F;H)的矩阵。然后转换为shape是（H，T</em>D&#x2F;H）的矩阵。那么现在的每个token（每一行）就有原生每个特征field（token）的一部分。可以简单理解为，后续对该token的任何操作都是对所有特征field的操作。</li>
+<li>每令牌前馈网络（Per-token FFNs）：为每个令牌分配独立参数，处理特征子空间建模，避免高频特征主导长尾信号。扩展为Sparse-MoE变体，使用动态路由（ReLU Routing + Dense-Training&#x2F;Sparse-Inference）解决专家不均衡和欠训练问题，提高ROI。</li>
+</ol>
+</li>
+</ul>
+<p>RankMixer 和 DeepSeek 都使用了稀疏专家混合（MoE），这是近年来高效大模型的热门技术。DeepSeek 的 MoE（如 DeepSeek V3）在 NLP 领域广为人知，而 RankMixer 将 MoE 适配到推荐系统，优化了路由策略（如 ReLU Routing）以处理特征不均衡。</p>
+<p>AB：</p>
+<p>* 部署于抖音Feed推荐（1B参数），活跃天数+0.2%、App时长+0.5%；低活跃用户提升最大（活跃天数+0.46%）。</p>
+<p>* 在广告（ADVV+3.9%）和搜索（活跃天数+0.14%、查询修改率-1%）场景中也显著提升，验证通用性。</p>
+<p>心得：</p>
+<p>（1）多头令牌混合，实现了重组令牌，输出每个令牌是所有特征field的小部分组成的，换句话说，对该令牌的后续操作就是对所有特征field的特征交叉。对所有新令牌的处理，就是一种并行处理。这个借鉴MLP-Mixer。</p>
+<p>（2）每令牌前馈网络，为每个特征field设置独立的网络，并且使用很多expert网络，这些都增大了模型的规模和weights数量。但是通过动态策略、稀疏MOE，即路由到少量的expert上，实现了效率的可控。这很像deepseek的优化。</p>
+<h3 id="模型核心对比总览表"><a href="#模型核心对比总览表" class="headerlink" title="模型核心对比总览表"></a>模型核心对比总览表</h3><table>
+<thead>
+<tr>
+<th align="left">技术路径</th>
+<th align="left">模型&#x2F;机构</th>
+<th align="left">核心思想</th>
+<th align="left">核心贡献&#x2F;价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>基线</strong></td>
+<td align="left">传统判别式模型</td>
+<td align="left">为“用户-物品”对进行精准打分和排序。</td>
+<td align="left">奠定了深度学习推荐的基础，在特定预测任务上高效且成熟。</td>
+</tr>
+<tr>
+<td align="left"><strong>生成式架构</strong></td>
+<td align="left"><strong>HSTU (Meta)</strong></td>
+<td align="left">将推荐重构为序列到序列的<strong>内容生成</strong>问题。</td>
+<td align="left">首次在工业界验证了推荐系统的“ Scaling Law ”。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>OneRec (快手)</strong></td>
+<td align="left">用<strong>端到端的统一生成模型</strong>替代多阶段推荐漏斗。</td>
+<td align="left">提供了一套完整的、可落地的端到端生成式推荐系统方案。</td>
+</tr>
+<tr>
+<td align="left"><strong>堆叠式架构</strong></td>
+<td align="left"><strong>LUM (阿里)</strong></td>
+<td align="left"><strong>“生成式赋能判别式”</strong>：用生成模型离线构建知识，增强传统模型。</td>
+<td align="left">无需重构现有系统，落地成本低，风险可控。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>HLLM (字节)</strong></td>
+<td align="left">用<strong>层级化LLM</strong>替代传统ID Embedding，实现端到端的语义化。</td>
+<td align="left">将推荐从“符号匹配”升级为“语义理解”。</td>
+</tr>
+<tr>
+<td align="left"><strong>混合式架构</strong></td>
+<td align="left"><strong>MTGR (美团外卖)</strong></td>
+<td align="left">借鉴生成式架构(HSTU)作为<strong>统一特征编码器</strong>，兼容全部特征进行判别式任务预估。</td>
+<td align="left">既利用了Transformer强大的序列编码能力，又保留了交叉特征等被验证有效的判别式信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>判别式扩展架构</strong></td>
+<td align="left"><strong>RankMixer (抖音)</strong></td>
+<td align="left">在判别式范式内，通过<strong>软硬协同设计</strong>实现模型的极致扩展。</td>
+<td align="left">证明了通过架构创新，判别式模型同样能实现规模化效应。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="CTR模型近期工作"><a href="#CTR模型近期工作" class="headerlink" title="CTR模型近期工作"></a>CTR模型近期工作</h3><table>
+<thead>
+<tr>
+<th align="left">研究方向</th>
+<th align="left">模型&#x2F;论文名称</th>
+<th align="left">核心思想与贡献</th>
+<th align="left">应用与验证</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>建模用户行为</strong></td>
+<td align="left"><strong>MIRRN</strong> (Multi-granularity Interest Retrieval and Refinement Network)(KDD2025) [1]</td>
+<td align="left">通过检索不同时间尺度的行为子序列来捕获用户的多粒度兴趣。引入多头傅里叶变换器高效学习序列关系。</td>
+<td align="left">在多个基准任务上效果显著，并通过华为音乐A&#x2F;B测试验证，提升了用户听歌量和时长。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>LIBER</strong> (Lifelong User Behavior Modeling Based on Large Language Models) [2]</td>
+<td align="left">提出包含用户行为流分区、用户兴趣学习和融合三个模块的框架，利用大语言模型(LLMs)处理终身用户行为序列。有效解决了长序列信息提取和用户兴趣动态变化的挑战。</td>
+<td align="left">已部署在华为音乐推荐服务中，用户播放次数提升3.01%，播放时长提升7.69%。</td>
+</tr>
+<tr>
+<td align="left"><strong>建模特征交叉</strong></td>
+<td align="left"><strong>IPA</strong> (Towards Unifying Feature Interaction Models) [3]</td>
+<td align="left">提出了一个名为IPA的通用框架，通过交互函数、层池化和层聚合器三个组件来统一现有特征交互模型。并基于该框架提出了一个有竞争力的新型模型。</td>
+<td align="left">基于该框架的新模型PFL在腾讯广告平台的A&#x2F;B测试中获得显著GMV提升，并已在多个场景部署。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>OptFusion</strong> (Fusion Matters: Learning Fusion in Deep CTR Models)(WSDM2025) [4]</td>
+<td align="left">提出OptFusion方法，通过一次性学习算法自动化学习CTR模型中的融合连接和操作，解决了传统融合策略固化的问题。</td>
+<td align="left">在三个大规模数据集上的实验证明了其有效性和高效性。</td>
+</tr>
+<tr>
+<td align="left"><strong>集成架构</strong></td>
+<td align="left"><strong>CETNet</strong> (A Collaborative Ensemble Framework for CTR Prediction) [5]</td>
+<td align="left">提出协同集成训练网络，让多个拥有独立嵌入表的模型协同学习，并通过基于置信度的融合机制动态平衡各模型贡献。</td>
+<td align="left">在Amazon、淘宝、快手及Meta的大规模工业数据集上验证了其有效性。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>MBCnet</strong> (Multi-Branch Cooperation Network) [6]</td>
+<td align="left">提出多分支协同网络，包含三个不同功能的网络分支。通过“分支共同教学”和“适度差异化”原则让多分支协作，以更好地建模复杂特征交互。</td>
+<td align="left">在淘宝的大规模工业数据集和在线A&#x2F;B测试中，CTR、交易量和GMV均取得显著提升。</td>
+</tr>
+<tr>
+<td align="left"><strong>蒸馏机制</strong></td>
+<td align="left"><strong>EKTF</strong> (Ensemble Knowledge Transfer Framework) [7]</td>
+<td align="left">针对大规模集成学习的局限性，提出集成知识迁移框架。利用学生网络的集体决策作为抽象教师指导学习，并设计考核机制平衡超参数。</td>
+<td align="left">在五个真实数据集上的实验结果表明其在有效性和兼容性方面均优于现有方法。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>FSDNet</strong> (Feature Interaction Fusion Self-Distillation Network) [8]</td>
+<td align="left">提出一个融合自蒸馏模块，在每一层连接显式和隐式特征交互。利用最深的融合层作为教师，通过自蒸馏指导浅层训练，避免了复杂的师生框架设计。</td>
+<td align="left">在四个基准数据集上验证了框架的有效性和泛化能力。</td>
+</tr>
+<tr>
+<td align="left"><strong>大语言模型相关</strong></td>
+<td align="left"><strong>RAG-Enhanced LLM Recommender with Multi-Head Early Exit</strong> [9]</td>
+<td align="left">结合检索增强生成(RAG)和多头早退出机制来优化LLM推荐系统的效率和精度。利用图卷积网络(GCNs)加速检索，并根据预测置信度动态终止推理过程。</td>
+<td align="left">实验证明，该架构能在不牺牲精度的前提下有效减少计算时间，为LLM商业部署设立新标杆。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>MSD</strong> (LLM-Infused Approach for Optimized CTR Prediction) [10]</td>
+<td align="left">提出一个LLM融合框架(MSD)，通过提取和蒸馏LLMs中的关键语义信息，并将其集成到更小更高效的模型中，以平衡效率和效果。</td>
+<td align="left">在美团赞助搜索系统的在线A&#x2F;B测试中，CPM和CTR显著优于基线模型。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>FLIP</strong> (Fine-grained Alignment between ID-based Models and PLMs) [11]</td>
+<td align="left">提出FLIP方法，通过新颖的联合掩码建模任务，实现表格ID与词语token之间的细粒度特征级对齐，结合了基于ID的模型和预训练语言模型(PLMs)的优势。</td>
+<td align="left">在三个真实世界数据集上的实验表明，FLIP超越了现有的SOTA基线模型。</td>
+</tr>
+<tr>
+<td align="left"><strong>跨域推荐</strong></td>
+<td align="left"><strong>Enhancing CTR Prediction with Search Query Representation</strong> [12]</td>
+<td align="left">利用搜索领域的用户搜索查询来增强推荐领域的用户偏好建模。引入扩散模型解决数据稀疏性问题，以推断正样本。</td>
+<td align="left">实验分析表明，该模型在推荐领域的表现优于现有的最新模型。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>MLORA</strong> (Multi-Domain Low-Rank Adaptive Network) [13]</td>
+<td align="left">提出多领域低秩自适应网络，为每个领域设计专门的LoRA模块，以提升模型在多领域CTR预测任务中的性能，同时避免参数量剧增。</td>
+<td align="left">在多个多领域数据集和实际生产环境的A&#x2F;B测试中验证了其优越性和灵活性。</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p>[1] <strong>Multi-granularity Interest Retrieval and Refinement Network for Long-Term User Behavior Modeling in CTR Prediction</strong><br>    * <code>https://arxiv.org/abs/2411.15005</code></p>
+<p>[2] <strong>LIBER: Lifelong User Behavior Modeling Based on Large Language Models</strong><br>    * <code>https://arxiv.org/abs/2411.14713</code> </p>
+<p>[3] <strong>Towards Unifying Feature Interaction Models for Click-Through Rate Prediction</strong><br>    * <code>https://arxiv.org/abs/2411.12441</code> [cite: 94]</p>
+<p>[4] <strong>Fusion Matters: Learning Fusion in Deep Click-through Rate Prediction Models</strong><br>    * <code>https://arxiv.org/abs/2411.15731</code> [cite: 115]</p>
+<p>[5] <strong>A Collaborative Ensemble Framework for CTR Prediction</strong><br>    * <code>https://arxiv.org/abs/2411.13700</code> </p>
+<p>[6] <strong>Branches, Assemble! Multi-Branch Cooperation Network for Large-Scale Click-Through Rate Prediction at Taobao</strong><br>    * <code>https://arxiv.org/abs/2411.13057</code> </p>
+<p>[7] <strong>Ensemble Learning via Knowledge Transfer for CTR Prediction</strong><br>    * <code>https://arxiv.org/abs/2411.16122</code> </p>
+<p>[8] <strong>Feature Interaction Fusion Self-Distillation Network For CTR Prediction</strong><br>    * <code>https://arxiv.org/abs/2411.07508</code> </p>
+<p>[9] <strong>The Efficiency vs. Accuracy Trade-off: Optimizing RAG-Enhanced LLM Recommender Systems Using Multi-Head Early Exit</strong><br>    * <code>https://arxiv.org/abs/2501.02173</code> </p>
+<p>[10] <strong>Balancing Efficiency and Effectiveness: An LLM-Infused Approach for Optimized CTR Prediction</strong><br>    * <code>https://arxiv.org/abs/2412.06860</code></p>
+<p>[11] <strong>FLIP: Fine-grained Alignment between ID-based Models and Pretrained Language Models for CTR Prediction</strong><br>    * <code>https://arxiv.org/abs/2310.19453</code><br>[12] <strong>Enhancing CTR Prediction in Recommendation Domain with Search Query Representation</strong><br>    * <code>https://arxiv.org/abs/2410.21487</code> </p>
+<p>[13] <strong>MLORA: Multi-Domain Low-Rank Adaptive Network for Click-Through Rate Prediction</strong><br>    * <code>https://arxiv.org/abs/2408.08913</code> </p>
+<h4 id="ICML’25-从特征交互到特征生成：CTR预测模型的生成范式"><a href="#ICML’25-从特征交互到特征生成：CTR预测模型的生成范式" class="headerlink" title="ICML’25 | 从特征交互到特征生成：CTR预测模型的生成范式"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/6F30T1QU7Mzg6N4PWDB_Yw">ICML’25 | 从特征交互到特征生成：CTR预测模型的生成范式</a></h4><h5 id="论文解决的问题"><a href="#论文解决的问题" class="headerlink" title="论文解决的问题"></a><strong>论文解决的问题</strong></h5><p>传统点击率（CTR）预测模型基于特征交互估计用户点击物品的概率，遵循判别范式，但存在原始特征嵌入的局限性，易导致嵌入维度崩溃和信息冗余问题，且由于特征间无明确顺序，难以将其转化为生成范式。</p>
+<h5 id="1-论文的创新点"><a href="#1-论文的创新点" class="headerlink" title="1. 论文的创新点"></a><strong>1. 论文的创新点</strong></h5><ul>
+<li>提出一种用于CTR模型的新型监督特征生成框架，将判别式的“特征交互”范式转变为生成式的“特征生成”范式。具体做法是将所有特征嵌入拼接来预测每个特征嵌入。</li>
+<li>此框架可以和现有的CTR模型结合提升性能，产生维度崩溃更少、冗余更低的特征嵌入，缓解判别范式的固有局限。</li>
+</ul>
+<p>简单来说：</p>
+<ul>
+<li>以FM为例，原始的方式是特征i和特征j进行交互，改进后是生成的特征i和原始的特征j交互。</li>
+<li>生成方式是用所有的特征拼接后经过MLP来生成。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2025/01/27/IAS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1437,98 +1935,6 @@
 <p><strong>Research Object</strong>:<br>The research object is auction design with contextual information, where each bidder and item in the auction is equipped with relevant contextual information. This contextual information can describe different bidders and items to some extent, making the auctions closer to practical scenarios. For instance, in e-commerce advertising, there are a large number of bidders and items (i.e., ad slots) with various features, and each auction involves a different number of bidders and items.</p>
 <p><strong>Used Technology</strong>:<br>The paper proposes CITransNet, a Context-Integrated Transformer-based neural network for optimal auction design. CITransNet integrates bidding information, bidder contexts, and item contexts to develop an auction mechanism. It is built upon the Transformer architecture, capturing the complex interplay among different bidders and items in an auction. CITransNet maintains permutation-equivariance over bids and contexts, meaning any permutation of bidders (or items) in the bidding profile and bidder contexts (or item contexts) will cause the same permutation of auction results. Moreover, the number of parameters in CITransNet does not depend on the scale of the auction (i.e., the number of bidders and items), giving CITransNet the potential to generalize to auctions with various bidders or items.</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/09/19/moni/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar4.jpg">
-      <meta itemprop="name" content="Yuhan Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一个田螺突然就">
-      <meta itemprop="description" content="Yuhan Wang's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一个田螺突然就">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/19/moni/" class="post-title-link" itemprop="url">moni</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-19 13:32:41" itemprop="dateCreated datePublished" datetime="2024-09-19T13:32:41+08:00">2024-09-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-24 20:05:32" itemprop="dateModified" datetime="2024-12-24T20:05:32+08:00">2024-12-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          这里有东西被加密了，需要输入密码查看哦。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/19/moni/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
