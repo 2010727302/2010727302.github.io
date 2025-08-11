@@ -217,7 +217,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-08-11 20:00:51 / 修改时间：20:03:27" itemprop="dateCreated datePublished" datetime="2025-08-11T20:00:51+08:00">2025-08-11</time>
+      <time title="创建时间：2025-08-11 20:00:51 / 修改时间：20:13:15" itemprop="dateCreated datePublished" datetime="2025-08-11T20:00:51+08:00">2025-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -344,7 +344,7 @@
 </tbody></table>
 <hr>
 <h3 id="1-生成式架构-Generative-Architecture"><a href="#1-生成式架构-Generative-Architecture" class="headerlink" title="1. 生成式架构 (Generative Architecture)"></a><strong>1. 生成式架构 (Generative Architecture)</strong></h3><ul>
-<li>LLM4Rec 范式概览<br> <img src="/images/llm4rec.png"><br><em>A Survey on Large Language Models for Recommendation：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2305.19860">https://arxiv.org/pdf/2305.19860</a></em>	<br>如上图，LLM4Rec 概括来说有3种范式：</li>
+<li>LLM4Rec 范式概览<br> <img src="/2025/08/11/prediction/llm4rec.png"><br><em>A Survey on Large Language Models for Recommendation：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2305.19860">https://arxiv.org/pdf/2305.19860</a></em>	<br>如上图，LLM4Rec 概括来说有3种范式：</li>
 </ul>
 <ol>
 <li>   LLM Embedding + RS：利用语言模型作为特征提取器，将 user 和 item 的描述输入给 LLM 然后得到 embedding，然后再将这些 embedding 输入到传统推荐模型使用（小红书 NoteLLM）<br><em>案例：小红书笔记推荐，利用 LLM 产生笔记 embedding 然后做 i2i 召回；</em></li>
@@ -359,8 +359,8 @@
 </ul>
 <h4 id="完全生成式"><a href="#完全生成式" class="headerlink" title="完全生成式"></a><strong>完全生成式</strong></h4><h5 id="1-1-HSTU-Meta"><a href="#1-1-HSTU-Meta" class="headerlink" title="1.1 HSTU (Meta)"></a><strong>1.1 HSTU (Meta)</strong></h5><ul>
 <li><p><strong>模型概述</strong>：HSTU将推荐彻底范式化为一个序列到序列（Seq2Seq）的生成任务。模型根据用户历史直接<strong>生成</strong>未来可能交互的物品ID序列。</p>
-<p>  <img src="/images/hstu.png"></p>
-  <img src="E:\RUCGL\REPO\--\images\hstu2.png" alt="image-20250809191048418" style="zoom:50%;" />
+<p>  <img src="/2025/08/11/prediction/hstu.png"></p>
+  <img src="hstu2.png" alt="image-20250809191048418" style="zoom:50%;" />
 </li>
 <li><p><strong>具体做法</strong> </p>
 <p>  这篇是 GR 架构的示范，直接把推荐 task 转为序列转导问题，用 HSTU 编码器串起所有交互行为</p>
@@ -398,12 +398,12 @@
 </li>
 </ul>
 <hr>
-<h4 id="2-堆叠式架构-Stacked-Architecture"><a href="#2-堆叠式架构-Stacked-Architecture" class="headerlink" title="2. 堆叠式架构 (Stacked Architecture)"></a><strong>2. 堆叠式架构 (Stacked Architecture)</strong></h4><h5 id="2-1-Large-User-Model-LUM-阿里"><a href="#2-1-Large-User-Model-LUM-阿里" class="headerlink" title="2.1 Large User Model - LUM (阿里)"></a><strong>2.1 Large User Model - LUM (阿里)</strong></h5><img src="E:\RUCGL\REPO\--\images\lum1.png" alt="image-20250809190735326" style="zoom:80%;" />
+<h4 id="2-堆叠式架构-Stacked-Architecture"><a href="#2-堆叠式架构-Stacked-Architecture" class="headerlink" title="2. 堆叠式架构 (Stacked Architecture)"></a><strong>2. 堆叠式架构 (Stacked Architecture)</strong></h4><h5 id="2-1-Large-User-Model-LUM-阿里"><a href="#2-1-Large-User-Model-LUM-阿里" class="headerlink" title="2.1 Large User Model - LUM (阿里)"></a><strong>2.1 Large User Model - LUM (阿里)</strong></h5><img src="lum1.png" alt="image-20250809190735326" style="zoom:80%;" />
 
 <ul>
 <li><p><strong>模型概述</strong>：LUM代表了一种务实的融合路径，其核心思想是“用生成式模型赋能传统的判别式模型”，而非完全替代。</p>
 </li>
-<li><img src="E:\RUCGL\REPO\--\images\lum2.png" alt="image-20250809190735326" style="zoom:80%;" />
+<li><img src="lum2.png" alt="image-20250809190735326" style="zoom:80%;" />
 </li>
 <li><p><strong>技术架构与实现</strong>：</p>
 <ul>
@@ -427,7 +427,7 @@
 </ul>
 <h5 id="2-2-HLLM-字节"><a href="#2-2-HLLM-字节" class="headerlink" title="2.2 HLLM (字节)"></a><strong>2.2 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fVgqAL-pO6Ae5CwcPf34yA">HLLM (字节)</a></strong></h5><ul>
 <li><p><strong>模型概述</strong>：用LLM彻底替代了传统的、无语义的ID Embedding。</p>
-<img src="https://mmbiz.qpic.cn/sz_mmbiz_png/zhVlwj96tThmyibOuG3sCJibfBVz5Apo9t4u2gDRwKhYeafE6xCNym0F0icLRZBqlfOedvgKbEdiankibB9icZ1WSaIw/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片" style="zoom: 60%;" />
+<img src="hllm.png" alt="图片" style="zoom: 60%;" />
 </li>
 <li><p><strong>技术架构与实现</strong>：做了一个双LLM结构：</p>
 <ul>
