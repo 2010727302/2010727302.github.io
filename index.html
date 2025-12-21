@@ -187,6 +187,290 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2025/12/21/LCRON/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar4.jpg">
+      <meta itemprop="name" content="Yuhan Wang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个田螺突然就">
+      <meta itemprop="description" content="Yuhan Wang's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一个田螺突然就">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/21/LCRON/" class="post-title-link" itemprop="url">KDD2024 adv</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-12-21 19:06:19 / 修改时间：19:20:36" itemprop="dateCreated datePublished" datetime="2025-12-21T19:06:19+08:00">2025-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/research/prerank/" itemprop="url" rel="index"><span itemprop="name">prerank</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kuaishoutech/article/details/149599655">参考</a><br><img src="/2025/12/21/LCRON/image-1.png"></p>
+<h2 id="1-场景设定"><a href="#1-场景设定" class="headerlink" title="1. 场景设定"></a>1. 场景设定</h2><p><strong>背景</strong>：一家公司要招人。</p>
+<ul>
+<li>**阶段 1 ($\mathcal{M}_1$)**：HR 简历筛选。<ul>
+<li><strong>任务</strong>：从一堆简历里选出 $q_1$ 个人进入下一轮。</li>
+<li><strong>对应公式中的</strong> $P_{\mathcal{M}_1}^{q_1}$（HR 给每个人通过的概率）。</li>
+</ul>
+</li>
+<li>**阶段 2 ($\mathcal{M}_2$)**：业务主管面试。<ul>
+<li><strong>任务</strong>：从 HR 选送的人里，选出 $q_2$ 个人发 Offer。</li>
+<li><strong>对应公式中的</strong> $P_{\mathcal{M}_2}^{q_2}$（主管给每个人打的分）。</li>
+</ul>
+</li>
+<li>**目标 ($\mathbf{y}$)**：我们希望真正的人才（Ground Truth, $y&#x3D;1$）能拿到 Offer。</li>
+</ul>
+<hr>
+<h2 id="2-核心概念解释"><a href="#2-核心概念解释" class="headerlink" title="2. 核心概念解释"></a>2. 核心概念解释</h2><h3 id="A-P-pi-：HR-的选择结果（采样概率）"><a href="#A-P-pi-：HR-的选择结果（采样概率）" class="headerlink" title="A. $P_{\pi}$：HR 的选择结果（采样概率）"></a>A. $P_{\pi}$：HR 的选择结果（采样概率）</h3><p>你在图中间看到的那个带 $\prod$ 的大公式，是在计算<strong>“某一种特定的入围名单”出现的概率</strong>。</p>
+<ul>
+<li><strong>假设有 3 个候选人</strong>：小王（牛人）、小李（混子）、小张（混子）。</li>
+<li><strong>HR 的打分（概率）</strong>：小王(0.9), 小李(0.6), 小张(0.1)。</li>
+<li>**我们要选 2 个人 ($q_1&#x3D;2$)**。<ul>
+<li>**组合 $\pi_1$ (小王, 小李)**：概率很高，因为两人分都高。</li>
+<li>**组合 $\pi_2$ (小李, 小张)**：概率很低，因为小张分太低了。</li>
+</ul>
+</li>
+</ul>
+<h3 id="B-P-CS-q-2-：最终生存概率（期待值）"><a href="#B-P-CS-q-2-：最终生存概率（期待值）" class="headerlink" title="B. $P_{CS}^{q_2}$：最终生存概率（期待值）"></a>B. $P_{CS}^{q_2}$：最终生存概率（期待值）</h3><p>你在图下方看到的那个带 $\mathbb{E}$ 的公式，是在算<strong>“小王最终拿到 Offer 的平均概率”</strong>。<br>这个概率取决于两件事：</p>
+<ol>
+<li>HR 得先把小王放进来（取决于 $P_{\pi}$）。如果 HR 没选小王，主管根本见不到他，得分为 0。</li>
+<li>主管得给小王打高分（取决于 $P_{\mathcal{M}_2}^{q_2}$）。</li>
+</ol>
+<h3 id="C-CE-P-CS-q-2-mathbf-y-：交叉熵-Loss"><a href="#C-CE-P-CS-q-2-mathbf-y-：交叉熵-Loss" class="headerlink" title="C. $CE(P_{CS}^{q_2}, \mathbf{y})$：交叉熵 Loss"></a>C. $CE(P_{CS}^{q_2}, \mathbf{y})$：交叉熵 Loss</h3><p>这就是标准的奖惩机制。</p>
+<ul>
+<li>**如果小王是牛人 ($y&#x3D;1$)**：我们需要 $P_{CS}^{q_2}$ 越接近 1 越好。</li>
+<li><strong>如果小王没拿到 Offer</strong>：Loss 就会变大。</li>
+</ul>
+<hr>
+<h2 id="3-举个具体的数字例子（全流程）"><a href="#3-举个具体的数字例子（全流程）" class="headerlink" title="3. 举个具体的数字例子（全流程）"></a>3. 举个具体的数字例子（全流程）</h2><p>假设 $y_{小王} &#x3D; 1$ (小王是真正的人才)。</p>
+<h3 id="情景一：模型配合得很好"><a href="#情景一：模型配合得很好" class="headerlink" title="情景一：模型配合得很好"></a>情景一：模型配合得很好</h3><ul>
+<li>**阶段 1 (HR)**：给小王打了高分。</li>
+<li><strong>结果</strong>：在大多数可能的组合 $\pi$ 里，小王都在名单上。</li>
+<li>**阶段 2 (主管)**：给小王打了高分（比如 0.95）。</li>
+<li><strong>计算期望</strong>：期望分数 $\approx$ (小王在名单里的概率 0.9) $\times$ (主管打分 0.95) &#x3D; 0.855。</li>
+<li><strong>计算 Loss</strong>：$Loss &#x3D; -1 \times \ln(0.855) &#x3D; \mathbf{0.15}$ (Loss 很小，模型很开心)。</li>
+</ul>
+<h3 id="情景二：阶段-1-掉链子了（漏斗问题）"><a href="#情景二：阶段-1-掉链子了（漏斗问题）" class="headerlink" title="情景二：阶段 1 掉链子了（漏斗问题）"></a>情景二：阶段 1 掉链子了（漏斗问题）</h3><ul>
+<li>**阶段 1 (HR)**：眼拙，觉得小王不行，给了低分。</li>
+<li><strong>结果</strong>：小王很难进入名单 $\pi$。他在大多数情况下被“截断”了。</li>
+<li>**阶段 2 (主管)**：虽然主管模型很准，但是他没机会见到小王。</li>
+<li><strong>在那些小王没入选的组合里</strong>，小王的得分被 Mask 成了 0。</li>
+<li><strong>计算期望</strong>：期望分数 $\approx$ (小王在名单里的概率 0.1) $\times$ (主管打分 0.95) &#x3D; 0.095。</li>
+<li><strong>计算 Loss</strong>：$Loss &#x3D; -1 \times \ln(0.095) &#x3D; \mathbf{2.35}$ (Loss 巨大！)。</li>
+</ul>
+<hr>
+<h2 id="4-这个-Loss-的妙处（Back-Propagation）"><a href="#4-这个-Loss-的妙处（Back-Propagation）" class="headerlink" title="4. 这个 Loss 的妙处（Back Propagation）"></a>4. 这个 Loss 的妙处（Back Propagation）</h2><p>当发生了情景二（Loss 巨大）时，梯度反向传播会告诉模型：<br>“喂！最后结果不对！小王是牛人，但他没拿到分！”</p>
+<p>这时候，责任会通过数学公式分摊：</p>
+<ul>
+<li><strong>主管模型 ($\mathcal{M}_2$) 说</strong>：“这不怪我啊，我如果见到他肯定给高分，但我没见到啊！”</li>
+<li><strong>HR 模型 ($\mathcal{M}_1$) 就会收到强烈的梯度信号</strong>：“是你前面没把他选进来！ 下次把小王的 $P_{\mathcal{M}_1}$ 提上去！”</li>
+</ul>
+<p>这就是<strong>“端到端代理 Loss”</strong>的核心意义：<br>它通过最终的胜负（是否 Recall 成功），跨过中间的采样过程，直接去优化前面的粗排模型，让粗排模型知道：“凡是后面精排模型喜欢的，你前面都要给我放进来，别误杀”。<br><img src="/image-2.png"></p>
+<h1 id="离散-Top-K-算子的矩阵表达解析"><a href="#离散-Top-K-算子的矩阵表达解析" class="headerlink" title="离散 Top-K 算子的矩阵表达解析"></a>离散 Top-K 算子的矩阵表达解析</h1><h2 id="1-设定场景"><a href="#1-设定场景" class="headerlink" title="1. 设定场景"></a>1. 设定场景</h2><p><strong>背景</strong>：假设有 4 个物品（Item 1, Item 2, Item 3, Item 4），模型 $\mathcal{M}$ 给它们打的分数向量 $x$ 是：<br>$$x &#x3D; [10, \mathbf{90}, 50, \mathbf{80}]$$<br>（注意：Item 2 是 90 分，Item 4 是 80 分，它是前两名）。</p>
+<p><strong>目标</strong>：我们现在的目标是：找出 Top-2 的物品（也就是 $k&#x3D;2$）。</p>
+<hr>
+<h2 id="2-什么是“排列矩阵”-mathcal-P-？"><a href="#2-什么是“排列矩阵”-mathcal-P-？" class="headerlink" title="2. 什么是“排列矩阵” $\mathcal{P}$？"></a>2. 什么是“排列矩阵” $\mathcal{P}$？</h2><p>文本里说：“$(\mathcal{P}<em>x^{\downarrow})</em>{i,j}&#x3D;1$ 表示 $x_j$ 是 $x$ 中第 $i$ 大的元素”。</p>
+<p>这句话翻译成人话就是：<strong>矩阵的第 $i$ 行，用来指示“第 $i$ 名是谁”</strong>。</p>
+<p>我们来看看排名的实际情况：</p>
+<ul>
+<li>**第 1 名 ($i&#x3D;1$)**：是 90 分（在原数组的第 2 个位置）。</li>
+<li>**第 2 名 ($i&#x3D;2$)**：是 80 分（在原数组的第 4 个位置）。</li>
+<li>**第 3 名 ($i&#x3D;3$)**：是 50 分（在原数组的第 3 个位置）。</li>
+<li>**第 4 名 ($i&#x3D;4$)**：是 10 分（在原数组的第 1 个位置）。</li>
+</ul>
+<p>根据这个排名，我们构建排列矩阵 $\mathcal{P}$（每一行对应第 1 名到第 4 名的位置）：<br>$$\mathcal{P} &#x3D;<br>\begin{pmatrix}<br>0 &amp; \mathbf{1} &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; \mathbf{1} \<br>0 &amp; 0 &amp; 1 &amp; 0 \<br>1 &amp; 0 &amp; 0 &amp; 0<br>\end{pmatrix}<br>\begin{matrix}<br>\leftarrow \text{第1行：第1名在位置2} \<br>\leftarrow \text{第2行：第2名在位置4} \<br>\leftarrow \text{第3行：第3名在位置3} \<br>\leftarrow \text{第4行：第4名在位置1}<br>\end{matrix}$$</p>
+<hr>
+<h2 id="3-那个求和公式-sum-是在干嘛？"><a href="#3-那个求和公式-sum-是在干嘛？" class="headerlink" title="3. 那个求和公式 $\sum$ 是在干嘛？"></a>3. 那个求和公式 $\sum$ 是在干嘛？</h2><p>文中给出的公式是：<br>$$\mathcal{M}<em>i^{\downarrow}(k) &#x3D; \sum</em>{j&#x3D;1}^{k} (\mathcal{P}<em>{\mathcal{M}}^{\downarrow})</em>{j, :}$$</p>
+<p>这其实就是<strong>把矩阵的前 $k$ 行加起来</strong>。</p>
+<p>现在我们要选 Top-2 ($k&#x3D;2$)，所以我们只看矩阵的前两行：</p>
+<ul>
+<li><strong>第 1 行（冠军）</strong>：$[0, 1, 0, 0]$</li>
+<li><strong>第 2 行（亚军）</strong>：$[0, 0, 0, 1]$</li>
+</ul>
+<p>把它们加起来：<br>$$[0, 1, 0, 0] + [0, 0, 0, 1] &#x3D; [0, \mathbf{1}, 0, \mathbf{1}]$$</p>
+<hr>
+<h2 id="4-结果解读"><a href="#4-结果解读" class="headerlink" title="4. 结果解读"></a>4. 结果解读</h2><p>最后得到的这个向量 $[0, \mathbf{1}, 0, \mathbf{1}]$ 就是公式里的 $\mathcal{M}_i^{\downarrow}(k)$。它是一个<strong>掩码（Mask）</strong>：</p>
+<ul>
+<li><strong>第 1 个位置是 0</strong> $\rightarrow$ Item 1 没选中</li>
+<li><strong>第 2 个位置是 1</strong> $\rightarrow$ Item 2 选中了</li>
+<li><strong>第 3 个位置是 0</strong> $\rightarrow$ Item 3 没选中</li>
+<li><strong>第 4 个位置是 1</strong> $\rightarrow$ Item 4 选中了</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这段看似复杂的数学描述，其实只干了一件事：</p>
+<ol>
+<li><strong>排序</strong>：看看谁的分数高。</li>
+<li><strong>制表</strong>：造一个矩阵记录第几名原本在哪里。</li>
+<li><strong>圈地</strong>：如果我要 Top-K，我就把表里的前 K 行拿出来，并在对应位置打勾。</li>
+</ol>
+<hr>
+<h2 id="为什么要搞这么复杂？"><a href="#为什么要搞这么复杂？" class="headerlink" title="为什么要搞这么复杂？"></a>为什么要搞这么复杂？</h2><p>最后那句“松弛为随机变量…进行优化”才是重点。因为硬生生的排序（Sort）和取前 K 个（Top-K）是<strong>不可导的操作</strong>（没法求梯度，没法训练神经网络）。</p>
+<p>作者把它写成矩阵形式，是为了后面把这个“由0和1组成的硬矩阵”变成“<strong>软绵绵的概率矩阵</strong>”（比如用 Gumbel-Softmax 或 NeuralSort），这样就可以放进神经网络里反向传播了。<br><img src="/2025/12/21/LCRON/image.png"><br>$\prod_{i:\pi_i&#x3D;1}$ 是数学中的连乘（Product）符号加上一个筛选条件。1. $\prod$ (大写的 Pi)：代表连乘（即把后面所有的项乘起来），就像 $\sum$ 代表连加一样。下标 $i$：表示索引变量。冒号 $:$：表示“满足……条件”（such that）。$\pi_i &#x3D; 1$：这是筛选条件。</p>
+<h1 id="两阶段建模解析"><a href="#两阶段建模解析" class="headerlink" title="两阶段建模解析"></a>两阶段建模解析</h1><ul>
+<li>**总商品库 ($N$)**：只有 4 个商品 ${A, B, C, D}$。</li>
+<li>**真实情况 ($\mathbf{y}$)**：用户只喜欢 A 和 C。</li>
+<li><strong>阶段 1 任务</strong>：从中选 2 个 ($q_1&#x3D;2$) 给阶段 2。</li>
+<li><strong>阶段 2 任务</strong>：给这 2 个打分，算出最终概率。</li>
+</ul>
+<hr>
+<h2 id="公式一：交叉熵损失-CE-Loss"><a href="#公式一：交叉熵损失-CE-Loss" class="headerlink" title="公式一：交叉熵损失 (CE Loss)"></a>公式一：交叉熵损失 (CE Loss)</h2><p>$$CE(P_{CS}^{q_2}, \mathbf{y}) &#x3D; -\sum_i (y_i \ln((P_{CS}^{q_2})<em>i) + (1-y_i)\ln(1-(P</em>{CS}^{q_2})_i))$$</p>
+<p>这个公式是最终的裁判，用来衡量模型预测得准不准。</p>
+<ul>
+<li>**$P_{CS}^{q_2}$ (Prediction)**：系统最终预测的生存概率向量。<ul>
+<li><strong>例子</strong>：假设模型算出来 A、B、C、D 最终被选中的概率是 $[0.8, 0.2, 0.6, 0.1]$。</li>
+</ul>
+</li>
+<li>**$\mathbf{y}$ (Ground Truth)**：真实标签向量（二值向量）。<ul>
+<li><strong>含义</strong>：用户实际点击了哪些。</li>
+<li><strong>例子</strong>：用户喜欢 A 和 C，不喜欢 B 和 D。所以 $\mathbf{y} &#x3D; [1, 0, 1, 0]$。</li>
+</ul>
+</li>
+<li>**$i$**：商品索引。含义：遍历每一个商品 (A, B, C, D)。</li>
+<li>**$\sum_i$**：求和。含义：把所有商品的判断误差加起来，变成一个总的 Loss 值。</li>
+<li>**$\ln$**：自然对数。</li>
+</ul>
+<p><strong>计算逻辑</strong>：</p>
+<ul>
+<li>对于商品 A ($y&#x3D;1$)：我们要最大化 $\ln(0.8)$。</li>
+<li>对于商品 B ($y&#x3D;0$)：我们要最大化 $\ln(1-0.2)$。</li>
+<li>如果预测反了（比如 A 预测成 0.1），$\ln(0.1)$ 是个很大的负数，取负号后 Loss 就会变得超级大。</li>
+</ul>
+<hr>
+<h2 id="公式二：采样概率-P-pi"><a href="#公式二：采样概率-P-pi" class="headerlink" title="公式二：采样概率 ($P_\pi$)"></a>公式二：采样概率 ($P_\pi$)</h2><p>$$P_\pi &#x3D; \frac{\prod_{i:\pi_i&#x3D;1} (P_{\mathcal{M}<em>1}^{q_1})<em>i}{\sum</em>{S \subseteq [N], |S|&#x3D;T} \prod</em>{j \in S} (P_{\mathcal{M}_1}^{q_1})_j}$$</p>
+<p>这个公式描述的是阶段 1 (粗排模型) 的行为：它选出某一种特定组合的概率是多少？</p>
+<ul>
+<li>**$P_{\mathcal{M}_1}^{q_1}$**：粗排模型的打分向量。<ul>
+<li><strong>例子</strong>：模型 1 觉得四个商品的分数是 $[0.9, 0.1, 0.8, 0.2]$ (A, B, C, D)。</li>
+</ul>
+</li>
+<li>**$\pi$**：一种具体的采样结果（Mask）。<ul>
+<li><strong>含义</strong>：比如“选中 A 和 C”这种组合，表示为 $[1, 0, 1, 0]$。</li>
+</ul>
+</li>
+<li>**$\prod_{i:\pi_i&#x3D;1}$**：只乘选中的项（分子部分）。<ul>
+<li><strong>例子</strong>：对于组合 ${A, C}$，分子 &#x3D; $0.9 \times 0.8 &#x3D; 0.72$。</li>
+</ul>
+</li>
+<li>**$S \subseteq [N], |S|&#x3D;T$**：分母里的求和条件。<ul>
+<li><strong>含义</strong>：遍历所有可能的长度为 $T$ ($T&#x3D;q_1$) 的子集。</li>
+<li><strong>例子</strong>：我们要从 4 个里选 2 个，所有可能的组合有 6 种：(AB, AC, AD, BC, BD, CD)。</li>
+</ul>
+</li>
+<li>**分母整体 $\sum \prod$**：归一化系数。<ul>
+<li><strong>含义</strong>：算出所有 6 种组合的分数乘积之和，作为分母，确保所有概率加起来等于 1。</li>
+</ul>
+</li>
+<li><strong>计算</strong>：<ul>
+<li>AB: $0.9 \times 0.1 &#x3D; 0.09$</li>
+<li>AC: $0.9 \times 0.8 &#x3D; 0.72$</li>
+<li>…以此类推算出总和。</li>
+</ul>
+</li>
+<li><strong>结果</strong>：$P_\pi(\text{选AC}) &#x3D; \frac{0.72}{\text{总和}}$。这表示“选中 A 和 C 这一对”的概率。</li>
+</ul>
+<hr>
+<h2 id="公式三：最终生存概率-P-CS-q-2"><a href="#公式三：最终生存概率-P-CS-q-2" class="headerlink" title="公式三：最终生存概率 ($P_{CS}^{q_2}$)"></a>公式三：最终生存概率 ($P_{CS}^{q_2}$)</h2><p>$$P_{CS}^{q_2} &#x3D; \mathbb{E}<em>{\pi \sim P_\pi} \frac{(P</em>{\mathcal{M}<em>2}^{q_2} \odot \pi)}{\langle \pi, P</em>{\mathcal{M}<em>2}^{q_2} \rangle &#x2F; \langle \mathbf{1}, P</em>{\mathcal{M}_2}^{q_2} \rangle}$$</p>
+<p>这个公式把两个阶段结合起来，计算在考虑了粗排筛选风险的情况下，精排模型给出的期望分数。</p>
+<ul>
+<li>**$\mathbb{E}_{\pi \sim P_\pi}$**：数学期望。<ul>
+<li><strong>含义</strong>：因为粗排是个概率过程（可能选 AC，也可能选 AD），我们需要把所有情况按照它们发生的概率 ($P_\pi$) 加权平均。</li>
+</ul>
+</li>
+<li>**$P_{\mathcal{M}_2}^{q_2}$**：精排模型的打分向量。<ul>
+<li><strong>例子</strong>：模型 2 比较准，分数是 $[0.95, 0.05, 0.95, 0.05]$ (A, B, C, D)。</li>
+</ul>
+</li>
+<li>**$\odot \pi$**：掩码操作（Hadamard 积）。<ul>
+<li><strong>含义</strong>：如果粗排没选中（$\pi$ 对应位置是 0），精排分再高也没用，直接置零。</li>
+<li><strong>例子</strong>：如果 $\pi$ 选了 AC ($[1,0,1,0]$)，那么 B 和 D 的分变成 0。向量变为 $[0.95, 0, 0.95, 0]$。</li>
+</ul>
+</li>
+<li>**$\langle \pi, P_{\mathcal{M}_2}^{q_2} \rangle$**：被选中的物品的总分（点积）。<ul>
+<li><strong>例子</strong>：$0.95 \text{(A)} + 0.95 \text{(C)} &#x3D; 1.9$。</li>
+</ul>
+</li>
+<li>**$\langle \mathbf{1}, P_{\mathcal{M}_2}^{q_2} \rangle$**：所有物品的总分。<ul>
+<li><strong>例子</strong>：$0.95+0.05+0.95+0.05 &#x3D; 2.0$。</li>
+</ul>
+</li>
+<li><strong>分母里的除法</strong>：权重归一化。<ul>
+<li><strong>含义</strong>：$1.9 &#x2F; 2.0 &#x3D; 0.95$。这个系数代表“当前选中的这一组，占了总分数的 95%”。</li>
+</ul>
+</li>
+</ul>
+<p><strong>整体逻辑</strong>：<br>拿“被掩码后的分数”除以“该组合的权重占比”。如果粗排经常把高分物品漏掉（$\pi$ 经常是 $[0,1,0,1]$），那么期望值里的有效分数就会很低，最终 $P_{CS}$ 就会很小。</p>
+<hr>
+<p>这里的逻辑是：</p>
+<ol>
+<li>**采样的是 $\pi$**：系统根据模型 1 的预测去“猜”哪些物品能进前 $q_1$ 名。这是一个随机过程。</li>
+<li><strong>优化的是 Groundtruth 的通过率</strong>：我们有一个固定的目标 $\mathbf{y}$（比如商品 A 和 C 是好的）。我们希望调整模型参数，使得在上面的采样过程中，$\pi$ 恰好总是选中 A 和 C。</li>
+<li><strong>结果</strong>：如果 $\pi$ 选中了 A 和 C，并且模型 2 也给了高分，那么 $CE$ Loss 就会很小。</li>
+</ol>
+<p><strong>总结一句话</strong>：我们在用 $CE$ Loss 强迫模型 1 生成的随机采样分布 $P_\pi$，尽可能地与真实的 Groundtruth 分布（永远选中好商品）重合。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2025/08/11/prediction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1844,96 +2128,6 @@
 <h3 id="1-Research-Problem"><a href="#1-Research-Problem" class="headerlink" title="1. Research Problem"></a>1. Research Problem</h3><p>The core issue explored in this paper is the design of a revenue-maximizing incentive-compatible mechanism for selling a non-excludable good, such as an advertisement slot, to two cooperative bidders (e.g., a merchant and a brand). This problem captures scenarios where two parties jointly bid in an auction and both benefit from the ad being displayed. The mechanism collects bids from both parties and decides on the allocation and payments. This gives rise to intricate incentive compatibility constraints, such as how to split payments between the two parties. The paper tackles the problem of finding a revenue-maximizing incentive-compatible mechanism from an online learning perspective, which poses significant technical challenges due to the large action space and the highly irregular function mapping mechanisms to revenue.</p>
 <h3 id="2-Research-Object"><a href="#2-Research-Object" class="headerlink" title="2. Research Object"></a>2. Research Object</h3><p>The research object is the mechanism design for selling joint advertisements in the online retail sector, specifically focusing on scenarios where multiple bidders are involved in the bidding process for a single, non-excludable item. The paper is particularly concerned with the complexities that arise in auction design, including how to divide payments among different bidders and ensuring that the auction mechanism maximizes revenue while meeting the criteria for incentive compatibility and individual rationality.</p>
 <h3 id="3-Used-Technology"><a href="#3-Used-Technology" class="headerlink" title="3. Used Technology"></a>3. Used Technology</h3><p>The paper employs an online learning approach to address the challenge of identifying a revenue-maximizing incentive-compatible mechanism. The authors propose an efficient learning algorithm based on an adaptive discretization scheme of the mechanism space, as any non-adaptive discretization fails to achieve sublinear regret. In the stochastic setting, where agents’ valuations are drawn from a fixed but unknown distribution, the algorithm achieves a regret bound of (\tilde{O}(n^{3&#x2F;4})). In the adversarial setting, where valuations are arbitrarily generated upfront, the authors exploit the non-Lipschitzness of the problem to prove a strong negative result, indicating that no learning algorithm can achieve more than half of the revenue of the best fixed mechanism in hindsight. They also consider the (\pi)-smooth adversary setting, where valuations are randomly generated from smooth distributions but can be non-stationary. In this setting, they construct an efficient learning algorithm that achieves a regret bound of (\tilde{O}(n^{2&#x2F;3})) and is based on a succinct encoding of exponentially many experts. Finally, they prove that no learning algorithm can achieve less than (\Omega(\sqrt{n})) regret in both the stochastic and the smooth setting, thus narrowing the range where the minimax regret rates for these two problems lie.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://2010727302.github.io/2024/09/29/A-Context-Integrated-Transformer-Based-Neural-Network-for-Auction-Design/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar4.jpg">
-      <meta itemprop="name" content="Yuhan Wang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一个田螺突然就">
-      <meta itemprop="description" content="Yuhan Wang's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一个田螺突然就">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/29/A-Context-Integrated-Transformer-Based-Neural-Network-for-Auction-Design/" class="post-title-link" itemprop="url">A Context-Integrated Transformer-Based Neural Network for Auction Design</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-29 17:49:31" itemprop="dateCreated datePublished" datetime="2024-09-29T17:49:31+08:00">2024-09-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-05 17:46:52" itemprop="dateModified" datetime="2024-10-05T17:46:52+08:00">2024-10-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/research/" itemprop="url" rel="index"><span itemprop="name">research</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="中文版"><a href="#中文版" class="headerlink" title="中文版"></a>中文版</h3><p><strong>研究的问题</strong>：<br>这篇论文探讨的核心问题是如何设计一个激励相容的拍卖机制，以最大化拍卖人的预期收益。尽管理论上在单件物品拍卖中已有较为成熟的解决方案，但在多件物品拍卖中，如何设计最优拍卖机制仍然是一个挑战。近年来，深度学习方法在这方面取得了显著进展，但现有研究通常只关注固定数量的竞拍者和物品，或者将拍卖限制为对称形式。本研究通过将竞拍者和物品的公共上下文信息纳入拍卖学习框架，克服了这些限制。</p>
-<p><strong>研究的对象</strong>：<br>研究对象是具有上下文信息的拍卖设计，即在拍卖中，每个竞拍者和物品都有相关的上下文信息。这些上下文信息能够在一定程度上描述不同的竞拍者和物品，使得拍卖更接近实际情况。例如，在电子商务广告中，有大量具有各种特征的竞拍者和物品（即广告位），每个拍卖都涉及不同数量的竞拍者和物品。</p>
-<p><strong>使用的技术</strong>：<br>论文提出了CITransNet，这是一个基于上下文集成的Transformer神经网络，用于最优拍卖设计。CITransNet结合了出价信息、竞拍者上下文和物品上下文，开发拍卖机制。它建立在Transformer架构上，能够捕捉拍卖中不同竞拍者和物品之间复杂的相互影响。CITransNet在出价和上下文上保持排列等变性，即竞拍者（或物品）在出价信息和竞拍者上下文（或物品上下文）中的任何排列都会导致拍卖结果的相同排列。此外，CITransNet的参数数量不依赖于拍卖规模（即竞拍者和物品的数量），使其有潜力泛化到具有不同竞拍者或物品的各种拍卖中。</p>
-<h3 id="English-Version"><a href="#English-Version" class="headerlink" title="English Version"></a>English Version</h3><p><strong>Research Problem</strong>:<br>The central problem explored in this paper is how to design an incentive-compatible auction mechanism to maximize the auctioneer’s expected revenue. Although theoretical approaches have provided optimal solutions for single-item auctions, designing optimal mechanisms for multi-item auctions remains a challenge. Recently, deep learning methods have made significant progress in this area, but existing studies typically focus on a fixed set of bidders and items or restrict auctions to be symmetric. This study overcomes these limitations by integrating public contextual information of bidders and items into the auction learning framework.</p>
-<p><strong>Research Object</strong>:<br>The research object is auction design with contextual information, where each bidder and item in the auction is equipped with relevant contextual information. This contextual information can describe different bidders and items to some extent, making the auctions closer to practical scenarios. For instance, in e-commerce advertising, there are a large number of bidders and items (i.e., ad slots) with various features, and each auction involves a different number of bidders and items.</p>
-<p><strong>Used Technology</strong>:<br>The paper proposes CITransNet, a Context-Integrated Transformer-based neural network for optimal auction design. CITransNet integrates bidding information, bidder contexts, and item contexts to develop an auction mechanism. It is built upon the Transformer architecture, capturing the complex interplay among different bidders and items in an auction. CITransNet maintains permutation-equivariance over bids and contexts, meaning any permutation of bidders (or items) in the bidding profile and bidder contexts (or item contexts) will cause the same permutation of auction results. Moreover, the number of parameters in CITransNet does not depend on the scale of the auction (i.e., the number of bidders and items), giving CITransNet the potential to generalize to auctions with various bidders or items.</p>
 
       
     </div>
