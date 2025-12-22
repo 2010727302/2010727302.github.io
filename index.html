@@ -215,9 +215,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-12-21 19:06:19 / 修改时间：19:43:48" itemprop="dateCreated datePublished" datetime="2025-12-21T19:06:19+08:00">2025-12-21</time>
+      <time title="创建时间：2025-12-21 19:06:19" itemprop="dateCreated datePublished" datetime="2025-12-21T19:06:19+08:00">2025-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-22 16:35:48" itemprop="dateModified" datetime="2025-12-22T16:35:48+08:00">2025-12-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -454,6 +460,11 @@
 <li><strong>HR 模型 ($\mathcal{M}_1$) 就会收到强烈的梯度信号</strong>：“是你前面没把他选进来！ 下次把小王的 $P_{\mathcal{M}_1}$ 提上去！”</li>
 </ul>
 <p>这就是<strong>“端到端代理 Loss”</strong>的核心意义：<br>它通过最终的胜负（是否 Recall 成功），跨过中间的采样过程，直接去优化前面的粗排模型，让粗排模型知道：“凡是后面精排模型喜欢的，你前面都要给我放进来，别误杀”。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>冲突是怎么发生的？假设我们要选出 Top-2（金牌和银牌），而球员 A 和球员 B 都是顶级天才（Ground-truth $y_A&#x3D;1, y_B&#x3D;1$）。模型的宏伟目标：希望 A 和 B 都能进入前两名。<br>梯度的指令：</p>
+<ul>
+<li>指令 1：把 A 往“第一名”的位置推（增加 $\hat{P}_{1,A}$）。</li>
+<li>指令 2：把 B 也往“第一名”的位置推（增加 $\hat{P}_{1,B}$）。<br>因为“第一名只能给一个人”的硬约束（求和等于 1），这两个指令是完全相反的。为了让 A 的概率上升，模型必须牺牲 B。<br>后果：模型在训练时会感到“左右为难”，梯度信号一会儿让 A 冲，一会儿让 B 冲，导致参数更新抵消，训练极其不稳定。</li>
+</ul>
 
       
     </div>
